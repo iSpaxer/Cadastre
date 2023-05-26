@@ -1,0 +1,3 @@
+# Project exclude paths
+/tgBot/commonRabitmq/target/
+/tgBot/dispatcher/target/

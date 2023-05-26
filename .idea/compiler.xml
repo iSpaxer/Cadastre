@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Site" />
+        <module name="dispatcher" />
+        <module name="commonRabitmq" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Cadastre" target="19" />
+      <module name="CommonRabbitmq" target="19" />
+      <module name="commonRabitmq" target="19" />
+      <module name="dispatcher" target="19" />
+      <module name="Site" target="17" />
+      <module name="TestTelegramBot" target="19" />
+      <module name="tgBot" target="19" />
+      <module name="tgBott" target="19" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Site" options="-parameters" />
+      <module name="commonRabitmq" options="-parameters" />
+      <module name="dispatcher" options="-parameters" />
+      <module name="tgBot" options="" />
+      <module name="tgBott" options="-parameters" />
+    </option>
+  </component>
+</project>
