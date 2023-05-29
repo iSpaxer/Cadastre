@@ -15,11 +15,7 @@
     <bytecodeTargetLevel>
       <module name="Cadastre" target="19" />
       <module name="CommonRabbitmq" target="19" />
-      <module name="commonRabitmq" target="19" />
-      <module name="dispatcher" target="19" />
-      <module name="Site" target="17" />
       <module name="TestTelegramBot" target="19" />
-      <module name="tgBot" target="19" />
       <module name="tgBott" target="19" />
     </bytecodeTargetLevel>
   </component>
