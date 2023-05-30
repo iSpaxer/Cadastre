@@ -1,4 +1,4 @@
-package ru.tg.service;
+package ru.relex.service;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 

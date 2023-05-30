@@ -9,6 +9,9 @@
         <option value="$PROJECT_DIR$/tgBot/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/Site/pom.xml" />
+        <option value="$PROJECT_DIR$/tgBot/node2/pom.xml" />
+        <option value="$PROJECT_DIR$/tgBot/dispatcher/pom.xml" />
+        <option value="$PROJECT_DIR$/tgBot/node/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

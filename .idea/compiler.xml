@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Site" />
+        <module name="node" />
         <module name="dispatcher" />
         <module name="commonRabitmq" />
       </profile>
@@ -15,6 +16,9 @@
     <bytecodeTargetLevel>
       <module name="Cadastre" target="19" />
       <module name="CommonRabbitmq" target="19" />
+      <module name="node (1) (ru.node)" target="19" />
+      <module name="node (2) (ru.relex)" target="11" />
+      <module name="node (2) (ru.tg)" target="11" />
       <module name="TestTelegramBot" target="19" />
       <module name="tgBott" target="19" />
     </bytecodeTargetLevel>
@@ -24,6 +28,9 @@
       <module name="Site" options="-parameters" />
       <module name="commonRabitmq" options="-parameters" />
       <module name="dispatcher" options="-parameters" />
+      <module name="node" options="-parameters" />
+      <module name="node (1) (ru.node)" options="-parameters" />
+      <module name="node (2) (ru.tg)" options="-parameters" />
       <module name="tgBot" options="" />
       <module name="tgBott" options="-parameters" />
     </option>
