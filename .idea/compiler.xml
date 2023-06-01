@@ -15,10 +15,13 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Cadastre" target="19" />
+      <module name="commonJpa" target="17" />
       <module name="CommonRabbitmq" target="19" />
       <module name="node (1) (ru.node)" target="19" />
       <module name="node (2) (ru.relex)" target="11" />
       <module name="node (2) (ru.tg)" target="11" />
+      <module name="Site (1)" target="17" />
+      <module name="Site (2)" target="17" />
       <module name="TestTelegramBot" target="19" />
       <module name="tgBott" target="19" />
     </bytecodeTargetLevel>
@@ -26,6 +29,9 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Site" options="-parameters" />
+      <module name="Site (1)" options="-parameters" />
+      <module name="Site (2)" options="-parameters" />
+      <module name="commonJpa" options="" />
       <module name="commonRabitmq" options="-parameters" />
       <module name="dispatcher" options="-parameters" />
       <module name="node" options="-parameters" />

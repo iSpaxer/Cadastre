@@ -10,6 +10,7 @@ import static rabitmq.RabbitQueue.ANSWER_MESSAGE;
 
 @Service
 public class AnswerConsumerImpl implements AnswerConsumer {
+
     private final UpdateController updateController;
 
     public AnswerConsumerImpl(UpdateController updateController) {

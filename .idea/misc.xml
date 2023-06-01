@@ -12,10 +12,14 @@
         <option value="$PROJECT_DIR$/tgBot/node2/pom.xml" />
         <option value="$PROJECT_DIR$/tgBot/dispatcher/pom.xml" />
         <option value="$PROJECT_DIR$/tgBot/node/pom.xml" />
+        <option value="$PROJECT_DIR$/commonJpa/pom.xml" />
+        <option value="$PROJECT_DIR$/Site22/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/commonJpa/pom.xml" />
+        <option value="$PROJECT_DIR$/tgBot/Site22/pom.xml" />
         <option value="$PROJECT_DIR$/tgBot/tgBott/pom.xml" />
       </set>
     </option>
