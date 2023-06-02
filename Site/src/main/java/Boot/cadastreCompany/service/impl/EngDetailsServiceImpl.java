@@ -1,4 +1,4 @@
-package Boot.cadastreCompany.service;
+package Boot.cadastreCompany.service.impl;
 
 import Boot.cadastreCompany.models.Engineer;
 import Boot.cadastreCompany.repositories.EngRepository;

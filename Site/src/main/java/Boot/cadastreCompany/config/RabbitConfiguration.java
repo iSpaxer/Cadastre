@@ -1,4 +1,4 @@
-package Boot.cadastreCompany.configuration;
+package Boot.cadastreCompany.config;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -35,4 +35,16 @@ public class RabbitConfiguration {
 //    public Queue answerMessageQueue() {
 //        return new Queue(ANSWER_MESSAGE);
 //    }
+    /*
+
+       @Bean
+    public Queue answerMessageClients() {
+        return new Queue(ANSWER_CLIENTS);
+    }
+
+    @Bean
+    public Queue answerMessageGetClients() {
+        return new Queue(ANSWER_GET_CLIENTS);
+    }
+     */
 }

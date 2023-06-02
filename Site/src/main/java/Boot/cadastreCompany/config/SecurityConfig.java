@@ -1,6 +1,6 @@
 package Boot.cadastreCompany.config;
 
-import Boot.cadastreCompany.service.EngDetailsServiceImpl;
+import Boot.cadastreCompany.service.impl.EngDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -73,6 +73,8 @@ public class MainServiceImpl implements MainService {
         sendMessage.setText("getTestAll.toString()");
 
         producerService.producerAnswer(sendMessage);
+
+        producerService.producerAnswerClient();
     }
 
     private TgEngineerUser findOrSaveTgEngineerUser(Update update) {

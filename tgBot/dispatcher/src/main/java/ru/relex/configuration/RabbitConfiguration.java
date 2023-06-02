@@ -36,4 +36,14 @@ public class RabbitConfiguration {
         return new Queue(ANSWER_MESSAGE);
     }
 
+    @Bean
+    public Queue answerMessageClients() {
+        return new Queue(ANSWER_CLIENTS);
+    }
+
+    @Bean
+    public Queue requestMessageGetClients() {
+        return new Queue(REQUEST_GET_CLIENTS);
+    }
+
 }

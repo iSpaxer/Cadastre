@@ -17,34 +17,39 @@ import static rabitmq.RabbitQueue.*;
 @Log4j
 public class ConsumerServiceImpl implements ConsumerService {
     private final MainService mainService;
-//    private final ProducerService producerService;
-//
-//    public ConsumerServiceImpl(ProducerService producerService) {
-//        this.producerService = producerService;
-//    }
 
     @Autowired
     public ConsumerServiceImpl(MainService mainService) {
         this.mainService = mainService;
     }
 
+    @Override
+    @RabbitListener(queues = TEXT_MESSAGE_UPDATE)
+    public void consumeTextMessageUpdates(Update update) {
+        log.debug("NODE: Text message is received");
+        mainService.processTextMessage(update);
+//        var message = update.getMessage();
+//        var sendMessage = new SendMessage();
+//        sendMessage.setChatId(message.getChatId().toString());
+//        sendMessage.setText("Hello from NODE");
+//
+//        producerService.producerAnswer(sendMessage);
+    }
+
+    //TODO SPAM
 //    @Override
 //    @RabbitListener(queues = TEXT_MESSAGE_UPDATE)
-//    public void consumeTextMessageUpdates(Update update) {
+//    public void consumeSpamMessageString(String str) {
 //        log.debug("NODE: Text message is received");
-//        mainService.processTextMessage(update);
-////        var message = update.getMessage();
-////        var sendMessage = new SendMessage();
-////        sendMessage.setChatId(message.getChatId().toString());
-////        sendMessage.setText("Hello from NODE");
-////
-////        producerService.producerAnswer(sendMessage);
+//
+//
+//        mainService.spam(str);
 //    }
 
     @Override
-    @RabbitListener(queues = TEXT_MESSAGE_UPDATE)
-    public void consumeTextMessageUpdates(String str) {
-        log.debug("NODE: Text message is received");
+    @RabbitListener(queues = ANSWER_CLIENTS)
+    public void consumeAnswerGetClientString (String str) {
+        log.debug("NODE: Clients is received");
 
 
         mainService.spam(str);
