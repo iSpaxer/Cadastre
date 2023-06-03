@@ -39,7 +39,7 @@ public class ConsumerServiceImpl implements ConsumerService {
     //TODO SPAM
 //    @Override
 //    @RabbitListener(queues = TEXT_MESSAGE_UPDATE)
-//    public void consumeSpamMessageString(String str) {
+//    public void consumeTextMessageUpdates(String str) {
 //        log.debug("NODE: Text message is received");
 //
 //

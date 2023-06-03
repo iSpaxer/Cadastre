@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 
 @Configuration
@@ -27,11 +28,16 @@ public class SecurityConfig  {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests( (auth) -> auth
-                .requestMatchers("/login", "/", "/error", "/s").permitAll()
-//                    .requestMatchers( "/css/**").permitAll()
-                .anyRequest().authenticated())
-            .httpBasic().and()
+                .authorizeHttpRequests()
+                .requestMatchers("/login", "/", "/error").permitAll()
+                .requestMatchers("/img/**", "/css/**", "/js/**", "/sass/**", "/libs/**").permitAll()
+                .anyRequest().authenticated()
+//            .authorizeHttpRequests( (auth) -> auth
+//                .requestMatchers("/login", "/", "/error", "/s").permitAll()
+////                .requestMatchers( "/css/**").permitAll()
+//                .anyRequest().authenticated())
+//            .httpBasic()
+            .and()
             .formLogin().loginPage("/login")
             .loginProcessingUrl("/process_login")
             .defaultSuccessUrl("/in", true)
@@ -41,10 +47,17 @@ public class SecurityConfig  {
         return http.build();
     }
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/img/**", "/css/**");
-    }
+//    @Bean
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//
+//        registry.addResourceHandler("images/**").addResourceLocations("static/images/");
+//
+//    }
+
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        return (web) -> web.ignoring().requestMatchers("/img/**", "/css/**", "js");
+//    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {

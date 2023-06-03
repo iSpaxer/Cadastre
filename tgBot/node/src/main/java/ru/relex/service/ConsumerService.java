@@ -6,7 +6,7 @@ public interface ConsumerService {
     void consumeTextMessageUpdates(Update update);
 
     //TODO SPAM
-    //void consumeSpamMessageString(String str);
+    //void consumeTextMessageUpdates(String str);
 
     void consumeDocMessageUpdates(Update update);
     void consumePhotoMessageUpdates(Update update);
