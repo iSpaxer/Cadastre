@@ -1,0 +1,133 @@
+.main {
+    height: 741px;
+    background-size: cover;
+    background-image: url('../img/main/bg-image.jpg');
+
+    border-block: 1px solid #9D9D9D;
+}
+
+.container-row {
+    padding-top: 130px;
+    padding-bottom: 220px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-services {
+    width: 571px;
+}
+
+.main-services-title {
+    margin-bottom: 25px;
+    font-style: italic;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 39px;
+    color: #FFFFFF;
+}
+
+.main-services-list-el {
+    padding-left: 30px;
+    margin-bottom: 15px;
+    position: relative;
+    font-weight: 500;
+    font-size: 24px;
+    color: #FFFFFF;
+}
+
+.main-services-list-el:last-child {
+    margin-bottom: 0;
+}
+
+.main-services-list-el::before {
+    content: "";
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-image: url('../img/main/tick.svg');
+}
+
+/* Main form */
+
+.main-form {
+    width: 544px;
+    height: 429px;
+    background: radial-gradient(100% 124.1% at 0% 0%, rgba(187, 182, 182, 0.23) 0%, rgba(57, 43, 40, 0.31) 100%);
+    border-radius: 32px;
+}
+
+.form-title-wrapper {
+    margin-top: 70px;
+    margin-bottom: 37px;
+    text-align: center;
+    border-radius: 15px;
+    
+}
+
+.main-form-title {
+    font-weight: 800;
+    font-size: 35px;
+    color: #FFFFFF;
+}
+
+.form-group-name {
+    margin-bottom: 24px;
+    padding-left: 62px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-phone {
+    padding-left: 62px;
+    margin-bottom: 35px;
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 17px;
+    color: rgba(245, 208, 104, 0.8);
+
+}
+
+.input {
+    width: 418px;
+    font-weight: 800;
+    font-size: 20px;
+    color: #FFFFFF;
+
+    background: none;
+    border-bottom: 2px solid #F5D068;
+
+}
+
+.button-wrapper {
+    width: 480px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-bell {
+    padding-left: 30px;
+    width: 234px;
+    height: 52px;
+    background: none;
+    border: 1px solid #F5D068;
+    border-radius: 0px;
+    cursor: pointer;
+
+    font-weight: 800;
+    font-size: 18px;
+    color: #F5D068;
+
+    background-image: url('../img/main/telegramm-icons.svg');
+    background-repeat: no-repeat;
+    background-position: 17px 15px;
+    
+}
