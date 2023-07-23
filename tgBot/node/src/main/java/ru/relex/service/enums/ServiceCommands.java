@@ -1,10 +1,11 @@
 package ru.relex.service.enums;
 
 public enum ServiceCommands {
+    START("/start"),
     HELP("/help"),
     REGISTRATION("/registration"),
-    CANCEL("/cancel"),
-    START("/start");
+    GETCLIENT("/get-client"),
+    CANCEL("/cancel");
     private final String cmd;
 
     ServiceCommands(String cmd) {
