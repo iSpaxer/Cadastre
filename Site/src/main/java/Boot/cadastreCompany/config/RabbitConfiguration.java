@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import static rabitmq.RabbitQueue.*;
 
 
+
 @Configuration
 public class RabbitConfiguration {
     @Bean

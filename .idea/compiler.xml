@@ -7,16 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="RabbitMQ" />
         <module name="Site" />
         <module name="node" />
         <module name="dispatcher" />
-        <module name="commonRabitmq" />
+        <module name="utils" />
+        <module name="DBPostgres" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Cadastre" target="19" />
+      <module name="Cadastre" target="1.5" />
       <module name="commonJpa" target="17" />
       <module name="CommonRabbitmq" target="19" />
+      <module name="DBPostgresql" target="19" />
       <module name="node (1) (ru.node)" target="19" />
       <module name="node (2) (ru.relex)" target="11" />
       <module name="node (2) (ru.tg)" target="11" />
@@ -28,11 +31,13 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="DBPostgres" options="-parameters" />
+      <module name="DBPostgresql" options="-parameters" />
+      <module name="RabbitMQ" options="-parameters" />
       <module name="Site" options="-parameters" />
       <module name="Site (1)" options="-parameters" />
       <module name="Site (2)" options="-parameters" />
       <module name="commonJpa" options="" />
-      <module name="commonRabitmq" options="-parameters" />
       <module name="dispatcher" options="-parameters" />
       <module name="node" options="-parameters" />
       <module name="node (1) (ru.node)" options="-parameters" />

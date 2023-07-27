@@ -3,6 +3,11 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/CommonRabbitmq/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CommonRabbitmq/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DBPostgres/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DBPostgres/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/RabbitMQ/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/RabbitMQ/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Site/DBPostgresql/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Site/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Site/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/TestTelegramBot/src/main/java" charset="UTF-8" />
@@ -13,8 +18,6 @@
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tgBot/Site22/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tgBot/Site22/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/tgBot/commonRabitmq/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/tgBot/commonRabitmq/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tgBot/dispatcher/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tgBot/dispatcher/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tgBot/node/src/main/java" charset="UTF-8" />
@@ -22,5 +25,7 @@
     <file url="file://$PROJECT_DIR$/tgBot/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tgBot/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tgBot/tgBott/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/utils/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/utils/src/main/resources" charset="UTF-8" />
   </component>
 </project>

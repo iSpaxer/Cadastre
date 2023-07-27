@@ -33,7 +33,7 @@
 
         <dependency>
             <groupId>Myrabbitmq</groupId>
-            <artifactId>commonRabitmq</artifactId>
+            <artifactId>RabbitMQ</artifactId>
             <version>1.0-SNAPSHOT</version>
 
         </dependency>

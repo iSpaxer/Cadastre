@@ -3,16 +3,16 @@ package Boot.cadastreCompany.service;
 import Boot.cadastreCompany.models.Client;
 import Boot.cadastreCompany.repositories.HomeRepository;
 import Boot.cadastreCompany.service.rabbit.NotificationProducer;
+import Boot.cadastreCompany.service.rabbit.impl.NotificationProducerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import Boot.cadastreCompany.service.rabbit.impl.NotificationProducerImpl;
-
 
 import java.util.Date;
 import java.util.List;
 
 import static rabitmq.RabbitQueue.TEXT_MESSAGE_UPDATE;
+
 
 
 @Service

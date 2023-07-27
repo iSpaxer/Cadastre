@@ -26,12 +26,7 @@ public class mainController {
     @GetMapping()
     public String homePage(Model model) {
         model.addAttribute("client", new Client());
-        return "homePage/index";
-    }
-
-    @GetMapping("s")
-    public String test() {
-        return "test";
+        return "homePage/2index";
     }
 
     @PostMapping()

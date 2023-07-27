@@ -1,0 +1,49 @@
+package DBPostgres.service;
+
+
+//import DBPostgres.models.Client
+import DBPostgres.repositories.HomeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import utils.models.Client;
+
+import java.util.Date;
+import java.util.List;
+
+//import static rabitmq.RabbitQueue.TEXT_MESSAGE_UPDATE;
+
+
+@Service
+@Transactional(readOnly = true)
+public class HomeService {
+    private HomeRepository repository;
+    //private final NotificationProducer notificationProducer;
+
+
+    @Autowired
+    public HomeService(HomeRepository repository) {
+        this.repository = repository;
+        //this.notificationProducer = updateProducer;
+    }
+
+    public List<Client> getAllClient() {
+        return repository.findAll();
+    }
+
+
+    @Transactional
+    public void save(Client newClient) {
+        newClient.setCreatedData(new Date());
+
+        //notificationProducer.produce(TEXT_MESSAGE_UPDATE, information(newClient));
+        repository.save(newClient);
+    }
+
+//    private String information(Client client) {
+//        return "A new client  left a request!\n" +
+//                "Name: " + client.getName() + "\n" +
+//                "Phone: " + client.getPhone() + "\n" +
+//                "Data of creation: " + client.getCreatedData();
+//    }
+}

@@ -16,7 +16,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>commonRabitmq</module>
         <module>dispatcher</module>
         <module>node</module>
     </modules>
