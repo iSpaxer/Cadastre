@@ -1,17 +1,18 @@
 package Boot.cadastreCompany.security;
 
+import Boot.cadastreCompany.dto.EngineerDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import utils.models.Engineer;
+
 
 import java.util.Collection;
 
 public class EngDetails implements UserDetails {
 
-    private final Engineer engineer;
+    private final EngineerDTO engineerDTO;
 
-    public EngDetails(Engineer engineer) {
-        this.engineer = engineer;
+    public EngDetails(EngineerDTO engineer) {
+        this.engineerDTO = engineer;
     }
 
     @Override
@@ -21,12 +22,12 @@ public class EngDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return engineer.getPassword();
+        return engineerDTO.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return engineer.getLogin();
+        return engineerDTO.getLogin();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package Boot.cadastreCompany.controllers;
 
-import Boot.cadastreCompany.service.HomeService;
+import Boot.cadastreCompany.dto.ClientDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,34 +10,34 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import utils.models.Client;
 
 @Controller
 @RequestMapping("/")
 public class mainController {
 
-    private HomeService service;
-
-    @Autowired
-    public mainController(HomeService service) {
-        this.service = service;
-    }
+//    private HomeService service;
+//
+//    @Autowired
+//    public mainController(HomeService service) {
+//        this.service = service;
+//    }
 
     @GetMapping()
     public String homePage(Model model) {
-        model.addAttribute("client", new Client());
+        model.addAttribute("client", new ClientDTO());
         ///TODO
         return "/test";
     }
 
     @PostMapping()
-    public String addClient(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult) {
+    public String addClient(@ModelAttribute("client") @Valid ClientDTO clientDTO, BindingResult bindingResult) {
         //валидация
         if (bindingResult.hasErrors()) {
             ///TODO
             return "/test";
         }
-        service.save(client);
+
+        //service.save(clientDTO);
         return "redirect:/";
     }
 
@@ -48,7 +48,7 @@ public class mainController {
 
     @GetMapping("/in") // {name}
     public String adminPanel(Model model) {
-        model.addAttribute("clients", service.getAllClient());
+        //model.addAttribute("clients", service.getAllClient());
 
         return "backPage/adminPanel";
     }

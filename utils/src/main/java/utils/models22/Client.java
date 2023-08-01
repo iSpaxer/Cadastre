@@ -1,4 +1,4 @@
-package utils.models;
+package utils.models22;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;

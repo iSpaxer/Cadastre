@@ -27,6 +27,6 @@ public class CommonAnswerConsumerImpl implements CommonAnswerConsumer {
     @RabbitListener(queues = REQUEST_GET_CLIENTS)
     public void consumeGetListClient(Boolean bool) {
         //TODO добавить счеткик?
-        rabbitMainService.SendAllClients(0);
+        //rabbitMainService.SendAllClients(0);
     }
 }

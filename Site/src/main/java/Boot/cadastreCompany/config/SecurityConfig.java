@@ -31,17 +31,18 @@ public class SecurityConfig  {
                 .authorizeHttpRequests()
                 .requestMatchers("/login", "/", "/error").permitAll()
                 .requestMatchers("/img/**", "/css/**", "/js/**", "/sass/**", "/libs/**").permitAll()
-                .anyRequest().authenticated()
+                ///TODO .anyRequest().authenticated()
+                .anyRequest().permitAll()
 //            .authorizeHttpRequests( (auth) -> auth
 //                .requestMatchers("/login", "/", "/error", "/s").permitAll()
 ////                .requestMatchers( "/css/**").permitAll()
 //                .anyRequest().authenticated())
 //            .httpBasic()
-            .and()
-            .formLogin().loginPage("/login")
-            .loginProcessingUrl("/process_login")
-            .defaultSuccessUrl("/in", true)
-            .failureUrl("/login?error");
+                .and()
+                .formLogin().loginPage("/login")
+                .loginProcessingUrl("/process_login")
+                .defaultSuccessUrl("/in", true)
+                .failureUrl("/login?error");
         http.authenticationProvider(authenticationProvider());
 
         return http.build();

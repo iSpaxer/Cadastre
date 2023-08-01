@@ -1,33 +1,28 @@
 package Boot.cadastreCompany.service.impl;
 
-import Boot.cadastreCompany.repositories.EngRepository;
+import Boot.cadastreCompany.dto.EngineerDTO;
 import Boot.cadastreCompany.security.EngDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import utils.models.Engineer;
 
 import java.util.Optional;
 
 @Service
 public class EngDetailsServiceImpl implements UserDetailsService {
 
-    private final EngRepository engRepository;
-
-    @Autowired
-    public EngDetailsServiceImpl(EngRepository engRepository) {
-        this.engRepository = engRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        Optional<Engineer> eng = engRepository.findByLogin(login);
-
-        if (eng.isEmpty())
-            throw new UsernameNotFoundException("Eng not found!");
-
-        return new EngDetails(eng.get());
+//        Optional<EngineerDTO> engineerDTO = engRepository.findByLogin(login);
+//
+//        if (engineerDTO.isEmpty())
+//            throw new UsernameNotFoundException("Eng not found!");
+//
+//        return new EngDetails(engineerDTO.get());
+        return null;
+        //TODO
     }
 }
