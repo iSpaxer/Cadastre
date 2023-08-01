@@ -1,6 +1,5 @@
 package Boot.cadastreCompany.service.impl;
 
-import Boot.cadastreCompany.models.Engineer;
 import Boot.cadastreCompany.repositories.EngRepository;
 import Boot.cadastreCompany.security.EngDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import utils.models.Engineer;
 
 import java.util.Optional;
 

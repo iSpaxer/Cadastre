@@ -1,4 +1,4 @@
-package Boot.cadastreCompany.models;
+package DBPostgres.models;
 
 public enum Role {
     ADMIN,

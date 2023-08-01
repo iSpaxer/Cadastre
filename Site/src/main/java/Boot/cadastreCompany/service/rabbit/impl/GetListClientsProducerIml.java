@@ -1,10 +1,10 @@
 package Boot.cadastreCompany.service.rabbit.impl;
 
-import Boot.cadastreCompany.models.Client;
 import Boot.cadastreCompany.service.rabbit.GetListClientsProducer;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
+import utils.models.Client;
 
 import java.util.List;
 

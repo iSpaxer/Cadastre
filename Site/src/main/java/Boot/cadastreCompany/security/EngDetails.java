@@ -1,8 +1,8 @@
 package Boot.cadastreCompany.security;
 
-import Boot.cadastreCompany.models.Engineer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import utils.models.Engineer;
 
 import java.util.Collection;
 

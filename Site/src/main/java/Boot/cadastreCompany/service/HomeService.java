@@ -1,12 +1,12 @@
 package Boot.cadastreCompany.service;
 
-import Boot.cadastreCompany.models.Client;
 import Boot.cadastreCompany.repositories.HomeRepository;
 import Boot.cadastreCompany.service.rabbit.NotificationProducer;
 import Boot.cadastreCompany.service.rabbit.impl.NotificationProducerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utils.models.Client;
 
 import java.util.Date;
 import java.util.List;

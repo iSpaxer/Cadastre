@@ -47,17 +47,6 @@ public class SecurityConfig  {
         return http.build();
     }
 
-//    @Bean
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//
-//        registry.addResourceHandler("images/**").addResourceLocations("static/images/");
-//
-//    }
-
-//    @Bean
-//    public WebSecurityCustomizer webSecurityCustomizer() {
-//        return (web) -> web.ignoring().requestMatchers("/img/**", "/css/**", "js");
-//    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -73,4 +62,6 @@ public class SecurityConfig  {
     protected PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
+
+
 }

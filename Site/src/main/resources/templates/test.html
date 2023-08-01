@@ -65,26 +65,26 @@
         </ul>
       </div>
 
-<!--      <form class="main-form" th:method="POST" th:action="@{/}" th:object="${client}">-->
-<!--        <div class="form-title-wrapper">-->
-<!--          <h2 class="main-form-title">Оставьте заявку</h2>-->
-<!--        </div>-->
-<!--        <input class="input" type="text" th:field="*{name}" placeholder="Ваше имя *">-->
-<!--        <div style="color: crimson" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" >Name Error</div>-->
-<!--        <input class="input" type="tel" th:field="*{phone}" placeholder="Ваш телефон *">-->
-<!--        <div style="color: crimson" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" >Phone Error</div>-->
-<!--        <input class="button-bell" type="submit" value="Заказать звонок">-->
-<!--      </form>-->
+      <form class="main-form" th:method="POST" th:action="@{/}" th:object="${client}">
+        <div class="form-title-wrapper">
+          <h2 class="main-form-title">Оставьте заявку</h2>
+        </div>
+        <input class="input" type="text" th:field="*{name}" placeholder="Ваше имя *">
+        <div style="color: crimson" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" >Name Error</div>
+        <input class="input" type="tel" th:field="*{phone}" placeholder="Ваш телефон *">
+        <div style="color: crimson" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" >Phone Error</div>
+        <input class="button-bell" type="submit" value="Заказать звонок">
+      </form>
 
-                      <form class="main-form">
-                          <div class="form-title-wrapper">
-                              <div class="shadow"></div>
-                              <h2 class="main-form-title">Оставьте заявку</h2>
-                          </div>
-                          <input class="input" type="text" placeholder="Ваше имя *" required>
-                          <input class="input" type="tel" placeholder="Ваш телефон *" required>
-                          <input class="button-bell" type="submit" value="Заказать звонок">
-                      </form>
+<!--                      <form class="main-form">-->
+<!--                          <div class="form-title-wrapper">-->
+<!--                              <div class="shadow"></div>-->
+<!--                              <h2 class="main-form-title">Оставьте заявку</h2>-->
+<!--                          </div>-->
+<!--                          <input class="input" type="text" placeholder="Ваше имя *" required>-->
+<!--                          <input class="input" type="tel" placeholder="Ваш телефон *" required>-->
+<!--                          <input class="button-bell" type="submit" value="Заказать звонок">-->
+<!--                      </form>-->
 
       </form>
     </div>

@@ -1,8 +1,8 @@
 package Boot.cadastreCompany.repositories;
 
-import Boot.cadastreCompany.models.Engineer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import utils.models.Engineer;
 
 import java.util.Optional;
 

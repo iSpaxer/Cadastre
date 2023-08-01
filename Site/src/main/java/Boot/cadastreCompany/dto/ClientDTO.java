@@ -1,0 +1,16 @@
+package Boot.cadastreCompany.dto;
+
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
+
+@Data
+public class ClientDTO {
+    @NotEmpty(message = "Поле пустое")
+    @Size(min = 2, max = 15, message = "Введите ваше имя")
+    private String name;
+
+    @NotEmpty(message = "Поле пустое")
+    @Size(min = 11, max = 11, message = "не корректный номер")
+    private String phone;
+}

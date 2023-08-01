@@ -1,6 +1,5 @@
 package Boot.cadastreCompany.controllers;
 
-import Boot.cadastreCompany.models.Client;
 import Boot.cadastreCompany.service.HomeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import utils.models.Client;
 
 @Controller
 @RequestMapping("/")
@@ -26,14 +26,16 @@ public class mainController {
     @GetMapping()
     public String homePage(Model model) {
         model.addAttribute("client", new Client());
-        return "homePage/2index";
+        ///TODO
+        return "/test";
     }
 
     @PostMapping()
     public String addClient(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult) {
         //валидация
         if (bindingResult.hasErrors()) {
-            return "homePage/index";
+            ///TODO
+            return "/test";
         }
         service.save(client);
         return "redirect:/";

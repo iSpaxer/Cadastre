@@ -1,6 +1,7 @@
 package Boot.cadastreCompany.service.rabbit;
 
-import Boot.cadastreCompany.models.Client;
+
+import utils.models.Client;
 
 import java.util.List;
 

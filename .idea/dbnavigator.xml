@@ -51,7 +51,6 @@ create table Client_Service(
     service_id int references Service(service_id),
     PRIMArY KEY (client_id, service_id)
 )]]></console>
-      <console name="CadastreCompany " type="STANDARD" schema="CadastreCompany" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">

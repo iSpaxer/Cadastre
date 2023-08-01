@@ -2,11 +2,10 @@ package DBPostgres.service;
 
 
 //import DBPostgres.models.Client
+import DBPostgres.models.Client;
 import DBPostgres.repositories.HomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import utils.models.Client;
 
 import java.util.Date;
 import java.util.List;
@@ -15,29 +14,33 @@ import java.util.List;
 
 
 @Service
-@Transactional(readOnly = true)
+//@Transactional(readOnly = true)
 public class HomeService {
-    private HomeRepository repository;
+    private HomeRepository homeRepository;
     //private final NotificationProducer notificationProducer;
 
 
     @Autowired
     public HomeService(HomeRepository repository) {
-        this.repository = repository;
+        this.homeRepository = repository;
         //this.notificationProducer = updateProducer;
     }
 
     public List<Client> getAllClient() {
-        return repository.findAll();
+        return homeRepository.findAll();
     }
 
+    public Client getLastClient() {
+        //return homeRepository.findById(homeRepository.count()).get();
+        return homeRepository.findFirstByOrderByIdDesc();
+    }
 
-    @Transactional
+    //@Transactional
     public void save(Client newClient) {
         newClient.setCreatedData(new Date());
 
-        //notificationProducer.produce(TEXT_MESSAGE_UPDATE, information(newClient));
-        repository.save(newClient);
+        System.out.printf(newClient.toString());
+        homeRepository.save(newClient);
     }
 
 //    private String information(Client client) {
