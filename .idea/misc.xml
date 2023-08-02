@@ -27,6 +27,7 @@
         <option value="$PROJECT_DIR$/commonJpa/pom.xml" />
         <option value="$PROJECT_DIR$/tgBot/Site22/pom.xml" />
         <option value="$PROJECT_DIR$/tgBot/tgBott/pom.xml" />
+        <option value="$PROJECT_DIR$/utils/pom.xml" />
         <option value="$PROJECT_DIR$/../DBPostgresql/pom.xml" />
       </set>
     </option>

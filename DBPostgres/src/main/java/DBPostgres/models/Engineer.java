@@ -1,5 +1,6 @@
 package DBPostgres.models;
 
+import DBPostgres.dto.EngineerDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -37,5 +38,9 @@ public class Engineer {
         this.eng_name = eng_name;
         this.login = login;
         this.password = password;
+    }
+
+    public EngineerDTO mappingEngineerDTO() {
+        return new EngineerDTO(eng_name, login, password);
     }
 }

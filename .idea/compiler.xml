@@ -10,7 +10,6 @@
         <module name="RabbitMQ" />
         <module name="Site" />
         <module name="node" />
-        <module name="utils" />
         <module name="dispatcher" />
         <module name="DBPostgres" />
       </profile>
@@ -32,6 +31,7 @@
       <module name="testAPI" target="19" />
       <module name="TestTelegramBot" target="19" />
       <module name="tgBott" target="19" />
+      <module name="utils" target="19" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

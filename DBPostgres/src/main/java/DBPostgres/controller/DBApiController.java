@@ -2,7 +2,9 @@ package DBPostgres.controller;
 
 import DBPostgres.dto.ClientDTO;
 import DBPostgres.dto.EngineerDTO;
+import DBPostgres.dto.EngineerLoginDTO;
 import DBPostgres.exception.GetJSONException;
+import DBPostgres.exception.UnknownException;
 import DBPostgres.models.Client;
 import DBPostgres.models.Engineer;
 import DBPostgres.service.EngService;
@@ -46,12 +48,12 @@ public class DBApiController {
         return homeService.getAllClient();
     }
 
-    @GetMapping("/lastClients")
+    @GetMapping("/lastClient")
     public Client getLastClients() {
         return homeService.getLastClient();
     }
 
-    @PostMapping("/postClients")
+    @PostMapping("/saveClient")
     public ResponseEntity<HttpStatus> gettingClient(@RequestBody @Valid ClientDTO clientDTO,
                                                     BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -73,8 +75,8 @@ public class DBApiController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/postEngineer")
-    public ResponseEntity<HttpStatus> gettingEngineer(@RequestBody @Valid EngineerDTO engineerDTO, BindingResult bindingResult) {
+    @PostMapping("/saveEngineer")
+    public ResponseEntity<?> gettingEngineer(@RequestBody @Valid EngineerDTO engineerDTO, BindingResult bindingResult) {
         engineerValidator.validate(engineerDTO, bindingResult);
         if (bindingResult.hasErrors()) {
             StringBuilder errorMsg = new StringBuilder();
@@ -95,11 +97,24 @@ public class DBApiController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping("/findByEngineer")
+    public ResponseEntity<?> findByEngineer(@RequestBody EngineerLoginDTO engineerLoginDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new UnknownException();
+        }
+        return new ResponseEntity<>(engService.findByEngineerLogin(engineerLoginDTO.getLogin()), HttpStatus.OK);
+    }
+
     @ExceptionHandler
     private ResponseEntity<ClientErrorResponse> handleException(GetJSONException e) {
         ClientErrorResponse  clientErrorResponse = new ClientErrorResponse(
                 "Error JSON format... Please reading instruction for API DB'\n" + e.getMessage()
         );
         return new ResponseEntity<>(clientErrorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<?> handleException(UnknownException e) {
+        return new ResponseEntity<>("UnknownException in DB... ", HttpStatus.BAD_REQUEST);
     }
 }

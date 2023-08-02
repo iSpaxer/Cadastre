@@ -1,11 +1,13 @@
 package DBPostgres.service;
 
+import DBPostgres.dto.EngineerDTO;
 import DBPostgres.models.Engineer;
 import DBPostgres.repositories.EngRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EngService {
@@ -19,6 +21,10 @@ public class EngService {
     public List<Engineer> getAllEngineer() {
         ///TODO необходимо вытаскивать без паролей или например только имена
         return engRepository.findAll();
+    }
+
+    public Optional<EngineerDTO> findByEngineerLogin(String login) {
+        return Optional.of(engRepository.findByLogin(login).get().mappingEngineerDTO());
     }
 
     public void save(Engineer engineer) {
