@@ -15,41 +15,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class mainController {
 
-//    private HomeService service;
-//
-//    @Autowired
-//    public mainController(HomeService service) {
-//        this.service = service;
+
+//    @GetMapping()
+//    public String homePage(Model model) {
+//        model.addAttribute("client", new ClientDTO());
+//        ///TODO
+//        return "/test";
 //    }
-
-    @GetMapping()
-    public String homePage(Model model) {
-        model.addAttribute("client", new ClientDTO());
-        ///TODO
-        return "/test";
-    }
-
-    @PostMapping()
-    public String addClient(@ModelAttribute("client") @Valid ClientDTO clientDTO, BindingResult bindingResult) {
-        //валидация
-        if (bindingResult.hasErrors()) {
-            ///TODO
-            return "/test";
-        }
-
-        //service.save(clientDTO);
-        return "redirect:/";
-    }
-
-    @GetMapping("/login")
-    public String loginPage() {
-        return "backPage/login";
-    }
-
-    @GetMapping("/in") // {name}
-    public String adminPanel(Model model) {
-        //model.addAttribute("clients", service.getAllClient());
-
-        return "backPage/adminPanel";
-    }
+//
+//    @PostMapping()
+//    public String addClient(@ModelAttribute("client") @Valid ClientDTO clientDTO, BindingResult bindingResult) {
+//        //валидация
+//        if (bindingResult.hasErrors()) {
+//            ///TODO
+//            return "/test";
+//        }
+//
+//        //service.save(clientDTO);
+//        return "redirect:/";
+//    }
+//
+//    @GetMapping("/login")
+//    public String loginPage() {
+//        return "backPage/login";
+//    }
+//
+//    @GetMapping("/adminPanel") // {name}
+//    public String adminPanel(Model model) {
+//        //model.addAttribute("clients", service.getAllClient());
+//
+//        return "backPage/adminPanel";
+//    }
 }

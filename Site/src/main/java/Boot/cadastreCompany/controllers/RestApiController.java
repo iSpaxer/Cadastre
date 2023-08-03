@@ -2,6 +2,7 @@ package Boot.cadastreCompany.controllers;
 
 import Boot.cadastreCompany.dto.ClientDTO;
 import Boot.cadastreCompany.dto.EngineerDTO;
+import Boot.cadastreCompany.exception.AuthenticationError;
 import Boot.cadastreCompany.exception.DBRequestException;
 import Boot.cadastreCompany.exception.UnknownException;
 import Boot.cadastreCompany.service.ApiRequestService;
@@ -10,11 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -22,22 +26,26 @@ import java.util.List;
 public class RestApiController {
 
     private ApiRequestService apiRequestService;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    public RestApiController(ApiRequestService apiRequestService) {
+    public RestApiController(ApiRequestService apiRequestService, AuthenticationManager authenticationManager) {
         this.apiRequestService = apiRequestService;
+        this.authenticationManager = authenticationManager;
     }
 
 ///TODO дописать
 //    @PostMapping("/postClient/")
 //    public ResponseEntity<List<Client>>
 
+    ///TODO not exception
     @GetMapping("/getClients")
     public ResponseEntity<List<ClientDTO>> getClients() {
         List<ClientDTO> clientDTOList = apiRequestService.getAllClients();
         return new ResponseEntity<>(clientDTOList, HttpStatus.OK);
     }
 
+    ///TODO not exception
     @GetMapping("/lastClient")
     public ResponseEntity<ClientDTO> getLastClient() {
 
@@ -46,19 +54,29 @@ public class RestApiController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<?> auth(@RequestBody @Valid EngineerDTO engineerDTO, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            /// TODO
-            return new ResponseEntity<>(
-                    "Some mistake.. " + bindingResult.getFieldErrors().toString(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> auth(@RequestBody @Valid EngineerDTO engineerDTO) {
+//        if (bindingResult.hasErrors()) {
+//            /// TODO
+//            return new ResponseEntity<>(
+//                    "Some mistake.. " + bindingResult.getFieldErrors().toString(), HttpStatus.BAD_REQUEST);
+//        }
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    engineerDTO.getLogin(), engineerDTO.getPassword()));
+        } catch (BadCredentialsException e) {
+            throw new AuthenticationError("Неправильный логин или пароль", HttpStatus.UNAUTHORIZED.value());
         }
-
-        ///TODO
-        return null;
-
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/saveClient_2")
+    @PostMapping("/test/auth")
+    public ResponseEntity<?> test_auth(@RequestBody @Valid EngineerDTO engineerDTO) {
+        apiRequestService.findByEngineer(engineerDTO.getLogin());
+
+        return new ResponseEntity<>(engineerDTO.getLogin() + " " + engineerDTO.getPassword(), HttpStatus.OK);
+    }
+
+    @PostMapping("/saveClient")
     public ResponseEntity<?> saveClient(@RequestBody @Valid ClientDTO clientDTO) {
 //        if (bindingResult.hasErrors()) {
 //            throw new UnknownException("UnknownException...\n Error save client", new Date());
@@ -68,8 +86,8 @@ public class RestApiController {
 
         ///TODO
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
+
 
     @GetMapping
     public String hidden() {
@@ -87,5 +105,11 @@ public class RestApiController {
     private ResponseEntity<?> handleException(DBRequestException e) {
         System.err.println("Error: " + e.getStatusCode() + " " + e.getMessage());
         return new ResponseEntity<>("DBRequestException...\nError: " + e.getStatusCode() + " " + e.getMessage(), HttpStatusCode.valueOf(e.getStatusCode()));
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<?> handleException(AuthenticationError e) {
+        System.err.println("Error authentication.." + e.getMessage() + "id: " + e.getId());
+        return new ResponseEntity<>("Error authentication.." + e.getMessage() + "id: " + e.getId(), HttpStatus.UNAUTHORIZED);
     }
 }

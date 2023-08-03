@@ -39,7 +39,7 @@ public class ApiRequestService {
         try {
             return webClientBuilder.build()
                     .get()
-                    .uri("/lastClient9")
+                    .uri("/lastClient")
                     .retrieve()
                     .bodyToMono(ClientDTO.class)
                     .block();
@@ -51,13 +51,14 @@ public class ApiRequestService {
         }
     }
 
-    public Optional<EngineerDTO> findByEngineer(String login) {
+    public EngineerDTO findByEngineer(String login) {
         try {
             return webClientBuilder.build()
-                    .get()
-                    .uri("http://localhost:8088/DB/findByEngineer")
+                    .post()
+                    .uri("/findByEngineer")
+                    .bodyValue(login)
                     .retrieve()
-                    .bodyToMono(Optional.class)
+                    .bodyToMono(EngineerDTO.class)
                     .block();
         } catch (WebClientResponseException webClientResponseException) {
             throw new DBRequestException(webClientResponseException.getMessage(), webClientResponseException.getStatusCode().value());

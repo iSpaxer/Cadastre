@@ -21,6 +21,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("DB/")
@@ -98,11 +99,15 @@ public class DBApiController {
     }
 
     @PostMapping("/findByEngineer")
-    public ResponseEntity<?> findByEngineer(@RequestBody EngineerLoginDTO engineerLoginDTO, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            throw new UnknownException();
+    public ResponseEntity<?> findByEngineer(@RequestBody String engineerLoginDTO, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            throw new UnknownException();
+//        }
+        Optional<EngineerDTO> engineerDTO = engService.findByEngineerLogin(engineerLoginDTO);
+        if (engineerDTO.isEmpty()) {
+            return  new ResponseEntity<>(null, HttpStatus.OK);
         }
-        return new ResponseEntity<>(engService.findByEngineerLogin(engineerLoginDTO.getLogin()), HttpStatus.OK);
+        return new ResponseEntity<>(engineerDTO.get(), HttpStatus.OK);
     }
 
     @ExceptionHandler
