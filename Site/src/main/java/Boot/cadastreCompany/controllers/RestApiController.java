@@ -68,9 +68,9 @@ public class RestApiController {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     engineerDTO.getLogin(), engineerDTO.getPassword()));
         } catch (BadCredentialsException e) {
-            throw new AuthenticationError("Неправильный логин или пароль", HttpStatus.UNAUTHORIZED.value());
+            throw new AuthenticationError("Неправильный логин или пароль ", HttpStatus.UNAUTHORIZED.value());
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Successful authentication! ", HttpStatus.OK);
     }
 
     @PostMapping("/test/auth")
@@ -105,6 +105,6 @@ public class RestApiController {
     @ExceptionHandler
     private ResponseEntity<?> handleException(AuthenticationError e) {
         System.err.println("Error authentication.." + e.getMessage() + "id: " + e.getId());
-        return new ResponseEntity<>("Error authentication.." + e.getMessage() + "id: " + e.getId(), HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>("Error authentication... " + e.getMessage() + "id: " + e.getId(), HttpStatus.UNAUTHORIZED);
     }
 }

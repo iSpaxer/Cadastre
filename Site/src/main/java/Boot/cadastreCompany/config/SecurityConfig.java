@@ -1,10 +1,13 @@
 package Boot.cadastreCompany.config;
 
+import Boot.cadastreCompany.security.AuthProviderImpl;
 import Boot.cadastreCompany.security.EngDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,11 +23,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class SecurityConfig  {
 
-    private final EngDetailsServiceImpl engDetailsService;
+//    private final EngDetailsServiceImpl engDetailsService;
+    private final AuthProviderImpl authProvider;
 
     @Autowired
-    public SecurityConfig(EngDetailsServiceImpl engDetailsService) {
-        this.engDetailsService = engDetailsService;
+    public SecurityConfig(AuthProviderImpl authProvider) {
+        this.authProvider = authProvider;
     }
 
     @Bean
@@ -42,38 +46,43 @@ public class SecurityConfig  {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 //                .and()
-      //          .formLogin().loginPage("/login")
+                //          .formLogin().loginPage("/login")
                 //.loginProcessingUrl("/process_login")
-            //    .defaultSuccessUrl("/adminPanel", true)
-           //     .failureUrl("/login?error")
+                //    .defaultSuccessUrl("/adminPanel", true)
+                //     .failureUrl("/login?error")
 //                .and()
 //                .exceptionHandling()
 //                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and()
-                .authenticationProvider(authenticationProvider());
+                .authenticationProvider(authProvider);
+//                .authenticationProvider(authenticationProvider());
 
         return http.build();
     }
 
 
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+//    @Bean
+//    public DaoAuthenticationProvider authenticationProvider() {
+//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+//
+//        authProvider.setPasswordEncoder(passwordEncoder());
+////        authProvider.setUserDetailsService(engDetailsService);
+//
+//
+//        return authProvider;
+//    }
 
-        authProvider.setPasswordEncoder(passwordEncoder());
-        authProvider.setUserDetailsService(engDetailsService);
 
-        return authProvider;
-    }
-
-    @Bean
-    protected PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12);
-    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) {
+//        config.
+//        return null;
+//    }
 
 }

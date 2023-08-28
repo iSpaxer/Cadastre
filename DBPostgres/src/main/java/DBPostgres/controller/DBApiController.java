@@ -12,6 +12,7 @@ import DBPostgres.service.HomeService;
 import DBPostgres.util.ClientErrorResponse;
 import DBPostgres.util.validate.EngineerValidator;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("DB/")
+@Slf4j
 public class DBApiController {
     private HomeService homeService;
     private EngService engService;
@@ -98,6 +100,29 @@ public class DBApiController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping("/authenticationEngineer")
+    public ResponseEntity<?> authenticationEngineer(@RequestBody @Valid EngineerDTO engineerDTO, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMsg = new StringBuilder();
+
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+
+            for (FieldError error : fieldErrors) {
+                errorMsg
+                        .append(error.getField())           // на каком поле была ошибка
+                        .append(" — ")                      // —
+                        .append(error.getDefaultMessage())  // выведем какая была ошибка
+                        .append(";");
+            }
+            throw new GetJSONException(errorMsg.toString());
+        }
+
+        Boolean checkAuth = engService.authenticationEngineer(engineerDTO);
+        log.info(" " + checkAuth);
+        return new ResponseEntity<>(checkAuth, HttpStatus.OK);
+    }
+
     @PostMapping("/findByEngineer")
     public ResponseEntity<?> findByEngineer(@RequestBody String engineerLoginDTO, BindingResult bindingResult) {
 //        if (bindingResult.hasErrors()) {
@@ -113,7 +138,7 @@ public class DBApiController {
     @ExceptionHandler
     private ResponseEntity<ClientErrorResponse> handleException(GetJSONException e) {
         ClientErrorResponse  clientErrorResponse = new ClientErrorResponse(
-                "Error JSON format... Please reading instruction for API DB'\n" + e.getMessage()
+                "Error JSON format... Please reading instruction for API DB" + e.getMessage()
         );
         return new ResponseEntity<>(clientErrorResponse, HttpStatus.BAD_REQUEST);
     }

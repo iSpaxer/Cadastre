@@ -41,6 +41,6 @@ public class Engineer {
     }
 
     public EngineerDTO mappingEngineerDTO() {
-        return new EngineerDTO(eng_name, login, password);
+        return new EngineerDTO(login, password);
     }
 }
