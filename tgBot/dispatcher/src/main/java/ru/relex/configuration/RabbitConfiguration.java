@@ -46,4 +46,9 @@ public class RabbitConfiguration {
         return new Queue(REQUEST_GET_CLIENTS);
     }
 
+    @Bean
+    public Queue getClientDTO() {
+        return new Queue(GET_CLIENT);
+    }
+
 }

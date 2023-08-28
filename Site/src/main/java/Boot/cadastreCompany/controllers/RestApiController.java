@@ -6,6 +6,7 @@ import Boot.cadastreCompany.exception.AuthenticationError;
 import Boot.cadastreCompany.exception.DBRequestException;
 import Boot.cadastreCompany.exception.UnknownException;
 import Boot.cadastreCompany.service.ApiRequestService;
+import Boot.cadastreCompany.service.rabbit_2_0.ClientProducer;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import rabitmq.RabbitQueue;
 
 
 import java.util.List;
@@ -27,12 +27,16 @@ public class RestApiController {
 
     private ApiRequestService apiRequestService;
     private AuthenticationManager authenticationManager;
+    private ClientProducer clientProducer;
+
 
     @Autowired
-    public RestApiController(ApiRequestService apiRequestService, AuthenticationManager authenticationManager) {
+    public RestApiController(ApiRequestService apiRequestService, AuthenticationManager authenticationManager, ClientProducer clientProducer) {
         this.apiRequestService = apiRequestService;
         this.authenticationManager = authenticationManager;
+        this.clientProducer = clientProducer;
     }
+
 
 ///TODO дописать
 //    @PostMapping("/postClient/")
@@ -78,22 +82,13 @@ public class RestApiController {
 
     @PostMapping("/saveClient")
     public ResponseEntity<?> saveClient(@RequestBody @Valid ClientDTO clientDTO) {
-//        if (bindingResult.hasErrors()) {
-//            throw new UnknownException("UnknownException...\n Error save client", new Date());
-//        }
 
-        apiRequestService.saveClient(clientDTO);
+        clientProducer.clientSaveProduce(RabbitQueue.GET_CLIENT, clientDTO);
 
         ///TODO
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-    @GetMapping
-    public String hidden() {
-
-        return "Hidden method";
-    }
 
     @ExceptionHandler
     private ResponseEntity<?> handleException(UnknownException e) {

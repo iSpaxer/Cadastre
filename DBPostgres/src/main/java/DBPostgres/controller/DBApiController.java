@@ -54,27 +54,27 @@ public class DBApiController {
         return homeService.getLastClient();
     }
 
-    @PostMapping("/saveClient")
-    public ResponseEntity<HttpStatus> gettingClient(@RequestBody @Valid ClientDTO clientDTO,
-                                                    BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMsg = new StringBuilder();
-
-            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-
-            for (FieldError error : fieldErrors) {
-                errorMsg
-                        .append(error.getField())           // на каком поле была ошибка
-                        .append(" — ")                      // —
-                        .append(error.getDefaultMessage())  // выведем какая была ошибка
-                        .append(";");
-            }
-            throw new GetJSONException(errorMsg.toString());
-        }
-
-        homeService.save(modelMapper.map(clientDTO, Client.class));
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @PostMapping("/saveClient")
+//    public ResponseEntity<HttpStatus> gettingClient(@RequestBody @Valid ClientDTO clientDTO,
+//                                                    BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            StringBuilder errorMsg = new StringBuilder();
+//
+//            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+//
+//            for (FieldError error : fieldErrors) {
+//                errorMsg
+//                        .append(error.getField())           // на каком поле была ошибка
+//                        .append(" — ")                      // —
+//                        .append(error.getDefaultMessage())  // выведем какая была ошибка
+//                        .append(";");
+//            }
+//            throw new GetJSONException(errorMsg.toString());
+//        }
+//
+//        homeService.save(modelMapper.map(clientDTO, Client.class));
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
     @PostMapping("/saveEngineer")
     public ResponseEntity<?> gettingEngineer(@RequestBody @Valid EngineerDTO engineerDTO, BindingResult bindingResult) {

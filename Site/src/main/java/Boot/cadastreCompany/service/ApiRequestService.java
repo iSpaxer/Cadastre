@@ -51,6 +51,7 @@ public class ApiRequestService {
         }
     }
 
+    // for checking login and password. From DB returned EngineerDTO
     public EngineerDTO findByEngineer(String login) {
         try {
             return webClientBuilder.build()
@@ -65,7 +66,22 @@ public class ApiRequestService {
         } catch (Exception e) {
             throw new UnknownException(e.getMessage(), new Date());
         }
+    }
 
+    public Boolean authenticationEngineer(EngineerDTO engineerDTO) {
+        try {
+            return webClientBuilder.build()
+                    .post()
+                    .uri("/authenticationEngineer")
+                    .bodyValue(engineerDTO)
+                    .retrieve()
+                    .bodyToMono(Boolean.class)
+                    .block();
+        } catch (WebClientResponseException webClientResponseException) {
+            throw new DBRequestException(webClientResponseException.getMessage(), webClientResponseException.getStatusCode().value());
+        } catch (Exception e) {
+            throw new UnknownException(e.getMessage(), new Date());
+        }
     }
 
     /// TODO post save client

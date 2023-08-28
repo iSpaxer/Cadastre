@@ -2,12 +2,13 @@ package Boot.cadastreCompany.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EngineerDTO {
-    @NotEmpty(message = "eng_name can't be equal to null")
-    private String eng_name;
 
     @NotEmpty(message = "login can't be equal to null")
     @Size(min = 3, message = "pls enter more than 3 characters")

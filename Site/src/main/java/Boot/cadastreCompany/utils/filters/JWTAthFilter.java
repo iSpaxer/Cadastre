@@ -1,4 +1,4 @@
-package Boot.cadastreCompany.config;
+package Boot.cadastreCompany.utils.filters;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

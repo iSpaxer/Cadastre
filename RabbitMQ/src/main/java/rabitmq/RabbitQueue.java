@@ -7,5 +7,6 @@ public class RabbitQueue  {
     public static final String ANSWER_MESSAGE = "answer_message";
     public static final String ANSWER_CLIENTS = "answer_clients";
     public static final String REQUEST_GET_CLIENTS = "request_get_clients";
+    public static final String GET_CLIENT = "get_client";
 
 }
