@@ -1,23 +1,20 @@
-package DBPostgres.models;
+package DBPostgres.dto;
 
-import DBPostgres.dto.EngineerDTO;
+import DBPostgres.models.Client;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
-@Entity
-@Table(name = "Engineer")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Engineer {
-
+public class EngineerDbDTO {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,20 +34,10 @@ public class Engineer {
     @NotEmpty(message = "password can't be equal null")
     @Size(min = 8, message = "pls enter more than 8 characters")
     private String password;
-
-    @Column(name = "tgId")
     private int tgId;
 
-    @OneToMany(mappedBy = "engineer")
+    ///TODO ?
+    @JsonBackReference
     private List<Client> clientList;
 
-    public Engineer(String name, String login, String password) {
-        this.name = name;
-        this.login = login;
-        this.password = password;
-    }
-
-    public EngineerDTO mappingEngineerDTO() {
-        return new EngineerDTO(login, password);
-    }
 }

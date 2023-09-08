@@ -17,11 +17,11 @@ import java.util.Date;
 public class Client {
 
     @Id
-    @Column(name = "client_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "client_name")
+    @Column(name = "name")
     @NotEmpty(message = "Поле пустое")
     @Size(min = 2, max = 15, message = "Введите ваше имя")
     private String name;
@@ -34,6 +34,10 @@ public class Client {
     @NotEmpty(message = "Поле пустое")
     @Size(min = 11, max = 11, message = "не корректный номер")
     private String phone;
+
+    @ManyToOne
+    @JoinColumn(name = "eng_id", referencedColumnName = "id")
+    private Engineer engineer;
 
     public Client(String name, Date createdData, String phone) {
         this.name = name;

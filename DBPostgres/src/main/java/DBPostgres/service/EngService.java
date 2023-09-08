@@ -28,15 +28,22 @@ public class EngService {
         return engRepository.findAll();
     }
 
-    public Optional<EngineerDTO> findByEngineerLogin(String login) {
+    public Optional<EngineerDTO> findByEngineerDTOLogin(String login) {
         return Optional.of(engRepository.findByLogin(login).get().mappingEngineerDTO());
+    }
+
+    public Optional<Engineer> findByEngineerLogin(String login) {
+        return engRepository.findByLogin(login);
     }
 
     public void save(Engineer engineer) {
 
         ///TODO security config
+        engineer.setPassword(bCryptPasswordEncoder.encode(engineer.getPassword()));
         engRepository.save(engineer);
     }
+
+
 
     public Boolean authenticationEngineer(EngineerDTO engineerDTO) {
         Optional<Engineer> optionalEngineer = engRepository.findByLogin(engineerDTO.getLogin());

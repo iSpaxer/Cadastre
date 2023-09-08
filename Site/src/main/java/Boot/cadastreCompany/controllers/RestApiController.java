@@ -86,7 +86,7 @@ public class RestApiController {
         clientProducer.clientSaveProduce(RabbitQueue.GET_CLIENT, clientDTO);
 
         ///TODO
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Successfully!", HttpStatus.OK);
     }
 
 
