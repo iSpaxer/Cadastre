@@ -11,6 +11,10 @@ public class EngDetails implements UserDetails {
 
     private final EngineerDTO engineerDTO;
 
+    public EngineerDTO getEngineerDTO() {
+        return engineerDTO;
+    }
+
     public EngDetails(EngineerDTO engineer) {
         this.engineerDTO = engineer;
     }
@@ -29,7 +33,6 @@ public class EngDetails implements UserDetails {
     public String getUsername() {
         return engineerDTO.getLogin();
     }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;

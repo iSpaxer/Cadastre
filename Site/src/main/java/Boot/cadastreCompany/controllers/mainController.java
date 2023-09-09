@@ -37,7 +37,7 @@ public class mainController {
 
     @GetMapping("/login")
     public String loginPage() {
-        return "backPage/login";
+        return "/login";
     }
 
     @GetMapping("/adminPanel") // {name}

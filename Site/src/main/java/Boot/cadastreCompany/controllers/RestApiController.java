@@ -1,20 +1,26 @@
 package Boot.cadastreCompany.controllers;
 
 import Boot.cadastreCompany.dto.ClientDTO;
+import Boot.cadastreCompany.dto.ClientDbDTO;
 import Boot.cadastreCompany.dto.EngineerDTO;
 import Boot.cadastreCompany.exception.AuthenticationError;
 import Boot.cadastreCompany.exception.DBRequestException;
 import Boot.cadastreCompany.exception.UnknownException;
+import Boot.cadastreCompany.security.EngDetails;
 import Boot.cadastreCompany.service.ApiRequestService;
 import Boot.cadastreCompany.service.rabbit_2_0.ClientProducer;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import rabitmq.RabbitQueue;
 
@@ -22,7 +28,8 @@ import rabitmq.RabbitQueue;
 import java.util.List;
 
 
-@RestController
+@RestController()
+@RequestMapping("/api")
 public class RestApiController {
 
     private ApiRequestService apiRequestService;
@@ -44,33 +51,37 @@ public class RestApiController {
 
     ///TODO not exception
     @GetMapping("/getClients")
-    public ResponseEntity<List<ClientDTO>> getClients() {
-        List<ClientDTO> clientDTOList = apiRequestService.getAllClients();
-        return new ResponseEntity<>(clientDTOList, HttpStatus.OK);
+    public ResponseEntity<?> getClients() {
+        List<ClientDbDTO> allClients = apiRequestService.getAllClients();
+        return new ResponseEntity<>(allClients, HttpStatus.OK);
     }
 
     ///TODO not exception
     @GetMapping("/lastClient")
-    public ResponseEntity<ClientDTO> getLastClient() {
+    public ResponseEntity<?> getLastClient() {
 
-        ClientDTO clientDTO = apiRequestService.getLastClient();
-        return new ResponseEntity<>(clientDTO, HttpStatus.OK);
+        ClientDbDTO lastClient = apiRequestService.getLastClient();
+        return new ResponseEntity<>(lastClient, HttpStatus.OK);
     }
 
-    @PostMapping("/auth")
-    public ResponseEntity<?> auth(@RequestBody @Valid EngineerDTO engineerDTO) {
-//        if (bindingResult.hasErrors()) {
-//            /// TODO
-//            return new ResponseEntity<>(
-//                    "Some mistake.. " + bindingResult.getFieldErrors().toString(), HttpStatus.BAD_REQUEST);
-//        }
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    engineerDTO.getLogin(), engineerDTO.getPassword()));
-        } catch (BadCredentialsException e) {
-            throw new AuthenticationError("Неправильный логин или пароль ", HttpStatus.UNAUTHORIZED.value());
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody EngineerDTO engineerDTO, BindingResult bindingResult,
+                             HttpServletRequest request) {
+        if (bindingResult.hasErrors()) {
+            throw new AuthenticationError("Invalid username or password", HttpStatus.UNAUTHORIZED.value());
         }
-        return new ResponseEntity<>("Successful authentication! ", HttpStatus.OK);
+
+        try {
+            request.login(engineerDTO.getLogin(), engineerDTO.getPassword());
+        } catch (ServletException e) {
+            throw new AuthenticationError("Invalid username or password", HttpStatus.UNAUTHORIZED.value());
+        }
+
+        var auth = (Authentication) request.getUserPrincipal();
+        var engDetails = (EngDetails) auth.getPrincipal();
+        var engDTO = engDetails.getEngineerDTO();
+
+       return new ResponseEntity<>("Successfully! " + engDTO.getLogin() ,HttpStatus.OK);
     }
 
     @PostMapping("/test/auth")
@@ -87,6 +98,20 @@ public class RestApiController {
 
         ///TODO
         return new ResponseEntity<>("Successfully!", HttpStatus.OK);
+    }
+
+    @PostMapping("/takeClient")
+    public ResponseEntity<?> takeClient(@RequestBody @Valid ClientDbDTO clientDbDTO, HttpServletRequest request) {
+
+        var auth = (Authentication) request.getUserPrincipal();
+        var engDetails = (EngDetails) auth.getPrincipal();
+        var engDTO = engDetails.getEngineerDTO();
+
+        apiRequestService.takeClient(engDTO, clientDbDTO);
+
+        //TODO передаём в сервис, там делаем http запрос на БД
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

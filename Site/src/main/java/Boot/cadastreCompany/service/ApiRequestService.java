@@ -1,9 +1,11 @@
 package Boot.cadastreCompany.service;
 
 import Boot.cadastreCompany.dto.ClientDTO;
+import Boot.cadastreCompany.dto.ClientDbDTO;
 import Boot.cadastreCompany.dto.EngineerDTO;
 import Boot.cadastreCompany.exception.DBRequestException;
 import Boot.cadastreCompany.exception.UnknownException;
+import Boot.cadastreCompany.utils.wrapper.EngineerAndClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,35 +15,35 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @Slf4j
 public class ApiRequestService {
-    private WebClient.Builder webClientBuilder;
+    private final WebClient.Builder webClientBuilder;
 
     @Autowired
     public ApiRequestService(WebClient.Builder webClientBuilder) {
         this.webClientBuilder = webClientBuilder;
     }
 
-    public List<ClientDTO> getAllClients() {
+    public List<ClientDbDTO> getAllClients() {
         return webClientBuilder.build()
                 .get()
                 .uri("/allClients")
                 .retrieve()
-                .bodyToFlux(ClientDTO.class)
+                .bodyToFlux(ClientDbDTO.class)
                 .collectList()
                 .block();
     }
 
-    public ClientDTO getLastClient() {
+    public ClientDbDTO getLastClient() {
         try {
             return webClientBuilder.build()
                     .get()
                     .uri("/lastClient")
                     .retrieve()
-                    .bodyToMono(ClientDTO.class)
+                    .bodyToMono(ClientDbDTO.class)
                     .block();
 
         } catch (WebClientResponseException webClientResponseException) {
@@ -92,6 +94,24 @@ public class ApiRequestService {
                     .post()
                     .uri("/saveClient")
                     .bodyValue(clientDTO)
+                    .retrieve()
+                    .bodyToMono(HttpStatus.class)   ///TODO в теле ничего нет
+                    .block();
+        } catch (WebClientResponseException webClientResponseException) {
+            throw new DBRequestException(webClientResponseException.getMessage(), webClientResponseException.getStatusCode().value());
+        } catch (Exception e) {
+            throw new UnknownException(e.getMessage(), new Date());
+        }
+    }
+
+    public void takeClient(EngineerDTO engineerDTO, ClientDbDTO clientDbDTO) {
+        EngineerAndClient engineerAndClient = new EngineerAndClient(engineerDTO, clientDbDTO);
+        try {
+            ///TODO неправильная обработка возвращаемого значения
+            webClientBuilder.build()
+                    .post()
+                    .uri("/takeClient")
+                    .bodyValue(engineerAndClient)
                     .retrieve()
                     .bodyToMono(HttpStatus.class)   ///TODO в теле ничего нет
                     .block();

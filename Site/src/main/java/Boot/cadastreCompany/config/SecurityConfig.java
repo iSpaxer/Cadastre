@@ -4,6 +4,7 @@ import Boot.cadastreCompany.security.AuthProviderImpl;
 import Boot.cadastreCompany.security.EngDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -15,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.stereotype.Service;
 
 
@@ -24,10 +26,10 @@ import org.springframework.stereotype.Service;
 public class SecurityConfig  {
 
 //    private final EngDetailsServiceImpl engDetailsService;
-    private final AuthProviderImpl authProvider;
+    private final AuthenticationProvider authProvider;
 
     @Autowired
-    public SecurityConfig(AuthProviderImpl authProvider) {
+    public SecurityConfig(AuthenticationProvider authProvider) {
         this.authProvider = authProvider;
     }
 
@@ -39,50 +41,25 @@ public class SecurityConfig  {
                 .authorizeHttpRequests()
                 .requestMatchers("/login", "/", "/error").permitAll()
                 .requestMatchers("/img/**", "/css/**", "/js/**", "/sass/**", "/libs/**").permitAll()
+                .requestMatchers("/api/login").permitAll()
+                .requestMatchers("/api/**").authenticated()
                 .requestMatchers("/adminPanel").authenticated()
-                ///TODO .anyRequest().authenticated()
-                .anyRequest().permitAll()
-                //TODO
+                .anyRequest().denyAll()
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-                //          .formLogin().loginPage("/login")
-                //.loginProcessingUrl("/process_login")
-                //    .defaultSuccessUrl("/adminPanel", true)
-                //     .failureUrl("/login?error")
-//                .and()
-//                .exceptionHandling()
-//                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-                .and()
-                .authenticationProvider(authProvider);
-//                .authenticationProvider(authenticationProvider());
+                .authenticationProvider(authProvider)
+                .exceptionHandling(customizer -> customizer
+                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
 
         return http.build();
     }
 
-
-//    @Bean
-//    public DaoAuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-//
-//        authProvider.setPasswordEncoder(passwordEncoder());
-////        authProvider.setUserDetailsService(engDetailsService);
-//
-//
-//        return authProvider;
-//    }
-
-
-
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.authenticationProvider(authProvider);
+        return authenticationManagerBuilder.build();
     }
 
-//    @Bean
-//    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) {
-//        config.
-//        return null;
-//    }
+
 
 }
