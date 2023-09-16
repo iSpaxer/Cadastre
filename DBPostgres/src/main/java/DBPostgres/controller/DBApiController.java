@@ -4,6 +4,8 @@ import DBPostgres.dto.ClientDTO;
 import DBPostgres.dto.ClientDbDTO;
 import DBPostgres.dto.EngineerDTO;
 import DBPostgres.dto.EngineerLoginDTO;
+import DBPostgres.exception.BodyEmptyException;
+import DBPostgres.exception.ClientIsBusyAnotherEngineer;
 import DBPostgres.exception.GetJSONException;
 import DBPostgres.exception.UnknownException;
 import DBPostgres.models.Client;
@@ -165,6 +167,16 @@ public class DBApiController {
                 "Error JSON format... Please reading instruction for API DB" + e.getMessage()
         );
         return new ResponseEntity<>(clientErrorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<?> handleException(BodyEmptyException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<?> handleException(ClientIsBusyAnotherEngineer e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler

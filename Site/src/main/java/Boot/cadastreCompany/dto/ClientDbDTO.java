@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientDbDTO {
-    private int id;
+    private Integer id;
     private String name;
     private Date createdData;
     private String phone;

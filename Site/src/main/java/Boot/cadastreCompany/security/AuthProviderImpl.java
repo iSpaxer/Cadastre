@@ -30,11 +30,16 @@ public class AuthProviderImpl implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         log.info("authenticationProvider working... ");
+        if (authentication.getName().isEmpty() || authentication.getPrincipal() == null) {
+            throw new BadCredentialsException("Empty login or password... ");
+        }
         EngineerDTO engineerDTO = new EngineerDTO(authentication.getName(), authentication.getCredentials().toString());
 
         if (!apiRequestService.authenticationEngineer(engineerDTO)) {
             throw new BadCredentialsException("Incorrect login or password... ");
         }
+        ///TODO hidePassword?
+//        hidePassword(engineerDTO);
         return new UsernamePasswordAuthenticationToken(new EngDetails(engineerDTO),
                 authentication.getCredentials(), Collections.emptyList());
     }
@@ -43,6 +48,10 @@ public class AuthProviderImpl implements AuthenticationProvider {
     public boolean supports(Class<?> authentication) {
         ///TODO
         return true;
+    }
+
+    private void hidePassword(EngineerDTO engineerDTO) {
+        engineerDTO.setPassword(null);
     }
 
 }

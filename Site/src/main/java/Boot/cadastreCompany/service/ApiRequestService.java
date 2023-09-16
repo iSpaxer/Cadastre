@@ -105,7 +105,12 @@ public class ApiRequestService {
     }
 
     public void takeClient(EngineerDTO engineerDTO, ClientDbDTO clientDbDTO) {
-        EngineerAndClient engineerAndClient = new EngineerAndClient(engineerDTO, clientDbDTO);
+        EngineerDTO requestEngineer = new EngineerDTO(engineerDTO.getLogin(), null);
+        ClientDbDTO requestClient = new ClientDbDTO(clientDbDTO.getId(), null, null, null, null);
+        if (requestEngineer.getLogin() == null || requestClient.getId() == null) {
+            throw new DBRequestException("Login engineer or id client is empty!", HttpStatus.BAD_REQUEST.value());
+        }
+        EngineerAndClient engineerAndClient = new EngineerAndClient(requestEngineer, requestClient);
         try {
             ///TODO неправильная обработка возвращаемого значения
             webClientBuilder.build()

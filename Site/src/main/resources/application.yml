@@ -1,14 +1,16 @@
 spring:
 
-  datasource:
-    driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/CadastreCompany
-    username: Alex
-    password: 2830
   mvc:
     hiddenmethod:
       filter:
         enabled: true
+
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/CadastreCompany
+    username: alex
+    password: alex
+
   jpa:
     open-in-view: false
     properties:
@@ -17,8 +19,14 @@ spring:
         show_sql: true
     hibernate:
       ddl-auto: update
+
   rabbitmq:
     host: 'localhost'
     port: 5672
     username: alex
     password: alex
+
+jwt:
+  secret: test
+  lifetime: 10m
+
