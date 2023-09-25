@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_19">
+    <output url="file://$MODULE_DIR$/TestTelegramBot/target/classes" />
+    <output-test url="file://$MODULE_DIR$/TestTelegramBot/target/test-classes" />
+    <content url="file://$MODULE_DIR$/TestTelegramBot">
+      <sourceFolder url="file://$MODULE_DIR$/TestTelegramBot/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/TestTelegramBot/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/TestTelegramBot/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/TestTelegramBot/target" />
+    </content>
+    <orderEntry type="jdk" jdkName="19" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

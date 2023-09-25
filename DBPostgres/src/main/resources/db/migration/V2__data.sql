@@ -1,0 +1,1 @@
+INSERT INTO Engineer(id, name, login, password, tg_id) VALUES (1, 'alexandr', 'alexandr', '$2a$12$1E/njmZS5i/N6xD3TH3Geukks87tznJAJeOp3AS77djfpTXqFOv5K', 1);

@@ -1,0 +1,17 @@
+
+spring.mvc.hiddenmethod.filter.enabled=true
+
+jpa.open-in-view=false
+
+jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+jpa.properties.hibernate.show_sql=true
+jpa.hibernate.ddl-auto=update
+
+
+spring.rabbitmq.host=localhost
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=alex
+spring.rabbitmq.password=alex
+
+jwt.secret: test
+jwt.lifetime: 10m
