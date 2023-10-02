@@ -24,7 +24,7 @@ public class MainController {
     public String homePage(Model model) {
         model.addAttribute("client", new ClientDTO());
         ///TODO
-        return "test";
+        return "index";
     }
 
     @PostMapping()
@@ -41,7 +41,7 @@ public class MainController {
 
     @GetMapping("/login")
     public String loginPage() {
-        return "login";
+        return "admin";
     }
 
     @PostMapping("/login")

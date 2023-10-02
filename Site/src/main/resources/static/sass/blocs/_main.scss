@@ -1,29 +1,60 @@
 .main {
-    height: 741px;
     background-size: cover;
+    background-position: center;
     background-image: url('../img/main/bg-image.jpg');
 
     border-block: 1px solid #9D9D9D;
 }
 
 .container-row {
-    padding-top: 130px;
-    padding-bottom: 220px;
     display: flex;
     justify-content: space-between;
+    
+    /* Tablet */ 
+    @media (max-width: 1199px) {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		margin-top: 50px;
+        align-items: start;
+    }
 }
 
 .main-services {
+    padding-top: 148px;
+    padding-bottom: 227px;
     width: 571px;
+    
+    /* Tablet */ 
+    @media (max-width: 1199px) {
+        margin-top: 65px;
+        padding: 0;
+    }
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		margin-top: 50px;
+        width: 300px;
+    }
 }
 
 .main-services-title {
     margin-bottom: 25px;
-    font-style: italic;
+    font-style: normal;
     font-weight: 900;
-    font-size: 32px;
+    font-size: 35px;
     line-height: 39px;
     color: #FFFFFF;
+    font-size: 35px;
+    
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		font-size: 22px;
+        line-height: auto;
+    }
 }
 
 .main-services-list-el {
@@ -33,6 +64,12 @@
     font-weight: 500;
     font-size: 24px;
     color: #FFFFFF;
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		font-size: 18px;
+        width: 270px;
+    }
 }
 
 .main-services-list-el:last-child {
@@ -54,10 +91,27 @@
 /* Main form */
 
 .main-form {
+    margin-top: 127px;
+    margin-bottom: 185px;
     width: 544px;
     height: 429px;
     background: radial-gradient(100% 124.1% at 0% 0%, rgba(187, 182, 182, 0.23) 0%, rgba(57, 43, 40, 0.31) 100%);
     border-radius: 32px;
+    /* Tablet */ 
+    @media (max-width: 1199px) {
+        margin-top: 41px;
+        margin-bottom: 202px;
+    }
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		width: 279px;
+        height: 220px;
+
+        margin-top: 46px;
+        margin-bottom: 127px;
+    }
+    
 }
 
 .form-title-wrapper {
@@ -65,13 +119,24 @@
     margin-bottom: 37px;
     text-align: center;
     border-radius: 15px;
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+        margin-top: 30px;
+		margin-bottom: 20px;
+    }
     
 }
 
 .main-form-title {
-    font-weight: 800;
+    font-weight: 900;
     font-size: 35px;
     color: #FFFFFF;
+    
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		font-size: 22px;
+    }
 }
 
 .form-group-name {
@@ -79,6 +144,12 @@
     padding-left: 62px;
     display: flex;
     flex-direction: column;
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		margin-bottom: 12px;
+        padding-left: 31px;
+    }
 }
 
 .form-group-phone {
@@ -86,6 +157,12 @@
     margin-bottom: 35px;
     display: flex;
     flex-direction: column;
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		margin-bottom: 12px;
+        padding-left: 31px;
+    }
 }
 
 .label {
@@ -93,6 +170,12 @@
     font-weight: 700;
     font-size: 17px;
     color: rgba(245, 208, 104, 0.8);
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		margin-bottom: 5px;
+        font-size: 8px;
+    }
 
 }
 
@@ -105,12 +188,23 @@
     background: none;
     border-bottom: 2px solid #F5D068;
 
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		width: 214px;
+        font-size: 11px;
+    }
+
 }
 
 .button-wrapper {
     width: 480px;
     display: flex;
     justify-content: flex-end;
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+        width: 245px;
+    }
 }
 
 .button-bell {
@@ -129,5 +223,15 @@
     background-image: url('../img/main/telegramm-icons.svg');
     background-repeat: no-repeat;
     background-position: 17px 15px;
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+        padding-left: 15px;
+        width: 120px;
+        height: 27px;
+		font-size: 9px;
+        background-image: url("../img/main/telegramm-icon-xs.svg");
+        background-position: 6px 6px;
+    }
     
 }

@@ -3,11 +3,19 @@ $(document).ready(function () {
 	const owl = $('.slider');
 	// Запускаем карусель
 	owl.owlCarousel({
-        slideBy:1,
+		items: 1,
+        slideBy: 1,	
         center: true,
-        loop: true
+        loop: true,
+		responsive: {
+			1199: {
+				items: 2.1
+			}
+		},
+		autoWidth: true
+		
 	});
-
+	
 	// Находим кастомные кнопки Вперед / Назад
 	const prev = $('.slider-services__arrow--left');
 	const next = $('.slider-services__arrow--right');

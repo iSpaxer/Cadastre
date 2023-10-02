@@ -1,0 +1,14 @@
+// Tablet 
+@media (max-width: 1199px) {
+	.container {
+		width: 767px;
+	}
+}
+
+
+/* Mobile XS */
+@media (max-width: 766px) {
+	.container {
+		width: 320px;
+	}
+}
