@@ -116,6 +116,22 @@ public class RestApiController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/getEngineerLogin")
+    public ResponseEntity<?> getEngineerLogin( HttpServletRequest request) {
+
+        var auth = (Authentication) request.getUserPrincipal();
+        var engDetails = (EngDetails) auth.getPrincipal();
+        var engDTO = engDetails.getEngineerDTO();
+        class EngName {
+            public String login;
+            EngName(String login) {
+                this.login = login;
+            }
+        }
+        EngName engName = new EngName(engDTO.getLogin());
+        return new ResponseEntity<>(engName, HttpStatus.OK);
+    }
+
 //    @GetMapping("/csrf")
 //    public CsrfResponse csrf(HttpServletRequest request) {
 //        var csrf = (CsrfToken) request.getAttribute("_csrf");

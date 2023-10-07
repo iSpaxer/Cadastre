@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;900&display=swap" rel="stylesheet">
-    
+
 
     <!-- OwlCarousel -->
     <link rel="stylesheet" href="./libs/owlCarousel/assets/owl.carousel.min.css">
@@ -20,326 +20,389 @@
 </head>
 <body>
 
-    <header class="header">
-        <div class="header-top">
-            <div class="header-logo">
-                <a href="./index.html">
-                    <img class="img-logo" src="./img/header/logo.png" alt="Логотип">
-                </a>
-            </div>
-             <div class="block">
-                <nav class="header-nav">
-                    <ul class="header-nav-list" >
-                        <li class="header-nav-list-el">Главная</li>
-                        <li class="header-nav-list-el" id="services">Услуги</li>
-                        <li class="header-nav-list-el" id="table">Цены</li>
-                        <li class="header-nav-list-el" id="contact">Контакты</li>
+<header class="header">
+    <div class="header-top">
+        <div class="header-logo">
+            <a href="./index.html">
+                <img class="img-logo" src="./img/header/logo.png" alt="Логотип">
+            </a>
+        </div>
+        <div class="block">
+            <nav class="header-nav">
+                <ul class="header-nav-list" >
+                    <li class="header-nav-list-el">Главная</li>
+                    <li class="header-nav-list-el" id="services">Услуги</li>
+                    <li class="header-nav-list-el" id="table">Цены</li>
+                    <li class="header-nav-list-el" id="contact">Контакты</li>
+                </ul>
+                <div class="line"></div>
+            </nav>
+
+            <div class="header-info">
+                <div class="info-online-row">
+                    <div class="info-mail">
+                        <p>geodezist13@bk.ru</p>
+                    </div>
+                    <ul class="info-ofline-list">
+                        <li class="ofline-list-number-tel" >+7 987 342-37-77</li>
+                        <li class="ofline-list-number-tel" >+7 917 458-56-14</li>
                     </ul>
-                    <div class="line"></div>
-                </nav>
-
-                <div class="header-info">
-                    <div class="info-online-row">
-                        <div class="info-mail">
-                            <p>geodezist13@bk.ru</p>
-                        </div>
-                        <ul class="info-ofline-list">
-                            <li class="ofline-list-number-tel" >+7 987 342-37-77</li>
-                            <li class="ofline-list-number-tel" >+7 917 458-56-14</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-ofline">
-                        <div class="social-network">
-                            <div class="social-network-img">
-                                <img class="social-network-whatsapp" src="./img/icons-header/whatsapp.svg" alt="whatsapp">
-                                <img class="social-network-viber" src="./img/icons-header/viber.svg" alt="viber">
-                            </div>
-                            <p>Пишите нам,<br>мы онлайн!</p>
-                        </div>
-                        <p class="info-ofline-time">пн-пт, 08:00-17:00</p>
-                    </div>
                 </div>
-            </div>
-            
-            <div class="nav-icon-wrapper">
-                <div class="nav-icon"></div>
+
+                <div class="info-ofline">
+                    <div class="social-network">
+                        <div class="social-network-img">
+                            <img class="social-network-whatsapp" src="./img/icons-header/whatsapp.svg" alt="whatsapp">
+                            <img class="social-network-viber" src="./img/icons-header/viber.svg" alt="viber">
+                        </div>
+                        <p>Пишите нам,<br>мы онлайн!</p>
+                    </div>
+                    <p class="info-ofline-time">пн-пт, 08:00-17:00</p>
+                </div>
             </div>
         </div>
-    </header>
 
-    <section class="main ">
-        <div class="container">
-            <div class="container-row">
-                <div class="main-services">
-                    <h1 class="main-services-title">Услуги<br>кадастрового инженера<br>в Мордовии</h1>
-                    <ul class="main-services-list">
-                        <li class="main-services-list-el">Межевание</li>
-                        <li class="main-services-list-el">Технический план</li>
-                        <li class="main-services-list-el">Акт обследования</li>
-                        <li class="main-services-list-el">Восстановление границ участка</li>
-                        <li class="main-services-list-el">Схема расположения земельного участка</li>
-                    </ul>
+        <div class="nav-icon-wrapper">
+            <div class="nav-icon"></div>
+        </div>
+    </div>
+</header>
+
+<section class="main ">
+    <div class="container">
+        <div class="container-row">
+            <div class="main-services">
+                <h1 class="main-services-title">Услуги<br>кадастрового инженера<br>в Мордовии</h1>
+                <ul class="main-services-list">
+                    <li class="main-services-list-el">Межевание</li>
+                    <li class="main-services-list-el">Технический план</li>
+                    <li class="main-services-list-el">Акт обследования</li>
+                    <li class="main-services-list-el">Восстановление границ участка</li>
+                    <li class="main-services-list-el">Схема расположения земельного участка</li>
+                </ul>
+            </div>
+
+            <form class="main-form">
+                <div class="form-title-wrapper">
+                    <h2 class="main-form-title">Оставьте заявку</h2>
                 </div>
+                <div class="form-group-name">
+                    <label class="label" for="name">Ваше имя *</label>
+                    <input required class="input" type="text" name="name">
+                </div>
+                <div class="form-group-phone">
+                    <label class="label" for="phone">Ваш телефон *</label>
+                    <input required class="input" type="text" name="phone">
+                </div>
+                <div class="button-wrapper">
+                    <input class="button-bell" type="submit" value="Заказать звонок">
+                </div>
+            </form>
 
-                <form class="main-form">
-                    <div class="form-title-wrapper">
-                        <h2 class="main-form-title">Оставьте заявку</h2>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-row">
+            <div class="footer-info">
+                <h3 class="footer-info-title">Качество</h3>
+                <p>
+                    Надежность, качество и профессионализм - это наши главные принципы. Мы всегда готовы выслушать потребности наших клиентов и предложить наилучшие решения для них.
+                </p>
+            </div>
+
+            <div class="footer-form">
+                <h3 class="footer-form-title">Почему мы?</h3>
+                <p>текст на 3 колонки</p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<section class="section-services" id="services-section">
+    <header class="section-services__header">
+        <div class="services__header-content">
+            <div>
+                <h2 class="services__header-title">Наши услуги</h2>
+            </div>
+            <div class="services__header-content-row">
+                <img class="services__header-img" src="./img/section-services/services-header/act.svg" alt="">
+                <img class="services__header-img" src="./img/section-services/services-header/borders.svg" alt="">
+                <img class="services__header-img services__header-img--plan" src="./img/section-services/services-header/plan.svg" alt="">
+                <img class="services__header-img" src="./img/section-services/services-header/sheme.svg" alt="">
+                <img class="services__header-img" src="./img/section-services/services-header/takeaway.svg" alt="">
+                <img class="services__header-img" src="./img/section-services/services-header/call.svg" alt="">
+            </div>
+        </div>
+
+    </header>
+    <!-- Слайдер -->
+    <div class="section-services__slider">
+        <!-- Вперед, назад кнопки -->
+        <button class="slider-services__arrow slider-services__arrow--left arrow-icon">
+            <svg viewBox="0 0 23 38" >
+                <path d="M8.36444 19.0015L23 33.7811L18.8163 38L-1.79698e-07 19.0015L18.8163 1.49992e-06L22.997 4.22488L8.36149 19.0045L8.36444 19.0015Z"/>
+            </svg>
+        </button>
+        <button class="slider-services__arrow slider-services__arrow--right arrow-icon">
+            <svg viewBox="0 0 23 38">
+                <path d="M14.6356 18.9985L0 4.2189L4.1837 0L23 18.9985L4.1837 38L0.00295787 33.7751L14.6385 18.9955L14.6356 18.9985Z"/>
+            </svg>
+        </button>
+        <!-- // Вперед, назад кнопки -->
+        <div class="slider owl-carousel owl-theme">
+            <!-- Слайды -->
+            <div class="slider-item" id="slide-1">
+                <div class="slider-item__card-img slider-item__card-img--borders">
+                    <img src="./img/section-services/services-slider/borders-img.png" alt="Межевание">
+                </div>
+                <div class="slider-item__card-content">
+                    <div class="slider-item__card-row">
+                        <img class="icon icon--borders" src="./img/section-services/services-icons/borders-icon.svg" alt="Межевание">
+                        <h2 class="slider-item__card-row-title slider-item__card-row-title--borders active" id="title-1">Межевание</h2>
                     </div>
-                    <div class="form-group-name">
-                        <label class="label" for="name">Ваше имя *</label>
-                        <input class="input" type="text" name="name">
+                    <p class="slider-item__card-row-text slider-item__card-row-text--borders">Установление границ земельного участка. От 2х рабочих дней.</p>
+                </div>
+            </div>
+            <div class="slider-item" id="slide-2">
+                <div class="slider-item__card-img slider-item__card-img--plan">
+                    <img src="./img/section-services/services-slider/plan.png" alt="Технический план">
+                </div>
+                <div class="slider-item__card-content">
+                    <div class="slider-item__card-row">
+                        <img class="icon icon--plan" src="./img/section-services/services-icons/plan-icon.svg" alt="Технический план">
+                        <h2 class="slider-item__card-row-title slider-item__card-row-title--plan" id="title-2">Технический план</h2>
                     </div>
-                    <div class="form-group-phone">
-                        <label class="label" for="phone">Ваш телефон *</label>
-                        <input class="input" type="text" name="phone">
+                    <p class="slider-item__card-row-text slider-item__card-row-text--plan">Документ составляется в отношении зданий, объектов строительства.</p>
+                </div>
+            </div>
+            <div class="slider-item" id="slide-3">
+                <div class="slider-item__card-img slider-item__card-img--sheme">
+                    <img src="./img/section-services/services-slider/sheme.png" alt="Схемы расположения земельного участка">
+                </div>
+                <div class="slider-item__card-content">
+                    <div class="slider-item__card-row">
+                        <img class="icon icon--sheme" src="./img/section-services/services-icons/scheme-icon.svg" alt="Схемы земельного участка">
+                        <h2 class="slider-item__card-row-title slider-item__card-row-title--sheme" id="title-3">Схемы расположения земельного участка</h2>
                     </div>
-                    <div class="button-wrapper">
-                        <input class="button-bell" type="submit" value="Заказать звонок"> 
+                    <p class="slider-item__card-row-text slider-item__card-row-text--sheme">Подготовка схемы осуществляется с учетом утвержденных документов.</p>
+                </div>
+            </div>
+            <div class="slider-item" id="slide-4">
+                <div class="slider-item__card-img slider-item__card-img--takeaway">
+                    <img src="./img/section-services/services-slider/takeaway.png" alt="Вынос границ">
+                </div>
+                <div class="slider-item__card-content">
+                    <div class="slider-item__card-row">
+                        <img class="icon icon--takeaway" src="./img/section-services/services-icons/takeaway-icon.svg" alt="Вынос границ">
+                        <h2 class="slider-item__card-row-title slider-item__card-row-title--takeaway" id="title-4">Вынос границ</h2>
+                    </div>
+                    <p class="slider-item__card-row-text slider-item__card-row-text--takeaway">Определение и закрепление на местности поворотных точек участка.</p>
+                </div>
+            </div>
+            <div class="slider-item" id="slide-5">
+                <div class="slider-item__card-img slider-item__card-img--planet">
+                    <img src="./img/section-services/services-slider/planet.png" alt="Не нашли нужное?">
+                </div>
+                <div class="slider-item__card-content">
+                    <div class="slider-item__card-row">
+                        <img class="icon icon--phone" src="./img/section-services/services-icons/phone-icon.svg" alt="Не нашли нужное?">
+                        <h2 class="slider-item__card-row-title slider-item__card-row-title--planet" id="title-5">Не нашли нужное? Позвоните нам!<h2>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-item" id="slide-6">
+                <div class="slider-item__card-img slider-item__card-img--akt">
+                    <img src="./img/section-services/services-slider/akt.png" alt="Акт обследования">
+                </div>
+                <div class="slider-item__card-content">
+                    <div class="slider-item__card-row">
+                        <img class="icon icon--akt" src="./img/section-services/services-icons/act-icon.svg" alt="Акт обследования">
+                        <h2 class="slider-item__card-row-title slider-item__card-row-title--akt" id="title-6">Акт обследования</h2>
+                    </div>
+                    <p class="slider-item__card-row-text slider-item__card-row-text--akt">Документ является заключением о состоянии данного объекта на момент обследования</p>
+                </div>
+            </div>
+            <!-- // Слайды -->
+        </div>
+    </div>
+    <!-- //Слайдер -->
+
+</section>
+
+<section class="section-table" id="table-section">
+    <div class="section-table-wrapper">
+        <img class="section-table-img" src="./img/section-table/semka.png" alt="Исполнительная съемка">
+        <div class="section-table__title-wrapper">
+            <h2 class="section-table__title">Краткий прайс лист</h2>
+        </div>
+        <table class="section-table__table">
+            <tbody>
+            <tr class="table-title">
+                <th class="table-title__view">Вид работ</th>
+                <th class="table-title__time">Срок выполнения</th>
+                <th class="table-title__rub">Стоимость (руб)</th>
+            </tr>
+            <!-- //Титульный ряд -->
+            <tr class="table__text">
+                <th class="table__text-works table__text-works--first"><p>Межевание земельного участка</p></th>
+                <td>От 2 дней</td>
+                <td>От 1111 р</td>
+            </tr>
+            <!-- //1 ряд -->
+            <tr class="table__text">
+                <th class="table__text-works"><p>Технический план</p></th>
+                <td>От 2 дней</td>
+                <td>От 1111 р</td>
+            </tr>
+            <!-- //2 ряд -->
+            <tr class="table__text">
+                <th class="table__text-works"><p>Акт обследования</p></th>
+                <td>От 2 дней</td>
+                <td>От 1111 р</td>
+            </tr>
+            <!-- //3 ряд -->
+            <tr class="table__text">
+                <th class="table__text-works"><p>Схема расположения</p></th>
+                <td>От 2 дней</td>
+                <td>От 1111 р</td>
+            </tr>
+            <!-- //4 ряд -->
+            <tr class="table__text">
+                <th class="table__text-works table__text-works--borders"><p>Вынос границ в натуру</p></th>
+                <td></td>
+                <td>От 1111 р</td>
+            </tr>
+            <!-- //5 ряд -->
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section-questions">
+    <div class="section-questions__row">
+        <div class="section-questions__content">
+            <div class="section-questions__content-wrapper">
+                <div class="section-questions__content-text">
+                    <h2>Остались вопросы?</h2>
+                    <p>Ответим по телефону 8 (987) 874 99 45</p>
+                    <h3>или мы перезвоним Вам</h3>
+                </div>
+                
+                <form class="section-questions__content-input">
+                    <div class="input-row">
+                        <input required class="questions__input questions__input--name" type="text" placeholder="Введите Ваше имя" name="name">
+                        <input required class="questions__input questions__input--phone" type="text"  placeholder="Введите Ваш номер телефона " name="phone">
+                    </div>
+                    <div class="questions-button-wrapper">
+                        <input class="questions-button" type="submit" value="Заказать звонок">
                     </div>
                 </form>
+
+            </div>
+            <div class="section-questions__img">
+                <img src="./img/section-questions/macbook.png" alt="macbook">
             </div>
         </div>
-    </section>
+    </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-row">
-                <div class="footer-info">
-                    <h3 class="footer-info-title">Качество</h3>
-                    <p>
-                        Надежность, качество и профессионализм - это наши главные принципы. Мы всегда готовы выслушать потребности наших клиентов и предложить наилучшие решения для них.
-                    </p> 
-                </div>
+</section>
 
-                <div class="footer-form">
-                    <h3 class="footer-form-title">Почему мы?</h3>
-                    <p>текст на 3 колонки</p>
-                </div>
+<section class="sections__contacts" id="contacts-section">
+    <div class="sections__contacts-contanier">
+        <div class="sections__contacts-contanier-row">
+            <div class="sections__contacts-contanier-wrapper">
+                <h2 class="sections__contacts-contanier-title">Контакты</h2>
+                <div class="title-border"></div>
             </div>
-        </div>
-
-    </footer>
-
-    <section class="section-services" id="services-section">
-        <header class="section-services__header">
-            <div class="services__header-content">
-                <div>
-                    <h2 class="services__header-title">Наши услуги</h2>
+            <div class="sections__contacts-content">
+                <div class="contact-contanier-item phone">
+                    <span class="contact-item-name">Телефоны:</span>
+                    <span class="contact-text-phone">+7 987 342-37-77</span>
+                    <span class="contact-text-phone">+7 917 458-56-14</span>
                 </div>
-                <div class="services__header-content-row">
-                    <img class="services__header-img" src="./img/section-services/services-header/act.svg" alt="">
-                    <img class="services__header-img" src="./img/section-services/services-header/borders.svg" alt="">
-                    <img class="services__header-img services__header-img--plan" src="./img/section-services/services-header/plan.svg" alt="">
-                    <img class="services__header-img" src="./img/section-services/services-header/sheme.svg" alt="">
-                    <img class="services__header-img" src="./img/section-services/services-header/takeaway.svg" alt="">
-                    <img class="services__header-img" src="./img/section-services/services-header/call.svg" alt="">
-                </div>          
-            </div>
-
-        </header>
-        <!-- Слайдер -->
-        <div class="section-services__slider">
-            <!-- Вперед, назад кнопки -->
-            <button class="slider-services__arrow slider-services__arrow--left arrow-icon">
-                <svg viewBox="0 0 23 38" >
-                    <path d="M8.36444 19.0015L23 33.7811L18.8163 38L-1.79698e-07 19.0015L18.8163 1.49992e-06L22.997 4.22488L8.36149 19.0045L8.36444 19.0015Z"/>
-                </svg>
-            </button>
-            <button class="slider-services__arrow slider-services__arrow--right arrow-icon">
-                <svg viewBox="0 0 23 38">
-                    <path d="M14.6356 18.9985L0 4.2189L4.1837 0L23 18.9985L4.1837 38L0.00295787 33.7751L14.6385 18.9955L14.6356 18.9985Z"/>
-                </svg>
-            </button>
-            <!-- // Вперед, назад кнопки -->
-            <div class="slider owl-carousel owl-theme">
-                <!-- Слайды -->
-                <div class="slider-item" id="slide-1">
-                    <div class="slider-item__card-img slider-item__card-img--borders">
-                        <img src="./img/section-services/services-slider/borders-img.png" alt="Межевание">
-                    </div>
-                    <div class="slider-item__card-content">
-                        <div class="slider-item__card-row">
-                            <img class="icon icon--borders" src="./img/section-services/services-icons/borders-icon.svg" alt="Межевание">
-                            <h2 class="slider-item__card-row-title slider-item__card-row-title--borders active" id="title-1">Межевание</h2>
-                        </div>
-                        <p class="slider-item__card-row-text slider-item__card-row-text--borders">Установление границ земельного участка. От 2х рабочих дней.</p>
-                    </div>
-                </div>             
-                <div class="slider-item" id="slide-2">
-                    <div class="slider-item__card-img slider-item__card-img--plan">
-                        <img src="./img/section-services/services-slider/plan.png" alt="Технический план">
-                    </div>
-                    <div class="slider-item__card-content">
-                        <div class="slider-item__card-row">
-                            <img class="icon icon--plan" src="./img/section-services/services-icons/plan-icon.svg" alt="Технический план">
-                            <h2 class="slider-item__card-row-title slider-item__card-row-title--plan" id="title-2">Технический план</h2>
-                        </div>
-                        <p class="slider-item__card-row-text slider-item__card-row-text--plan">Документ составляется в отношении зданий, объектов строительства.</p>
-                    </div>
+                <div class="contact-contanier-item time">
+                    <span class="contact-item-name">Режим работы:</span>
+                    <span class="contact-text time">пн-пт, 08:00-17:00</span>
                 </div>
-                <div class="slider-item" id="slide-3">
-                    <div class="slider-item__card-img slider-item__card-img--sheme">
-                        <img src="./img/section-services/services-slider/sheme.png" alt="Схемы расположения земельного участка">
-                    </div>
-                    <div class="slider-item__card-content">
-                        <div class="slider-item__card-row">
-                            <img class="icon icon--sheme" src="./img/section-services/services-icons/scheme-icon.svg" alt="Схемы земельного участка">
-                            <h2 class="slider-item__card-row-title slider-item__card-row-title--sheme" id="title-3">Схемы расположения земельного участка</h2>
-                        </div>
-                        <p class="slider-item__card-row-text slider-item__card-row-text--sheme">Подготовка схемы осуществляется с учетом утвержденных документов.</p>
-                    </div>
-                </div>
-                <div class="slider-item" id="slide-4">
-                    <div class="slider-item__card-img slider-item__card-img--takeaway">
-                        <img src="./img/section-services/services-slider/takeaway.png" alt="Вынос границ">
-                    </div>
-                    <div class="slider-item__card-content">
-                        <div class="slider-item__card-row">
-                            <img class="icon icon--takeaway" src="./img/section-services/services-icons/takeaway-icon.svg" alt="Вынос границ">
-                            <h2 class="slider-item__card-row-title slider-item__card-row-title--takeaway" id="title-4">Вынос границ</h2>
-                        </div>
-                        <p class="slider-item__card-row-text slider-item__card-row-text--takeaway">Определение и закрепление на местности поворотных точек участка.</p>
-                    </div>
-                </div>  
-                <div class="slider-item" id="slide-5">
-                    <div class="slider-item__card-img slider-item__card-img--planet">
-                        <img src="./img/section-services/services-slider/planet.png" alt="Не нашли нужное?">
-                    </div>
-                    <div class="slider-item__card-content">
-                        <div class="slider-item__card-row">
-                            <img class="icon icon--phone" src="./img/section-services/services-icons/phone-icon.svg" alt="Не нашли нужное?">
-                            <h2 class="slider-item__card-row-title slider-item__card-row-title--planet" id="title-5">Не нашли нужное? Позвоните нам!<h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-item" id="slide-6">
-                    <div class="slider-item__card-img slider-item__card-img--akt">
-                        <img src="./img/section-services/services-slider/akt.png" alt="Акт обследования">
-                    </div>
-                    <div class="slider-item__card-content">
-                        <div class="slider-item__card-row">
-                            <img class="icon icon--akt" src="./img/section-services/services-icons/act-icon.svg" alt="Акт обследования">
-                            <h2 class="slider-item__card-row-title slider-item__card-row-title--akt" id="title-6">Акт обследования</h2>
-                        </div>
-                        <p class="slider-item__card-row-text slider-item__card-row-text--akt">Документ является заключением о состоянии данного объекта на момент обследования</p>
-                    </div>
-                </div>
-                <!-- // Слайды -->
-            </div>
-        </div>
-        <!-- //Слайдер -->
-
-    </section>
-
-    <section class="section-table" id="table-section">
-        <div class="section-table-wrapper">
-            <img class="section-table-img" src="./img/section-table/semka.png" alt="Исполнительная съемка">
-            <div class="section-table__title-wrapper">
-                <h2 class="section-table__title">Краткий прайс лист</h2>
-            </div>
-            <table class="section-table__table">
-                <tbody>
-                    <tr class="table-title">
-                        <th class="table-title__view">Вид работ</th>
-                        <th class="table-title__time">Срок выполнения</th>
-                        <th class="table-title__rub">Стоимость (руб)</th>
-                    </tr>
-                    <!-- //Титульный ряд -->
-                    <tr class="table__text">
-                        <th class="table__text-works table__text-works--first"><p>Межевание земельного участка</p></th>
-                        <td>От 2 дней</td>
-                        <td>От 1111 р</td>
-                    </tr>
-                    <!-- //1 ряд -->
-                    <tr class="table__text">
-                        <th class="table__text-works"><p>Технический план</p></th>
-                        <td>От 2 дней</td>
-                        <td>От 1111 р</td>
-                    </tr>
-                    <!-- //2 ряд -->
-                    <tr class="table__text">
-                        <th class="table__text-works"><p>Акт обследования</p></th>
-                        <td>От 2 дней</td>
-                        <td>От 1111 р</td>
-                    </tr>
-                    <!-- //3 ряд -->
-                    <tr class="table__text">
-                        <th class="table__text-works"><p>Схема расположения</p></th>
-                        <td>От 2 дней</td>
-                        <td>От 1111 р</td>
-                    </tr>
-                    <!-- //4 ряд -->
-                    <tr class="table__text">
-                        <th class="table__text-works table__text-works--borders"><p>Вынос границ в натуру</p></th>
-                        <td></td>
-                        <td>От 1111 р</td>
-                    </tr>
-                    <!-- //5 ряд -->
-                </tbody>
-            </table>
-        </div>
-    </section>   
-
-    <section class="section-questions">
-        <div class="section-questions__row">
-            <div class="section-questions__content">
-                <div class="section-questions__content-wrapper">
-                    <div class="section-questions__content-text">
-                        <h2>Остались вопросы?</h2>
-                        <p>Ответим по телефону 8 (987) 874 99 45</p>
-                        <h3>или мы перезвоним Вам</h3>
-                    </div>
-                    <div class="section-questions__content-input">
-                        <div class="input-row">
-                            <input class="questions__input questions__input--name" type="name" placeholder="Введите Ваше имя">
-                            <input class="questions__input questions__input--phone" type="tel"  placeholder="Введите Ваш номер телефона">
-                        </div>
-                        <div class="questions-button-wrapper">
-                            <input class="questions-button" type="submit" value="Заказать звонок"> 
-                        </div>
-                    </div>
-                </div>
-                <div class="section-questions__img">
-                    <img src="./img/section-questions/macbook.png" alt="macbook">
+                <div class="contact-contanier-item mail">
+                    <span class="contact-item-name">E-mail:</span>
+                    <span class="contact-text-mail">geodezist13@bk.ru</span>
                 </div>
             </div>
         </div>
+    </div>
 
-    </section>
+</section>
 
-    <section class="sections__contacts" id="contacts-section">
-        <div class="sections__contacts-contanier">
-            <div class="sections__contacts-contanier-row">
-                <div class="sections__contacts-contanier-wrapper">
-                    <h2 class="sections__contacts-contanier-title">Контакты</h2>
-                    <div class="title-border"></div>
-                </div>
-                <div class="sections__contacts-content">
-                    <div class="contact-contanier-item phone">
-                        <span class="contact-item-name">Телефоны:</span>
-                        <span class="contact-text-phone">+7 987 342-37-77</span>
-                        <span class="contact-text-phone">+7 917 458-56-14</span>
-                    </div>
-                    <div class="contact-contanier-item time">
-                        <span class="contact-item-name">Режим работы:</span>
-                        <span class="contact-text time">пн-пт, 08:00-17:00</span>
-                    </div>
-                    <div class="contact-contanier-item mail">    
-                        <span class="contact-item-name">E-mail:</span>
-                        <span class="contact-text-mail">geodezist13@bk.ru</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- Скрипты карусели -->
+<script src="./libs/jquery-3.6.0.min.js"></script>
+<script src="./libs/owlCarousel/owl.carousel.min.js"></script>
+<script src="./js/carousel.js"></script>
+<script src="./js/main.js"></script>
+<script>
 
-    </section>
+    const mainForm = document.querySelector('.main-form');
+    mainForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // prevent the default form submission behavior
+        const formData = new FormData(mainForm); // create a new FormData object from the form data
+        const data = {}; // create an empty object to store the form data
+        
+        // loop through the FormData object and add each key-value pair to the data object
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+        
+        // convert the data object to a JSON string using JSON.stringify()
+        const jsonData = JSON.stringify(data);
+        
+        // send the JSON data to the server using an AJAX request (example using fetch())
+        fetch('/api/saveClient', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: jsonData
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+        location.reload(); 
+    });
+
+    const secondForm = document.querySelector('.section-questions__content-input');
+    secondForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // prevent the default form submission behavior
+        const formData = new FormData(secondForm); // create a new FormData object from the form data
+        const data = {}; // create an empty object to store the form data
+        
+        // loop through the FormData object and add each key-value pair to the data object
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+        
+        // convert the data object to a JSON string using JSON.stringify()
+        const jsonData = JSON.stringify(data);
+        
+        // send the JSON data to the server using an AJAX request (example using fetch())
+        fetch('/api/saveClient', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: jsonData
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+        location.reload(); 
+    });
+
+
     
-    <!-- Скрипты карусели -->
-    <script src="./libs/jquery-3.6.0.min.js"></script>
-    <script src="./libs/owlCarousel/owl.carousel.min.js"></script>
-    <script src="./js/carousel.js"></script>
-    <script src="./js/main.js"></script>
-    
+</script>
 </body>
 </html>

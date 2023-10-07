@@ -1,1 +1,3 @@
 INSERT INTO Engineer(id, name, login, password, tg_id) VALUES (1, 'alexandr', 'alexandr', '$2a$12$1E/njmZS5i/N6xD3TH3Geukks87tznJAJeOp3AS77djfpTXqFOv5K', 1);
+INSERT INTO Engineer(id, name, login, password, tg_id) VALUES (2, 'Valiliy', 'vvs062@mail.ru', '$2a$12$PGYIQhStSKtDFK9ZuKAJ0ODTwgAzBUzfrFJkr.zBaAHgx0pfEOvl6', 2);
+INSERT INTO Engineer(id, name, login, password, tg_id) VALUES (3, 'Alexey', 'alexey@yandex.ru', '$2a$12$AduMuuAhIuf5b0H4/NuqKeZFa8MFQIgaHhqEdujBrB/aPELdGsc7q', 3);

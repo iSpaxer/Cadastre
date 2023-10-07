@@ -54,10 +54,11 @@ public class SecurityConfig  {
                 .authorizeHttpRequests()
                 .requestMatchers("/", "/login", "/error").permitAll()
                 .requestMatchers("/img/**", "/css/**", "/js/**", "/sass/**", "/libs/**").permitAll()
-//                .requestMatchers("/api/login").permitAll()
+                .requestMatchers("/api/login").permitAll()
+                .requestMatchers("/api/saveClient").permitAll()
                 .requestMatchers("/api/**").authenticated()
                 .requestMatchers("/adminPanel").authenticated()
-                .anyRequest().permitAll() //TODO
+                .anyRequest().authenticated() //TODO
 
                 .and()
                 .addFilterBefore(new UserPassAuthFilter(), BasicAuthenticationFilter.class)
@@ -72,7 +73,6 @@ public class SecurityConfig  {
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login")
-                .deleteCookies("JSESSIONID")
 
                 .and()
                 .rememberMe().key("alexandr")//TODO key must be included from another file

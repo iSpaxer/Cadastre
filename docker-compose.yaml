@@ -29,8 +29,6 @@ services:
       - host_env
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
-    depends_on:
-      - postgres
 
   site:
     build: ./Site
@@ -48,7 +46,6 @@ services:
     depends_on:
       - rabbitmq
 
-
   dbpostgres:
     build: ./DBPostgres
     container_name: dbpostgres
@@ -61,6 +58,7 @@ services:
     depends_on:
       - postgres
       - rabbitmq
+      - site
 
 volumes:
   database:

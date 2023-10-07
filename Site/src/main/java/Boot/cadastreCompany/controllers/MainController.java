@@ -41,31 +41,33 @@ public class MainController {
 
     @GetMapping("/login")
     public String loginPage() {
-        return "admin";
+        return "login2";
     }
 
-    @PostMapping("/login")
-    public String login(@Valid @RequestBody EngineerDTO engineerDTO, BindingResult bindingResult,
-                                   HttpServletRequest request, HttpServletResponse response) {
-        if (bindingResult.hasErrors()) {
-            throw new AuthenticationError("Invalid username or password", HttpStatus.UNAUTHORIZED.value());
-        }
 
-        try {
-            request.login(engineerDTO.getLogin(), engineerDTO.getPassword());
-        } catch (ServletException e) {
-            throw new AuthenticationError("Invalid username or password", HttpStatus.UNAUTHORIZED.value());
-        }
-
-        var auth = (Authentication) request.getUserPrincipal();
-        var engDetails = (EngDetails) auth.getPrincipal();
-        var engDTO = engDetails.getEngineerDTO();
-
-        //   rememberMeServices.loginSuccess(request, response, auth);
-
-        //return new ResponseEntity<>("Successfully! " + engDTO.getLogin() ,HttpStatus.OK);
-        return "/login";
-    }
+//    @PostMapping("/login")
+//    public String login(@Valid @RequestBody EngineerDTO engineerDTO, BindingResult bindingResult, // TODO TG
+//                                   HttpServletRequest request, HttpServletResponse response) {
+//        if (bindingResult.hasErrors()) {
+//            throw new AuthenticationError("Invalid username or password", HttpStatus.UNAUTHORIZED.value());
+//        }
+//
+//        try {
+//            request.login(engineerDTO.getLogin(), engineerDTO.getPassword());
+//        } catch (ServletException e) {
+//            throw new AuthenticationError("Invalid username or password", HttpStatus.UNAUTHORIZED.value());
+//        }
+//
+//        var auth = (Authentication) request.getUserPrincipal();
+//        var engDetails = (EngDetails) auth.getPrincipal();
+//        var engDTO = engDetails.getEngineerDTO();
+//
+//        //   rememberMeServices.loginSuccess(request, response, auth);
+//
+//        //return new ResponseEntity<>("Successfully! " + engDTO.getLogin() ,HttpStatus.OK);
+//        return "/login";
+//    }
+        //TODO
 
 //    @GetMapping("/login2")
 //    public String loginPage2() {
@@ -76,7 +78,21 @@ public class MainController {
     public String adminPanel(Model model) {
         //model.addAttribute("clients", service.getAllClient());
 
-        return "backPage/adminPanel";
+        return "admin-panel";
+    }
+
+    @GetMapping("/adminPanel/tables") // {name}
+    public String tables(Model model) {
+        //model.addAttribute("clients", service.getAllClient());
+
+        return "pages/tables/basic-table";
+    }
+
+    @GetMapping("/adminPanel/documentation") // {name}
+    public String documentation(Model model) {
+        //model.addAttribute("clients", service.getAllClient());
+
+        return "docs/documentation";
     }
 
 }
