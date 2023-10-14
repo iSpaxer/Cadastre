@@ -14,9 +14,14 @@
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="8bda35a5-4c3c-4133-9827-81d37484892f">
       <console name="CadastreCompany" type="STANDARD" schema="CadastreCompany" session="Main"><![CDATA[SET search_path TO myschema,public;
+
 delete from flyway_schema_history where version = '1.1';
 
-DELETE FROM flyway_schema_history WHERE success=false;]]></console>
+DELETE FROM flyway_schema_history WHERE success=false;
+
+drop table if exists Client;
+drop table if exists Engineer;
+drop table if exists Pricelist;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">

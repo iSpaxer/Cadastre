@@ -1,20 +1,17 @@
 package DBPostgres.controller;
 
-import DBPostgres.dto.ClientDTO;
-import DBPostgres.dto.ClientDbDTO;
-import DBPostgres.dto.EngineerDTO;
-import DBPostgres.dto.EngineerLoginDTO;
+import DBPostgres.dto.*;
 import DBPostgres.exception.BodyEmptyException;
 import DBPostgres.exception.ClientIsBusyAnotherEngineer;
 import DBPostgres.exception.GetJSONException;
 import DBPostgres.exception.UnknownException;
 import DBPostgres.models.Client;
 import DBPostgres.models.Engineer;
+import DBPostgres.models.Pricelist;
 import DBPostgres.service.ClientService;
 import DBPostgres.service.CommonService;
-import DBPostgres.service.impl.CommonServiceImpl;
+import DBPostgres.service.PricelistService;
 import DBPostgres.service.EngService;
-import DBPostgres.service.impl.ClientServiceImpl;
 import DBPostgres.util.ClientErrorResponse;
 import DBPostgres.util.validate.EngineerValidator;
 import DBPostgres.util.wrapper.EngineerAndClient;
@@ -41,15 +38,16 @@ public class DBApiController {
     private CommonService commonService;
     private EngineerValidator engineerValidator;
     private ModelMapper modelMapper;
-
+    private PricelistService pricelistService;
 
     @Autowired
-    public DBApiController(ClientService clientService, EngService engService, CommonService commonService, EngineerValidator engineerValidator, ModelMapper modelMapper) {
+    public DBApiController(ClientService clientService, EngService engService, CommonService commonService, EngineerValidator engineerValidator, ModelMapper modelMapper, PricelistService pricelistService) {
         this.clientService = clientService;
         this.engService = engService;
         this.commonService = commonService;
         this.engineerValidator = engineerValidator;
         this.modelMapper = modelMapper;
+        this.pricelistService = pricelistService;
     }
 
     @GetMapping("/test")
@@ -159,6 +157,20 @@ public class DBApiController {
 //        Boolean bool = clientService.findById(engineerAndClient.getEngineer(), engineerAndClient.getClient());
         commonService.checkForTakeClient(engineerAndClient.getEngineer(), engineerAndClient.getClient());
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/getPricelist")
+    public ResponseEntity<?> getPricelist() {
+        List<PricelistDTO> pricelistAllDTO = pricelistService.getPricelist();
+        return new ResponseEntity<>(pricelistAllDTO, HttpStatus.OK);
+    }
+
+
+    // TODO VALID
+    @PostMapping("/updatePricelistDeadline")
+    public ResponseEntity<?> updatePricelistDeadline(@RequestBody @Valid PricelistDTO pricelistDTO) {
+        pricelistService.updateDeadline(pricelistDTO);
+        return new ResponseEntity<>("Updated Pricelist Deadline successfully!", HttpStatus.OK);
     }
 
     @ExceptionHandler

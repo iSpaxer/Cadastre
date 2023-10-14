@@ -4,6 +4,7 @@ import DBPostgres.dto.ClientDbDTO;
 import DBPostgres.dto.EngineerLoginDTO;
 import DBPostgres.models.Client;
 import DBPostgres.models.Engineer;
+import DBPostgres.models.Pricelist;
 
 import java.util.Date;
 import java.util.List;
@@ -13,5 +14,6 @@ public interface ClientService {
     List<ClientDbDTO> getAllClient();
     Client getLastClient();
     Optional<Client> findById(ClientDbDTO clientDbDTOExternal);
+
     void save(Client newClient);
 }
