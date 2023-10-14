@@ -1,5 +1,8 @@
 # Developer regime
 spring:
+  flyway:
+    clean-on-validation-error: true
+    clean-disabled: false
 
   mvc:
     hiddenmethod:

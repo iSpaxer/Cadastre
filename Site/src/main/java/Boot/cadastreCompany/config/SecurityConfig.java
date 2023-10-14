@@ -19,6 +19,11 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.csrf.XorCsrfTokenRequestAttributeHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 
 @EnableWebSecurity
@@ -41,11 +46,11 @@ public class SecurityConfig  {
         HttpSessionCsrfTokenRepository httpSessionCsrfTokenRepository = new HttpSessionCsrfTokenRepository();
         var chain = http
                 .csrf().disable() ///TODO csrf and cors
-                .cors().disable()
+//                .cors().disable()
 
-//                .cors()
+                .cors()
 //
-//                .and()
+                .and()
 //                .csrf().csrfTokenRequestHandler(new XorCsrfTokenRequestAttributeHandler())
 //                .csrfTokenRepository(new HttpSessionCsrfTokenRepository())
 //                .sessionAuthenticationStrategy(new CsrfAuthenticationStrategy(httpSessionCsrfTokenRepository))
@@ -53,7 +58,7 @@ public class SecurityConfig  {
 
                 .authorizeHttpRequests()
                 .requestMatchers("/", "/login", "/error").permitAll()
-                .requestMatchers("/img/**", "/css/**", "/js/**", "/sass/**", "/libs/**").permitAll()
+                .requestMatchers("/img/**", "/css/**", "/js/**", "/sass/**", "/libs/**", "/images/**", "/vendors/**").permitAll()
                 .requestMatchers("/api/login").permitAll()
                 .requestMatchers("/api/saveClient").permitAll()
                 .requestMatchers("/api/**").authenticated()
@@ -92,7 +97,18 @@ public class SecurityConfig  {
     }
 
     @Bean
-    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    @Bean
+     AuthenticationManager authManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.authenticationProvider(authProvider);
         return authenticationManagerBuilder.build();

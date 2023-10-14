@@ -13,7 +13,10 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="8bda35a5-4c3c-4133-9827-81d37484892f">
-      <console name="CadastreCompany" type="STANDARD" schema="CadastreCompany" session="Main" />
+      <console name="CadastreCompany" type="STANDARD" schema="CadastreCompany" session="Main"><![CDATA[SET search_path TO myschema,public;
+delete from flyway_schema_history where version = '1.1';
+
+DELETE FROM flyway_schema_history WHERE success=false;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -21,6 +24,9 @@
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
+  </component>
+  <component name="DBNavigator.Project.ExecutionManager">
+    <retain-sticky-names value="false" />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
