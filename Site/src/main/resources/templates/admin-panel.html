@@ -30,7 +30,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/adminPanel">
             <i class="mdi mdi-view-quilt menu-icon"></i>
-            <span class="menu-title">Main</span>
+            <span class="menu-title">Главная</span>
             <!-- <div class="badge badge-info badge-pill">2</div> -->
           </a>
         </li>
@@ -328,7 +328,23 @@
             
           </div>
           <!-- row end -->
+
+          <form class="set-new-password-form">
+            <div id="alert"></div>
+          
+            <label for="old password">Password</label>
+            <input type="password" name="oldPassword" />
+          
+            <label for="new password">New password</label>
+            <input type="password" name="newPassword" />
+          
+            <button type="submit">Reset password</button>
+          </form>
+
         </div>
+
+
+
         <!-- content-wrapper ends -->
         <!-- partial:./partials/_footer.html -->
         <footer class="footer">
@@ -477,6 +493,36 @@
     profileName.innerHTML = engLogin.login;
   })
 
+  </script>
+
+  <script>
+  let sendFormClient = (form) => { 
+    const formData = new FormData(form); // create a new FormData object from the form data
+    const data = {}; // create an empty object to store the form data
+    
+    // loop through the FormData object and add each key-value pair to the data object
+    for (let [key, value] of formData.entries()) {
+      data[key] = value;
+    }
+    
+    // convert the data object to a JSON string using JSON.stringify()
+    const jsonData = JSON.stringify(data);
+    console.log(jsonData);
+    // send the JSON data to the server using an AJAX request (example using fetch())
+    fetch('/api/updateEngineerPassword', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: jsonData
+    })
+  } 
+
+    const setNewPassword = document.querySelector('.set-new-password-form');
+    setNewPassword.addEventListener('submit', function(event) {
+      event.preventDefault(); // prevent the default form submission behavior
+      sendFormClient(setNewPassword);
+    });
   </script>
   
 </body>

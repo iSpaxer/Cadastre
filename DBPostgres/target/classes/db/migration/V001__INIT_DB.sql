@@ -1,5 +1,5 @@
 drop table if exists Client;
---drop table if exists Engineer;
+drop table if exists Engineer;
 drop table if exists Pricelist;
  
 

@@ -1,14 +1,16 @@
 package Boot.cadastreCompany.service;
 
-import Boot.cadastreCompany.dto.ClientDTO;
-import Boot.cadastreCompany.dto.ClientDbDTO;
-import Boot.cadastreCompany.dto.EngineerDTO;
+import Boot.cadastreCompany.dto.*;
 import Boot.cadastreCompany.exception.DBRequestException;
+import Boot.cadastreCompany.exception.EngineerNotAuthentication;
 import Boot.cadastreCompany.exception.UnknownException;
+import Boot.cadastreCompany.security.EngDetails;
 import Boot.cadastreCompany.utils.wrapper.EngineerAndClient;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -127,4 +129,74 @@ public class ApiRequestService {
         }
     }
 
+    public String updatePasswordByEngineer(EngineerUpdatePasswordDTO engineerUpdatePasswordDTO, HttpServletRequest request) {
+        String messageFromDB;
+        var auth = (Authentication) request.getUserPrincipal();
+        var engDetails = (EngDetails) auth.getPrincipal();
+        // получаем аутиф инжерена и (для ДБ) прокидываем логин объекту с новым паролем
+        EngineerDTO engineerAuthDTO = getAuthEngineer(request);
+        engineerUpdatePasswordDTO.setLogin(engineerAuthDTO.getLogin());
+        try {
+            ///TODO неправильная обработка возвращаемого значения
+            messageFromDB = webClientBuilder.build()
+                    .post()
+                    .uri("/updateEngineerPassword")
+                    .bodyValue(engineerUpdatePasswordDTO)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+        } catch (WebClientResponseException webClientResponseException) {
+            throw new DBRequestException(webClientResponseException.getMessage(), webClientResponseException.getStatusCode().value());
+        } catch (EngineerNotAuthentication e) {
+            throw e;
+        } catch (Exception e) {
+            throw new UnknownException(e.getMessage(), new Date());
+        }
+        // назначаем новый пароль UserDetails в spring security
+        engineerAuthDTO.setPassword(engineerUpdatePasswordDTO.getNewPassword());
+
+        return messageFromDB;
+    }
+
+    private EngineerDTO getAuthEngineer (HttpServletRequest request) {
+        var auth = (Authentication) request.getUserPrincipal();
+        var engDetails = (EngDetails) auth.getPrincipal();
+        var engDTO = engDetails.getEngineerDTO();
+        return engDTO;
+    }
+
+    public List<PricelistDTO> getPricelist() {
+        try {
+            return webClientBuilder.build()
+                    .get()
+                    .uri("/getPricelist")
+                    .retrieve()
+                    .bodyToFlux(PricelistDTO.class)
+                    .collectList()
+                    .block();
+        } catch (WebClientResponseException webClientResponseException) {
+            throw new DBRequestException(webClientResponseException.getMessage(), webClientResponseException.getStatusCode().value());
+        } catch (Exception e) {
+            throw new UnknownException(e.getMessage(), new Date());
+        }
+    }
+
+    public String updateDeadline(PricelistDTO pricelistDTO) {
+        String messageFromeDB;
+        try {
+            ///TODO неправильная обработка возвращаемого значения
+            messageFromeDB = webClientBuilder.build()
+                    .post()
+                    .uri("/updatePricelistDeadline")
+                    .bodyValue(pricelistDTO)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+        } catch (WebClientResponseException webClientResponseException) {
+            throw new DBRequestException(webClientResponseException.getMessage(), webClientResponseException.getStatusCode().value());
+        } catch (Exception e) {
+            throw new UnknownException(e.getMessage(), new Date());
+        }
+        return messageFromeDB;
+    }
 }

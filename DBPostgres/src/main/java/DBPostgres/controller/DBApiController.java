@@ -1,10 +1,7 @@
 package DBPostgres.controller;
 
 import DBPostgres.dto.*;
-import DBPostgres.exception.BodyEmptyException;
-import DBPostgres.exception.ClientIsBusyAnotherEngineer;
-import DBPostgres.exception.GetJSONException;
-import DBPostgres.exception.UnknownException;
+import DBPostgres.exception.*;
 import DBPostgres.models.Client;
 import DBPostgres.models.Engineer;
 import DBPostgres.models.Pricelist;
@@ -88,33 +85,33 @@ public class DBApiController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/saveEngineer")
-    public ResponseEntity<?> gettingEngineer(@RequestBody @Valid EngineerLoginDTO engineerLoginDTO, BindingResult bindingResult) {
-        engineerValidator.validate(engineerLoginDTO, bindingResult);
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMsg = new StringBuilder();
-
-            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-
-            for (FieldError error : fieldErrors) {
-                errorMsg
-                        .append(error.getField())           // на каком поле была ошибка
-                        .append(" — ")                      // —
-                        .append(error.getDefaultMessage())  // выведем какая была ошибка
-                        .append(";");
-            }
-            List<ObjectError> errors = bindingResult.getAllErrors();
-            for (ObjectError error : errors) {
-                errorMsg
-                        .append(error.getCode());
-            }
-            throw new GetJSONException(errorMsg.toString());
-        }
-
-        ///TODO add security config. Стоп, а мб сюда должен придти уже зашифрованный пароль ? //Приходит незащифрованный пароль
-        engService.save(modelMapper.map(engineerLoginDTO, Engineer.class));
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+    // TODO создание нового Инженера
+//    @PostMapping("/saveEngineer")
+//    public ResponseEntity<?> gettingEngineer(@RequestBody @Valid EngineerLoginDTO engineerLoginDTO, BindingResult bindingResult) {
+//        engineerValidator.validate(engineerLoginDTO, bindingResult);
+//        if (bindingResult.hasErrors()) {
+//            StringBuilder errorMsg = new StringBuilder();
+//
+//            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+//
+//            for (FieldError error : fieldErrors) {
+//                errorMsg
+//                        .append(error.getField())           // на каком поле была ошибка
+//                        .append(" — ")                      // —
+//                        .append(error.getDefaultMessage())  // выведем какая была ошибка
+//                        .append(";");
+//            }
+//            List<ObjectError> errors = bindingResult.getAllErrors();
+//            for (ObjectError error : errors) {
+//                errorMsg
+//                        .append(error.getCode());
+//            }
+//            throw new GetJSONException(errorMsg.toString());
+//        }
+//
+//        engService.save(modelMapper.map(engineerLoginDTO, Engineer.class));
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
     @PostMapping("/authenticationEngineer")
     public ResponseEntity<?> authenticationEngineer(@RequestBody @Valid EngineerDTO engineerDTO, BindingResult bindingResult) {
@@ -149,6 +146,33 @@ public class DBApiController {
             return  new ResponseEntity<>(null, HttpStatus.OK);
         }
         return new ResponseEntity<>(engineerDTO.get(), HttpStatus.OK);
+    }
+
+    @PostMapping("/updateEngineerPassword")
+    public ResponseEntity<?> updateEngineerPassword(@RequestBody @Valid EngineerUpdatePasswordDTO engineerUpdatePasswordDTO, BindingResult bindingResult) {
+//        engineerValidator.validate(engineerUpdatePasswordDTO, bindingResult);
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMsg = new StringBuilder();
+
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+
+            for (FieldError error : fieldErrors) {
+                errorMsg
+                        .append(error.getField())           // на каком поле была ошибка
+                        .append(" — ")                      // —
+                        .append(error.getDefaultMessage())  // выведем какая была ошибка
+                        .append(";");
+            }
+            List<ObjectError> errors = bindingResult.getAllErrors();
+            for (ObjectError error : errors) {
+                errorMsg
+                        .append(error.getCode());
+            }
+            throw new GetJSONException(errorMsg.toString());
+        }
+
+        engService.updatePassword(engineerUpdatePasswordDTO);
+        return new ResponseEntity<>("Update password for " + engineerUpdatePasswordDTO.getLogin() + " successfully!", HttpStatus.OK);
     }
 
     @PostMapping("/takeClient")
@@ -189,6 +213,11 @@ public class DBApiController {
     @ExceptionHandler
     private ResponseEntity<?> handleException(ClientIsBusyAnotherEngineer e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<?> handleException(EngineerNotAuthentication e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler

@@ -61,7 +61,8 @@ public class SecurityConfig  {
                 .requestMatchers("/img/**", "/css/**", "/js/**", "/sass/**", "/libs/**", "/images/**", "/vendors/**").permitAll()
                 .requestMatchers("/api/login").permitAll()
                 .requestMatchers("/api/saveClient").permitAll()
-                .requestMatchers("/api/**").authenticated()
+
+                .requestMatchers("/api/**").authenticated() //TODO authenticated
                 .requestMatchers("/adminPanel").authenticated()
                 .anyRequest().authenticated() //TODO
 

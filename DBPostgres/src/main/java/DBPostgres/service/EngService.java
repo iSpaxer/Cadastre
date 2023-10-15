@@ -1,12 +1,15 @@
 package DBPostgres.service;
 
 import DBPostgres.dto.EngineerDTO;
+import DBPostgres.dto.EngineerUpdatePasswordDTO;
+import DBPostgres.exception.EngineerNotAuthentication;
 import DBPostgres.models.Engineer;
 import DBPostgres.repositories.EngRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +53,7 @@ public class EngService {
         if (dBOptionalEngineer.isEmpty()) {
             log.info("Engineer in BD is empty!");
             return false;
+            //TODO throw new EngineerNotAuthentication();
         }
         Optional<EngineerDTO> dBEngineerDTO = Optional.of(dBOptionalEngineer.get().mappingEngineerDTO());
 
@@ -61,6 +65,19 @@ public class EngService {
             return true;
         } else {
             return false;
+        }
+    }
+
+    @Transactional
+    public void updatePassword(EngineerUpdatePasswordDTO engineerUpdatePasswordDTO) {
+        if (authenticationEngineer(new EngineerDTO(engineerUpdatePasswordDTO.getLogin(), engineerUpdatePasswordDTO.getOldPassword()))) {
+            Optional<Engineer> dBOptionalEngineer = engRepository.findByLogin(engineerUpdatePasswordDTO.getLogin());
+            Engineer upEngineer = dBOptionalEngineer.get();
+            upEngineer.setPassword(bCryptPasswordEncoder.encode(engineerUpdatePasswordDTO.getNewPassword()));
+
+            engRepository.save(upEngineer);
+        } else {
+            throw new EngineerNotAuthentication("Impossible update password! Engineer not authentication!");
         }
     }
 }
