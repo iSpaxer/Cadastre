@@ -181,6 +181,21 @@ public class ApiRequestService {
         }
     }
 
+    public String pricelistSwap() {
+        try {
+            return webClientBuilder.build()
+                    .get()
+                    .uri("/pricelistSwap")
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+        } catch (WebClientResponseException webClientResponseException) {
+            throw new DBRequestException(webClientResponseException.getMessage(), webClientResponseException.getStatusCode().value());
+        } catch (Exception e) {
+            throw new UnknownException(e.getMessage(), new Date());
+        }
+    }
+
     public String updateDeadline(PricelistDTO pricelistDTO) {
         String messageFromeDB;
         try {
@@ -199,4 +214,44 @@ public class ApiRequestService {
         }
         return messageFromeDB;
     }
+
+    public String updateCost(PricelistDTO pricelistDTO) {
+        String messageFromeDB;
+        try {
+            ///TODO неправильная обработка возвращаемого значения
+            messageFromeDB = webClientBuilder.build()
+                    .post()
+                    .uri("/updatePricelistCost")
+                    .bodyValue(pricelistDTO)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+        } catch (WebClientResponseException webClientResponseException) {
+            throw new DBRequestException(webClientResponseException.getMessage(), webClientResponseException.getStatusCode().value());
+        } catch (Exception e) {
+            throw new UnknownException(e.getMessage(), new Date());
+        }
+        return messageFromeDB;
+    }
+
+    public String updatePricelist(List<PricelistDTO> pricelistDTOList) {
+        String messageFromeDB;
+        try {
+            ///TODO неправильная обработка возвращаемого значения
+            messageFromeDB = webClientBuilder.build()
+                    .post()
+                    .uri("/updatePricelist")
+                    .bodyValue(pricelistDTOList)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+        } catch (WebClientResponseException webClientResponseException) {
+            throw new DBRequestException(webClientResponseException.getMessage(), webClientResponseException.getStatusCode().value());
+        } catch (Exception e) {
+            throw new UnknownException(e.getMessage(), new Date());
+        }
+        return messageFromeDB;
+    }
+
+
 }

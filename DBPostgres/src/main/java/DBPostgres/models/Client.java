@@ -23,7 +23,7 @@ public class Client {
 
     @Column(name = "name")
     @NotEmpty(message = "Поле пустое")
-    @Size(min = 2, max = 15, message = "Введите ваше имя")
+    @Size(min = 2, max = 40, message = "Введите ваше имя")
     private String name;
 
     @Column(name = "created_data")

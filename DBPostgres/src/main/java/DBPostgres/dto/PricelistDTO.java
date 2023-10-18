@@ -17,19 +17,14 @@ import java.util.Date;
 @AllArgsConstructor
 public class PricelistDTO {
 
-    @NotEmpty(message = "Поле 'mezhevaniye' пустое")
     private String mezhevaniye;
 
-    @NotEmpty(message = "Поле 'tech_plan' пустое")
     private String tech_plan;
 
-    @NotEmpty(message = "Поле 'akt_inspection' пустое")
     private String akt_inspection;
 
-    @NotEmpty(message = "Поле 'scheme_location' пустое")
     private String scheme_location;
 
-    @NotEmpty(message = "Поле 'takeaway_borders' пустое")
     private String takeaway_borders;
 
     @Temporal(TemporalType.TIMESTAMP)

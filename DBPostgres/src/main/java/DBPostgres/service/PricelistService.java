@@ -8,4 +8,10 @@ public interface PricelistService {
     List<PricelistDTO> getPricelist();
 
     void updateDeadline(PricelistDTO pricelistDTO);
+
+    void updateCost(PricelistDTO pricelistDTO);
+
+    void updatePricelist(List<PricelistDTO> pricelistDTOList);
+
+    void pricelistSwap();
 }

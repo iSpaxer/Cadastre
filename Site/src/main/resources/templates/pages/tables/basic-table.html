@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Spica Admin</title>
+  <title>Cadastre Admin</title>
   <!-- base:css -->
   <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
@@ -131,7 +131,7 @@
           <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome to Admin Panel</h4>
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item">
-              <h4 class="mb-0 font-weight-bold d-none d-xl-block">Mar 12, 2019 - Apr 10, 2019</h4>
+              <!-- <h4 class="mb-0 font-weight-bold d-none d-xl-block">Mar 12, 2019 - Apr 10, 2019</h4> -->
             </li>
             <li class="nav-item dropdown me-1">
               <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-bs-toggle="dropdown">
@@ -275,25 +275,93 @@
         </div>
       </nav>
       <!-- partial -->
-      <div class="main-panel">
-        <div class="row doc-content">
-          <div class="col-12 col-md-10 offset-md-1">
-            <div class="col-12 grid-margin" id="doc-intro">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="mb-4 mt-4">Introduction</h3>
-                        <p> <img src="../images/monkey-hammer.svg"> В разработке ;)</p>
-                        <p class="d-inline"><strong>Note</strong>: Если возникли вопросы, Вы всегда можете написать нам на почту <a class="d-inline text-info" href="mailto:a.v.sybachin@mail.ru">a.v.sybachin@mail.ru</a>
-                          </p>
-
+      <div class="main-panel">        
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <form class="update-table-pricelist-form" id="pricelist-form">
+                    <h4 class="card-title">Таблица на основной странице</h4>
+                    <div class="table-responsive">
+                      <table class="table table-striped" id="table-pricelist">
+                        <thead>
+                          <tr>
+                            <th>
+                              /
+                            </th>
+                            <th>
+                              Межевание
+                            </th>
+                            <th>
+                              Тех. план
+                            </th>
+                            <th>
+                              Акт обследования
+                            </th>
+                            <th>
+                              Схема расположения
+                            </th>
+                            <th>
+                              Вынос границ
+                            </th>
+                            <th>
+                              Последний раз редактировано
+                            </th>
+                            <!-- <th>
+                              Отредактировать
+                            </th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
                     </div>
+                    <button form="pricelist-form" class="badge badge-success badge-center" type="submit" id="button-pricelist-update">Сохранить изменения</button>
+                    <!-- <div class="badge badge-success badge-center">
+                      <input type="submit" value="Сохранить изменения">
+                    </div> -->
+                  </form>
+                  </div>
+                  <!-- <button form="pricelist-form" class="badge badge-success badge-center" type="button" id="button-pricelist-update">Сохранить изменения</button> -->
+              </div>
+        </div>
+      
+      <!-- main-panel ends -->
+        </div>
+        <div class="col-md-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Изменить Пароль</h4>
+              <p class="card-description">
+                <!-- Basic form layout -->
+              </p>
+
+              <!-- TODO -->
+              <form class="set-new-password-form forms-sample"> 
+ 
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Введите старый пароль</label>
+                  <input type="password" class="form-control"  placeholder="Старый пароль" name="oldPassword">
                 </div>
-            </div> 
+                <div class="form-group">
+                  <label for="exampleInputConfirmPassword1">Новый пароль</label>
+                  <input type="password" class="form-control" placeholder="Новый пароль" name="newPassword" >
+                </div>
+                <!-- <div class="form-group">
+                  <label for="exampleInputConfirmPassword1">Повторите новый пароль</label>
+                  <input type="password" class="form-control" placeholder="Новый пароль" name="newPassword2" >
+                </div> -->
+  
+                <button type="submit" class="btn btn-primary me-2">Именить</button>
+                <button class="btn btn-light">Отменить</button>
+              </form>
+
+            </div>
           </div>
         </div>
       </div>
-      <!-- main-panel ends -->
-    </div>
+    
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
@@ -309,6 +377,39 @@
   <script src="../../js/template.js"></script>
   <!-- endinject -->
   <!-- End custom js for this page-->
+  <script src="../../js/basic-table.js"></script>
+
+  <script> 
+    let sendFormPostRequest = (form) => { 
+      const formData = new FormData(form); // create a new FormData object from the form data
+      const data = {}; // create an empty object to store the form data
+      
+      // loop through the FormData object and add each key-value pair to the data object
+      for (let [key, value] of formData.entries()) {
+        data[key] = value;
+      }
+      
+      
+      // convert the data object to a JSON string using JSON.stringify()
+      const jsonData = JSON.stringify(data);
+      console.log(jsonData);
+      // send the JSON data to the server using an AJAX request (example using fetch())
+      fetch('/api/updateEngineerPassword', {
+          method: 'POST',
+          headers: {
+          'Content-Type': 'application/json'
+          },
+          body: jsonData
+      })
+    } 
+
+    const setNewPassword = document.querySelector('.set-new-password-form');
+    setNewPassword.addEventListener('submit', function(event) {
+      event.preventDefault(); // prevent the default form submission behavior
+      sendFormPostRequest(setNewPassword);
+    });
+  </script>
+  
 </body>
 
 </html>

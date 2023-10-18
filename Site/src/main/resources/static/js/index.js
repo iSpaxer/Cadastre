@@ -84,9 +84,6 @@ let sendFormClient = (form) => {
   .then(data => console.log(data))
   .catch(error => console.error(error));
   // location.reload(); 
-
-
-
 }
 
 const modalController = ({modal, btnClose, time = 300, form = null}) => {
@@ -169,14 +166,95 @@ mainForm.addEventListener('submit', function(event) {
   sendFormClient(mainForm);
 });
 
+// TODO
+modalController({
+  modal: '.modal1',
+  btnClose: '.modal__close',
+  time: 500,
+});
+
 const secondForm = document.querySelector('.section-questions__content-input');
 secondForm.addEventListener('submit', function(event) {
   event.preventDefault(); // prevent the default form submission behavior
   sendFormClient(secondForm);
-
-
 });
 
+// _______________________________________-
+
+async function getPricelist() {
+  const response = await fetch('/api/getPricelist', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  return await response.json()
+}
+
+class TableTitle { // класс нового обращения
+  
+  constructor(pricelistAll, nameLineArray) { //конструктор для такблицы с новыми обращениями
+    this.pricelistSortArray = [[pricelistAll[0].mezhevaniye, pricelistAll[1].mezhevaniye],
+                               [pricelistAll[0].tech_plan, pricelistAll[1].tech_plan], 
+                               [pricelistAll[0].akt_inspection, pricelistAll[1].akt_inspection],
+                               [pricelistAll[0].scheme_location,pricelistAll[1].scheme_location],
+                               [pricelistAll[0].takeaway_borders, pricelistAll[1].takeaway_borders]];
+    this.nameLineArray = nameLineArray;
+    this.tableTitle = document.getElementById('table-title'); 
+  }
+
+  sorting() {
+
+    
+  }
+
+  createTable() { //функция создания html разметки
+
+    let maxI = this.nameLineArray.length;
+    for (let i = 0; i < maxI; i++) {
+      let tr = this.tableTitle.insertRow(); //создаем tr
+        tr.classList.add("table__text");
+
+      let th = document.createElement("th");
+        th.classList.add("table__text-works", "table__text-works--first");
+        let cell = document.createTextNode(this.nameLineArray[i]); 
+        th.appendChild(cell);
+      tr.appendChild(th);
+
+      for (let j = 0; j < 2; j++) {
+        let td = tr.insertCell();
+        td.appendChild(document.createTextNode(this.pricelistSortArray[i][j])); //TODO
+        tr.appendChild(td);
+      }
+    }
+
+
+
+    // let tr = this.tableTitle.insertRow(); //создаем tr
+    // tr.classList.add("table__text");
+    //   // let td = tr.insertCell();
+    //   let th = document.createElement("th");
+    //   let cell = document.createTextNode("12312");
+    //   th.classList.add("table__text-works", "table__text-works--first");
+    //   th.appendChild(cell);
+    // tr.appendChild(th);
+    // this.clientList.forEach(element => {
+    //   let td = tr.insertCell();
+    //   td.appendChild(document.createTextNode(1));
+    //   tr.appendChild(td);
+    // })
+  } 
+}
+
+getPricelist().then((pricelistAll) => {
+  nameLineArray = ["Межевание земельного участка",
+                   "Технический план",
+                   "Акт обследования",
+                   "Схема расположения",
+                   "Вынос границ в натуру"];
+  let table = new TableTitle(pricelistAll, nameLineArray);
+  table.createTable();
+});
 
 
 

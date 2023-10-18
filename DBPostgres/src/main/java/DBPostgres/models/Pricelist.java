@@ -54,4 +54,9 @@ public class Pricelist {
         this.takeaway_borders = takeaway_borders;
         this.last_change = last_change;
     }
+
+    @Override
+    public String toString() {
+        return "mezhevaniye: " + mezhevaniye;
+    }
 }

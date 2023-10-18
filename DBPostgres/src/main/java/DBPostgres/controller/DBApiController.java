@@ -3,8 +3,6 @@ package DBPostgres.controller;
 import DBPostgres.dto.*;
 import DBPostgres.exception.*;
 import DBPostgres.models.Client;
-import DBPostgres.models.Engineer;
-import DBPostgres.models.Pricelist;
 import DBPostgres.service.ClientService;
 import DBPostgres.service.CommonService;
 import DBPostgres.service.PricelistService;
@@ -188,13 +186,30 @@ public class DBApiController {
         List<PricelistDTO> pricelistAllDTO = pricelistService.getPricelist();
         return new ResponseEntity<>(pricelistAllDTO, HttpStatus.OK);
     }
+    @GetMapping("/pricelistSwap")
+    public ResponseEntity<?> getPricelistSwap() {
+        pricelistService.pricelistSwap();
+        return new ResponseEntity<>("Swap Pricelist is successfully", HttpStatus.OK);
+    }
 
 
     // TODO VALID
     @PostMapping("/updatePricelistDeadline")
     public ResponseEntity<?> updatePricelistDeadline(@RequestBody @Valid PricelistDTO pricelistDTO) {
         pricelistService.updateDeadline(pricelistDTO);
-        return new ResponseEntity<>("Updated Pricelist Deadline successfully!", HttpStatus.OK);
+        return new ResponseEntity<>("Updated Pricelist Deadline is successfully!", HttpStatus.OK);
+    }
+
+    @PostMapping("/updatePricelistCost")
+    public ResponseEntity<?> updatePricelistCost(@RequestBody @Valid PricelistDTO pricelistDTO) {
+        pricelistService.updateCost(pricelistDTO);
+        return new ResponseEntity<>("Updated Pricelist Cost service is successfully!", HttpStatus.OK);
+    }
+
+    @PostMapping("/updatePricelist")
+    public ResponseEntity<?> updatePricelist(@RequestBody List<PricelistDTO> pricelistDTOList) {
+        pricelistService.updatePricelist(pricelistDTOList);
+        return new ResponseEntity<>("Updated Pricelist successfully!", HttpStatus.OK);
     }
 
     @ExceptionHandler
