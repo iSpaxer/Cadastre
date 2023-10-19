@@ -19,10 +19,6 @@
 
 </head>
 
-<style>
-
-</style>
-
 <body>
 
     <header class="header">
@@ -35,7 +31,7 @@
             <div class="block">
                 <nav class="header-nav">
                     <ul class="header-nav-list" >
-                        <li class="header-nav-list-el">Главная</li>
+                        <li class="header-nav-list-el" id="main-header">Главная</li>
                         <li class="header-nav-list-el" id="services">Услуги</li>
                         <li class="header-nav-list-el" id="table">Цены</li>
                         <li class="header-nav-list-el" id="contact">Контакты</li>
@@ -102,55 +98,7 @@
         </div>
     </div>
 
-    <!-- <div class="header-scroll">
-        <div class="header-top">
-            <div class="header-logo">
-                <a href="./index.html">
-                    <img class="img-logo" src="./img/header/logo.png" alt="Логотип">
-                </a>
-            </div>
-            <div class="block">
-                <nav class="header-nav">
-                    <ul class="header-nav-list" >
-                        <li class="header-nav-list-el">Главная</li>
-                        <li class="header-nav-list-el" id="services">Услуги</li>
-                        <li class="header-nav-list-el" id="table">Цены</li>
-                        <li class="header-nav-list-el" id="contact">Контакты</li>
-                    </ul>
-                    <div class="line"></div>
-                </nav>
-
-                <div class="header-info">
-                    <div class="info-online-row">
-                        <div class="info-mail">
-                            <p>my-kadastr@mail.ru</p>
-                        </div>
-                        <ul class="info-ofline-list">
-                            <li class="ofline-list-number-tel" >+7 917 698-88-07</li>
-                            <li class="ofline-list-number-tel" >+7 917 698-88-03</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-ofline">
-                        <div class="social-network">
-                            <div class="social-network-img">
-                                <img class="social-network-whatsapp" src="./img/icons-header/whatsapp.svg" alt="whatsapp">
-                                <img class="social-network-viber" src="./img/icons-header/viber.svg" alt="viber">
-                            </div>
-                            <p>Пишите нам,<br>мы онлайн!</p>
-                        </div>
-                        <p class="info-ofline-time">пн-пт, 08:00-17:00</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-icon-wrapper">
-                <div class="nav-icon"></div>
-            </div>
-        </div>
-    </div> -->
-
-    <section class="main ">
+    <section class="main "  id="main-section">
         <div class="container">
             <div class="container-row">
                 <div class="main-services">
@@ -333,37 +281,6 @@
                     <th class="table-title__time">Срок выполнения</th>
                     <th class="table-title__rub">Стоимость (руб)</th>
                 </tr>
-                <!-- //Титульный ряд -->
-                <!-- <tr class="table__text">
-                    <th class="table__text-works table__text-works--first"><p>Межевание земельного участка</p></th>
-                    <td>От 2 дней</td>
-                    <td>От 1111 р</td>
-                </tr> -->
-                <!-- //1 ряд -->
-                <!-- <tr class="table__text">
-                    <th class="table__text-works"><p>Технический план</p></th>
-                    <td>От 2 дней</td>
-                    <td>От 1111 р</td>
-                </tr> -->
-                <!-- //2 ряд -->
-                <!-- <tr class="table__text">
-                    <th class="table__text-works"><p>Акт обследования</p></th>
-                    <td>От 2 дней</td>
-                    <td>От 1111 р</td>
-                </tr> -->
-                <!-- //3 ряд -->
-                <!-- <tr class="table__text">
-                    <th class="table__text-works"><p>Схема расположения</p></th>
-                    <td>От 2 дней</td>
-                    <td>От 1111 р</td>
-                </tr> -->
-                <!-- //4 ряд -->
-                <!-- <tr class="table__text">
-                    <th class="table__text-works table__text-works--borders"><p>Вынос границ в натуру</p></th>
-                    <td></td>
-                    <td>От 1111 р</td>
-                </tr> -->
-                <!-- //5 ряд -->
                 </tbody>
             </table>
         </div>
@@ -375,7 +292,7 @@
                 <div class="section-questions__content-wrapper">
                     <div class="section-questions__content-text">
                         <h2>Остались вопросы?</h2>
-                        <p>Ответим по телефону +7 917 698-88-07 и +7 917 698-88-03</p>
+                        <p>Ответим по телефону <br>+7 917 698-88-07 и +7 917 698-88-03</br></p>
                         <h3>или мы перезвоним Вам</h3>
                     </div>
                     
@@ -391,7 +308,7 @@
 
                 </div>
                 <div class="section-questions__img">
-                    <img src="./img/section-questions/macbook.png" alt="macbook">
+                <img class="macbook" src="./img/section-questions/macbook.png" alt="macbook">
                 </div>
             </div>
         </div>
