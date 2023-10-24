@@ -218,7 +218,9 @@ class TableTitle { // класс нового обращения
       let th = document.createElement("th");
         th.classList.add("table__text-works", "table__text-works--first");
         let cell = document.createTextNode(this.nameLineArray[i]); 
-        th.appendChild(cell);
+        let p = document.createElement("p");
+        p.appendChild(cell);
+        th.appendChild(p);
       tr.appendChild(th);
 
       for (let j = 0; j < 2; j++) {

@@ -58,14 +58,16 @@ public class SecurityConfig  {
 
                 .authorizeHttpRequests()
                 .requestMatchers("/", "/login", "/error").permitAll()
-                .requestMatchers("/img/**", "/css/**", "/js/**", "/sass/**", "/libs/**", "/images/**", "/vendors/**").permitAll()
-                .anyRequest().permitAll()
-//                .requestMatchers("/api/login").permitAll()
-//                .requestMatchers("/api/saveClient").permitAll()
-//
-//                .requestMatchers("/api/**").authenticated() //TODO authenticated
-//                .requestMatchers("/adminPanel").authenticated()
-//                .anyRequest().authenticated() //TODO
+                .requestMatchers("/img/**", "/css/**", "/js/**", "/sass/**", "/libs/**",
+                        "/images/**", "/vendors/**", "/gif/**").permitAll()
+//                .anyRequest().permitAll()
+                .requestMatchers("/api/login").permitAll()
+                .requestMatchers("/api/saveClient").permitAll()
+                .requestMatchers("/api/getPricelist").permitAll()
+
+                .requestMatchers("/api/**").authenticated() //TODO authenticated
+                .requestMatchers("/adminPanel").authenticated()
+                .anyRequest().authenticated() //TODO
 
                 .and()
                 .addFilterBefore(new UserPassAuthFilter(), BasicAuthenticationFilter.class)

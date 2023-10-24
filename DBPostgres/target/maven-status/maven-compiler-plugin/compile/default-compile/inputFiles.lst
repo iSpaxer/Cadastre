@@ -1,5 +1,7 @@
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/util/ClientErrorResponse.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/service/impl/EngDetailsServiceImpl.java
+/home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/repositories/PricelistRepository.java
+/home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/exception/EngineerNotAuthentication.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/service/impl/ClientServiceImpl.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/controller/DBApiController.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/models/Engineer.java
@@ -12,9 +14,12 @@
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/models/Client.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/exception/GetJSONException.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/service/impl/DBConsumerImpl.java
+/home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/dto/PricelistDTO.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/service/impl/CommonServiceImpl.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/dto/EngineerDTO.java
+/home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/service/PricelistService.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/dto/ClientDbDTO.java
+/home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/service/impl/PricelistServiceImpl.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/repositories/ClientRepository.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/service/CommonService.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/exception/BodyEmptyException.java
@@ -22,8 +27,10 @@
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/config/RabbitConfiguration.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/exception/UnknownException.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/models/Role.java
+/home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/dto/EngineerUpdatePasswordDTO.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/util/validate/EngineerValidator.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/service/EngService.java
+/home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/models/Pricelist.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/config/DBConfig.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/service/ClientService.java
 /home/alex/IdeaProjects/Cadastre/DBPostgres/src/main/java/DBPostgres/service/DBConsumer.java

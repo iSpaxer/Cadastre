@@ -17,6 +17,9 @@ $(document).ready(function () {
 	});
 	
 	// Находим кастомные кнопки Вперед / Назад
+	// const slide_1 = $('.slide-1');
+	
+	
 	const prev = $('.slider-services__arrow--left');
 	const next = $('.slider-services__arrow--right');
 
