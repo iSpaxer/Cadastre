@@ -1108,13 +1108,13 @@ div[id^='slide-'] {
 
 div[id^='slide-']:hover {
 
-  filter: brightness(70%);
+  filter: brightness(100%);
 
-  .slider-item__card-row-title {
+  /* .slider-item__card-row-title {
     color: #37B1F5; 
     .slider-item__card-row-title.active {
       color: #F8F8F8; }
-  }
+  } */
 
 
 
