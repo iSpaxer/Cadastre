@@ -13,7 +13,26 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="../../css/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="../../images/favicon.png" />
+  <link rel="shortcut icon" href="./icon/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="./icon/favicon.ico" type="image/x-icon">
+
+  <link rel="apple-touch-icon" sizes="57x57" href="./icon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="./icon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="./icon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="./icon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="./icon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="./icon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="./icon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="./icon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="./icon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="./icon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./icon/favicon-16x16.png">
+  <link rel="manifest" href="./icon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="./icon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
 </head>
 
 <body>
@@ -29,7 +48,7 @@
           <a class="nav-link" href="/adminPanel">
             <i class="mdi mdi-view-quilt menu-icon"></i>
             <span class="menu-title">Главная</span>
-            <!-- <div class="badge badge-info badge-pill">2</div> -->
+            <div class="badge badge-info badge-pill" id="badge-info"></div>
           </a>
         </li>
         <li class="nav-item sidebar-category">
@@ -64,7 +83,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/adminPanel/tables">
             <i class="mdi mdi-grid-large menu-icon"></i>
-            <span class="menu-title">Таблицы</span>
+            <span class="menu-title">Настройки</span>
           </a>
         </li>
         <li class="nav-item sidebar-category">
@@ -133,7 +152,7 @@
             <li class="nav-item">
               <!-- <h4 class="mb-0 font-weight-bold d-none d-xl-block">Mar 12, 2019 - Apr 10, 2019</h4> -->
             </li>
-            <li class="nav-item dropdown me-1">
+            <!-- <li class="nav-item dropdown me-1">
               <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-bs-toggle="dropdown">
                 <i class="mdi mdi-calendar mx-0"></i>
                 <span class="count bg-info">2</span>
@@ -179,10 +198,10 @@
               </div>
             </li>
             <li class="nav-item dropdown me-2">
-              <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+              <!-- <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                 <i class="mdi mdi-email-open mx-0"></i>
                 <span class="count bg-danger">1</span>
-              </a>
+              </a> -->
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                 <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
                 <a class="dropdown-item preview-item">
@@ -225,7 +244,7 @@
                   </div>
                 </a>
               </div>
-            </li>
+            </li> -->
           </ul>
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="mdi mdi-menu"></span>
@@ -243,7 +262,7 @@
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
                 <img src="../../images/faces/face5.jpg" alt="profile"/>
-                <span class="nav-profile-name">Eleanor Richardson</span>
+                <span class="nav-profile-name" id="nav-profile-name-1"></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                 <a class="dropdown-item">
@@ -327,6 +346,20 @@
               </div>
         </div>
       
+        <div class="col-md-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Поменять столбцы местами</h4>
+              <p class="card-description">
+                Основная таблица
+              </p>
+              <form class="set-swap-table-form">
+                <button type="submit" class="btn btn-primary-2 me-2">Поменять</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
       <!-- main-panel ends -->
         </div>
         <div class="col-md-12 grid-margin stretch-card">
@@ -360,6 +393,7 @@
             </div>
           </div>
         </div>
+
       </div>
     
     <!-- page-body-wrapper ends -->

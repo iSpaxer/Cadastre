@@ -16,8 +16,32 @@
   <!-- from VS CODE: "../static/css/style.css" From Idea: css/style.css -->
   <link rel="stylesheet" href="../../css/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="images/favicon.png" />
+
+
+  <link rel="shortcut icon" href="./icon/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="./icon/favicon.ico" type="image/x-icon">
+
+  <link rel="apple-touch-icon" sizes="57x57" href="./icon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="./icon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="./icon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="./icon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="./icon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="./icon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="./icon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="./icon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="./icon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="./icon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./icon/favicon-16x16.png">
+  <link rel="manifest" href="./icon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="./icon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
 </head>
+
+
 <body>
   <div class="container-scroller d-flex">
     <!-- partial:./partials/_sidebar.html -->
@@ -31,7 +55,7 @@
           <a class="nav-link" href="/adminPanel">
             <i class="mdi mdi-view-quilt menu-icon"></i>
             <span class="menu-title">Главная</span>
-            <!-- <div class="badge badge-info badge-pill">2</div> -->
+            <div class="badge badge-info badge-pill"  id="badge-info"></div>
           </a>
         </li>
         <li class="nav-item sidebar-category">
@@ -66,7 +90,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/adminPanel/tables">
             <i class="mdi mdi-grid-large menu-icon"></i>
-            <span class="menu-title">Таблицы</span>
+            <span class="menu-title">Настройки</span>
           </a>
         </li>
         <li class="nav-item sidebar-category">
@@ -328,18 +352,6 @@
             
           </div>
           <!-- row end -->
-
-          <form class="set-new-password-form">
-            <div id="alert"></div>
-          
-            <label for="old password">Password</label>
-            <input type="password" name="oldPassword" />
-          
-            <label for="new password">New password</label>
-            <input type="password" name="newPassword" />
-          
-            <button type="submit">Reset password</button>
-          </form>
 
         </div>
 

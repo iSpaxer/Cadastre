@@ -1,31 +1,3 @@
-let sendFormPostRequest = (form) => { 
-    const formData = new FormData(form); // create a new FormData object from the form data
-    const data = {}; // create an empty object to store the form data
-    
-    // loop through the FormData object and add each key-value pair to the data object
-    for (let [key, value] of formData.entries()) {
-      data[key] = value;
-    }
-    
-    // convert the data object to a JSON string using JSON.stringify()
-    const jsonData = JSON.stringify(data);
-    console.log(jsonData);
-    // send the JSON data to the server using an AJAX request (example using fetch())
-    fetch('/api/updateEngineerPassword', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: jsonData
-    })
-  } 
-
-  const setNewPassword = document.querySelector('.set-new-password-form');
-  setNewPassword.addEventListener('submit', function(event) {
-    event.preventDefault(); // prevent the default form submission behavior
-    sendFormPostRequest(setNewPassword);
-  });
-
 
   async function getClients() {
     const response = await fetch('/api/getClients', {
@@ -119,6 +91,11 @@ let sendFormPostRequest = (form) => {
         commonClient.createAppeal();
         allApplealList.push(commonClient);
       }
+      let badge_info = document.getElementById('badge-info');
+      let quantityNewAppeal = newAppealList.length;
+      if ( !(quantityNewAppeal == 0) && !(quantityNewAppeal == undefined) ){
+        badge_info.innerHTML = newAppealList.length;
+      }
     });
   });
 
@@ -131,8 +108,9 @@ let sendFormPostRequest = (form) => {
     })
     return await response.json()
   }
-
+  
   let profileName = document.getElementById('nav-profile-name');
   getEngineerLogin().then((engLogin) => {
     profileName.innerHTML = engLogin.login;
-  })
+    console.log(engLogin.login);
+  });

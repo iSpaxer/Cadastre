@@ -136,11 +136,31 @@ async function getPricelist() {
 
   const pricelistForm = document.querySelector('.update-table-pricelist-form');
   pricelistForm.addEventListener('submit', function(event) {
-    console.log("УРа!")
+
     event.preventDefault(); // prevent the default form submission behavior
     // sendForm(pricelistForm);
     readAllInput(arrayPricelistAllTable);
   });
+
+
+  async function pricelistSwap() {
+    const response = await fetch('/api/pricelistSwap', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    return await response.json()
+  }
+
+  const swapTable = document.querySelector('.set-swap-table-form');
+  swapTable.addEventListener('submit', function(event) {
+    event.preventDefault(); // prevent the default form submission behavior
+    pricelistSwap();
+    console.log("УРа!")
+    // location.reload();
+  });
+
 
   // const buttonPricelist = document.getElementById("button-pricelist-update").addEventListener("click", (event) => {
   //   event.preventDefault();
