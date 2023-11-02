@@ -35,7 +35,7 @@ public class Client {
     @Size(min = 11, max = 11, message = "не корректный номер")
     private String phone;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "eng_id", referencedColumnName = "id")
     private Engineer engineer;
 

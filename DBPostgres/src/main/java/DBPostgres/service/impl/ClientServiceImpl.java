@@ -11,12 +11,18 @@ import DBPostgres.service.ClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -32,18 +38,29 @@ public class ClientServiceImpl implements ClientService {
         this.modelMapper = modelMapper;
     }
     @Override
-    public List<ClientDbDTO> getAllClient() {
-        List<Client> clientList = clientRepository.findAll();
-        List<ClientDbDTO> clientDbDTOList = new ArrayList<>();
-        for (Client client : clientList) {
+    public Page<ClientDbDTO> getAllClients(Pageable pageable) {
+        Page<Client> clientPage = clientRepository.findAll(pageable);
+        return customMapClientPageInDTO(clientPage);
+    }
+
+    private Page<ClientDbDTO> customMapClientPageInDTO(Page<Client> clientPage) {
+        Page<ClientDbDTO> clientDbDTOPage = clientPage.map(client -> {
             ClientDbDTO clientDbDTO = modelMapper.map(client, ClientDbDTO.class);
-            Engineer engineer = client.getEngineer();
-            if (engineer != null) {
-                clientDbDTO.setEngName(engineer.getName());
+            if (client.getEngineer() != null) {
+                clientDbDTO.setEngName(client.getEngineer().getName());
             }
-            clientDbDTOList.add(clientDbDTO);
-        }
-        return clientDbDTOList;
+            return clientDbDTO;
+        });
+        return clientDbDTOPage;
+    }
+
+    @Transactional
+    @Override
+    public Page<ClientDbDTO> getClientsWithBetweenDate(String fromDateStr, String toDateStr, Pageable pageable) {
+        LocalDate fromDate = LocalDate.parse(fromDateStr);
+        LocalDate toDate = LocalDate.parse(toDateStr);
+        Page<Client> clientPage = clientRepository.findAllClientsWithBetweenDate(fromDate, toDate, pageable);
+        return customMapClientPageInDTO(clientPage);
     }
 
     @Override
@@ -88,12 +105,4 @@ public class ClientServiceImpl implements ClientService {
         clientRepository.save(newClient);
     }
 
-
-
-//    private String information(Client client) {
-//        return "A new client  left a request!\n" +
-//                "Name: " + client.getName() + "\n" +
-//                "Phone: " + client.getPhone() + "\n" +
-//                "Data of creation: " + client.getCreatedData();
-//    }
 }

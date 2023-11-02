@@ -14,11 +14,16 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,10 +55,24 @@ public class DBApiController {
         return "is working!";
     }
 
-    @GetMapping("/allClients")
-    public List<ClientDbDTO> clientList() {
-        List<ClientDbDTO> clientList = clientService.getAllClient();
-        return clientList;
+//    @GetMapping("/allClients")
+//    public ResponseEntity<?> clientList(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageable) {
+//        Page<Client> clientPage = clientService.getAllClient(pageable);
+//        return new ResponseEntity<>(clientPage.getContent(), HttpStatus.OK);
+//    }
+
+    @GetMapping("/getClients")
+    public ResponseEntity<?> getClients(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageable) {
+        Page<ClientDbDTO> clientDbDToPage = clientService.getAllClients(pageable);
+        return new ResponseEntity<>(clientDbDToPage, HttpStatus.OK);
+    }
+
+    @GetMapping("/getClientsWithBetweenDate")
+    public ResponseEntity<?> getClientsWithBetweenDate (
+            @PageableDefault(sort = {"created_data"}, direction = Sort.Direction.ASC, size = 5) Pageable pageable,
+            @RequestParam(name = "from") String fromDate, @RequestParam(name = "to") String toDate) {
+        Page<ClientDbDTO> clientDbDToPage = clientService.getClientsWithBetweenDate(fromDate, toDate, pageable);
+        return new ResponseEntity<>(clientDbDToPage, HttpStatus.OK);
     }
 
     @GetMapping("/lastClient")
@@ -238,5 +257,10 @@ public class DBApiController {
     @ExceptionHandler
     private ResponseEntity<?> handleException(UnknownException e) {
         return new ResponseEntity<>("UnknownException in DB... ", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<?> handleException(MissingServletRequestParameterException e) {
+        return new ResponseEntity<>("Required parameters are not entered " + "HttpStatus " + HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST);
     }
 }
