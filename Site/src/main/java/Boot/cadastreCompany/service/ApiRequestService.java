@@ -5,18 +5,27 @@ import Boot.cadastreCompany.exception.DBRequestException;
 import Boot.cadastreCompany.exception.EngineerNotAuthentication;
 import Boot.cadastreCompany.exception.UnknownException;
 import Boot.cadastreCompany.security.EngDetails;
+import Boot.cadastreCompany.utils.RestPage;
 import Boot.cadastreCompany.utils.wrapper.EngineerAndClient;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+import org.springframework.data.domain.Page;
+import reactor.core.publisher.Flux;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -29,14 +38,37 @@ public class ApiRequestService {
         this.webClientBuilder = webClientBuilder;
     }
 
-    public List<ClientDbDTO> getAllClients() {
+    public Page<ClientDbDTO> getAllClients(String page, String size) {
+
         return webClientBuilder.build()
                 .get()
-                .uri("/allClients")
+
+                .uri(uriBuilder -> uriBuilder
+                        .path("/getClients")
+                        .queryParamIfPresent("page", Optional.ofNullable(page))
+                        .queryParamIfPresent("size", Optional.ofNullable(size))
+                        .build())
                 .retrieve()
-                .bodyToFlux(ClientDbDTO.class)
-                .collectList()
+                .bodyToMono(RestPage.class)
                 .block();
+
+    }
+
+    private void checkingEmptyString(String... values) {
+        for (String e : values) {
+            if (e == null) {
+                e = "";
+            }
+        }
+    }
+
+    private String createGetRequest(String s, List<String> list) {
+        s += "?";
+        for (String element : list) {
+            if (element.isBlank())
+                s += element + "&";
+        }
+        return s;
     }
 
     public ClientDbDTO getLastClient() {

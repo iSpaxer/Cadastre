@@ -8,6 +8,10 @@ import Boot.cadastreCompany.service.rabbit_2_0.ClientProducer;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -35,9 +39,10 @@ public class RestApiClientController {
 
     ///TODO not exception
     @GetMapping("/getClients")
-    public ResponseEntity<?> getClients() {
-        List<ClientDbDTO> allClients = apiRequestService.getAllClients();
-        return new ResponseEntity<>(allClients, HttpStatus.OK);
+    public ResponseEntity<?> getClients( @RequestParam(required = false) String size, @RequestParam(required = false) String page) {
+
+        Page<ClientDbDTO> clientDbDToPage = apiRequestService.getAllClients(page, size);
+        return new ResponseEntity<>(clientDbDToPage, HttpStatus.OK);
     }
 
     ///TODO not exception

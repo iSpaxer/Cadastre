@@ -10,16 +10,24 @@
         <module name="RabbitMQ" />
         <module name="Site" />
         <module name="node" />
+        <module name="TgBot2" />
         <module name="dispatcher" />
         <module name="DBPostgres" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="tgBot (1) (ru.tg)" target="17" />
+      <module name="TgBot (2) (org.example)" target="20" />
+      <module name="TgBot (2) (org.springframework.boot)" target="20" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="DBPostgres" options="-parameters" />
       <module name="RabbitMQ" options="-parameters" />
       <module name="Site" options="-parameters" />
+      <module name="TgBot (2) (org.springframework.boot)" options="-parameters" />
+      <module name="TgBot2" options="-parameters" />
       <module name="dispatcher" options="-parameters" />
       <module name="node" options="-parameters" />
     </option>

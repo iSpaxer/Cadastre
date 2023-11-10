@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,9 +57,12 @@ public class ClientServiceImpl implements ClientService {
 
     @Transactional
     @Override
-    public Page<ClientDbDTO> getClientsWithBetweenDate(String fromDateStr, String toDateStr, Pageable pageable) {
+    public Page<ClientDbDTO> getClientsWithBetweenDate(String fromDateStr, String toDateStr, Pageable pageable) throws DateTimeException {
         LocalDate fromDate = LocalDate.parse(fromDateStr);
         LocalDate toDate = LocalDate.parse(toDateStr);
+        if (fromDate.isAfter(toDate)) {
+            throw new DateTimeException("The end date is greater than the start date: " + fromDate.toString() + " > " +  toDate.toString());
+        }
         Page<Client> clientPage = clientRepository.findAllClientsWithBetweenDate(fromDate, toDate, pageable);
         return customMapClientPageInDTO(clientPage);
     }

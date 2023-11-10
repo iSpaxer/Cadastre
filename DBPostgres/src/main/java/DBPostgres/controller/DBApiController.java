@@ -26,6 +26,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.DateTimeException;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,14 +63,14 @@ public class DBApiController {
 //    }
 
     @GetMapping("/getClients")
-    public ResponseEntity<?> getClients(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 5) Pageable pageable) {
+    public ResponseEntity<?> getClients(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable) {
         Page<ClientDbDTO> clientDbDToPage = clientService.getAllClients(pageable);
         return new ResponseEntity<>(clientDbDToPage, HttpStatus.OK);
     }
 
     @GetMapping("/getClientsWithBetweenDate")
     public ResponseEntity<?> getClientsWithBetweenDate (
-            @PageableDefault(sort = {"created_data"}, direction = Sort.Direction.ASC, size = 5) Pageable pageable,
+            @PageableDefault(sort = {"created_data"}, direction = Sort.Direction.ASC, size = 10) Pageable pageable,
             @RequestParam(name = "from") String fromDate, @RequestParam(name = "to") String toDate) {
         Page<ClientDbDTO> clientDbDToPage = clientService.getClientsWithBetweenDate(fromDate, toDate, pageable);
         return new ResponseEntity<>(clientDbDToPage, HttpStatus.OK);
@@ -262,5 +263,10 @@ public class DBApiController {
     @ExceptionHandler
     private ResponseEntity<?> handleException(MissingServletRequestParameterException e) {
         return new ResponseEntity<>("Required parameters are not entered " + "HttpStatus " + HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<?> handleException(DateTimeException e) {
+        return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
     }
 }
