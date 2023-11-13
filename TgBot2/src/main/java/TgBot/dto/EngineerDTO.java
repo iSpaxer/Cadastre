@@ -1,4 +1,4 @@
-package DBPostgres.dto;
+package TgBot.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -14,7 +14,7 @@ import lombok.Setter;
 public class EngineerDTO {
 
     @NotEmpty(message = "login can't be equal to null")
-    @Size(min = 3, message = "pls enter more than 3 characters")
+    @Size(min = 5, message = "pls enter more than 3 characters")
     private String login;
 
     @NotEmpty(message = "password can't be equal null")
@@ -25,3 +25,4 @@ public class EngineerDTO {
         return "Engineer have login: " + this.getLogin() + " and password: " + this.getPassword();
     }
 }
+

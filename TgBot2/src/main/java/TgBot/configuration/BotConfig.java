@@ -1,4 +1,4 @@
-package TgBot.config;
+package TgBot.configuration;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

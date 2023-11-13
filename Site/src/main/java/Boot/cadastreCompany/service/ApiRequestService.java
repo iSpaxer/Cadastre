@@ -39,10 +39,8 @@ public class ApiRequestService {
     }
 
     public Page<ClientDbDTO> getAllClients(String page, String size) {
-
         return webClientBuilder.build()
                 .get()
-
                 .uri(uriBuilder -> uriBuilder
                         .path("/getClients")
                         .queryParamIfPresent("page", Optional.ofNullable(page))
@@ -51,7 +49,6 @@ public class ApiRequestService {
                 .retrieve()
                 .bodyToMono(RestPage.class)
                 .block();
-
     }
 
     private void checkingEmptyString(String... values) {

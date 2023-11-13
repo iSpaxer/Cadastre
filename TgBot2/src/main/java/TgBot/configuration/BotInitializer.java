@@ -1,6 +1,6 @@
-package TgBot.config;
+package TgBot.configuration;
 
-import TgBot.service.TelegramBot;
+import TgBot.telegramAPI.TelegramBot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
