@@ -1,4 +1,4 @@
-package DBPostgres.dto;
+package DBPostgres.dto.engineer;
 
 import DBPostgres.models.Client;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -34,7 +34,7 @@ public class EngineerDbDTO {
     @NotEmpty(message = "password can't be equal null")
     @Size(min = 8, message = "pls enter more than 8 characters")
     private String password;
-    private int tgId;
+    private long tgId;
 
     ///TODO ?
     @JsonBackReference

@@ -40,7 +40,7 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
         Long chatId = update.getMessage().getChatId();
         switch (messageText) {
             case "/start" -> {
-                startCommandReceived(chatId, update.getMessage().getChat().getFirstName());
+                startCommandReceived(update);
             }
             case "/register" -> {
                 registerCommandReceived(chatId);
@@ -58,8 +58,11 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
         return EmojiParser.parseToUnicode(s);
     }
 
-    private void startCommandReceived(Long chatId, String firstName) {
-        String answer = "Hi, " + firstName + "! ";
+    private void startCommandReceived(Update update) {
+        Long chatId = update.getMessage().getChatId();
+        String firstName = update.getMessage().getChat().getFirstName();
+//        long chatId = update.getMessage().getChatId();
+        String answer = "Hi, " + firstName + "! Ваш chatId: " + chatId;
         commonSendTextMessage.sendTextMessage(chatId, answer);
     }
 

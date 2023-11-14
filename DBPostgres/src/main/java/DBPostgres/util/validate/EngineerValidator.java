@@ -1,16 +1,12 @@
 package DBPostgres.util.validate;
 
-import DBPostgres.dto.EngineerDTO;
-import DBPostgres.dto.EngineerLoginDTO;
-import DBPostgres.models.Engineer;
+import DBPostgres.dto.engineer.EngineerDTO;
+import DBPostgres.dto.engineer.EngineerLoginDTO;
 import DBPostgres.repositories.EngRepository;
-import org.hibernate.annotations.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
-import java.util.Optional;
 
 @Component
 public class EngineerValidator implements Validator {

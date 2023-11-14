@@ -1,7 +1,7 @@
 package DBPostgres.service.impl;
 
-import DBPostgres.dto.ClientDbDTO;
-import DBPostgres.dto.EngineerLoginDTO;
+import DBPostgres.dto.client.ClientDbDTO;
+import DBPostgres.dto.engineer.EngineerLoginDTO;
 import DBPostgres.exception.BodyEmptyException;
 import DBPostgres.exception.ClientIsBusyAnotherEngineer;
 import DBPostgres.models.Client;

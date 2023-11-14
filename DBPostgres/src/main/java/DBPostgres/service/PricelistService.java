@@ -1,6 +1,6 @@
 package DBPostgres.service;
 
-import DBPostgres.dto.PricelistDTO;
+import DBPostgres.dto.pricelist.PricelistDTO;
 
 import java.util.List;
 

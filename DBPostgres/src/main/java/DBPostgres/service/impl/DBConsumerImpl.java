@@ -1,6 +1,6 @@
 package DBPostgres.service.impl;
 
-import DBPostgres.dto.ClientDTO;
+import DBPostgres.dto.client.ClientDTO;
 import DBPostgres.models.Client;
 import DBPostgres.service.DBConsumer;
 import lombok.extern.slf4j.Slf4j;

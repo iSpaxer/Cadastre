@@ -1,6 +1,6 @@
 package DBPostgres.service;
 
-import DBPostgres.dto.ClientDTO;
+import DBPostgres.dto.client.ClientDTO;
 
 public interface DBConsumer {
     void clientConsume(ClientDTO clientDTO);

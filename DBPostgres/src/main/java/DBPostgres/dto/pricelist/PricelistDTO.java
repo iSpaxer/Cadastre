@@ -1,4 +1,4 @@
-package DBPostgres.dto;
+package DBPostgres.dto.pricelist;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Temporal;

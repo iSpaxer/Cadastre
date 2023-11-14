@@ -1,13 +1,10 @@
 package TgBot.web.service.impl;
 
-import TgBot.dto.EngineerDTO;
+import TgBot.dto.EngineerTelegramDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
-
-import java.util.Date;
 
 
 @Service
@@ -19,12 +16,12 @@ public class ApiRequestService implements TgBot.web.service.ApiRequestService {
         this.webClientBuilder = webClientBuilder;
     }
 
-    public Boolean authenticationEngineer(EngineerDTO engineerDTO) {
+    public Boolean authenticationEngineer(EngineerTelegramDTO engineerTelegramDTO) {
         try {
             return webClientBuilder.build()
                     .post()
                     .uri("/authenticationEngineer")
-                    .bodyValue(engineerDTO)
+                    .bodyValue(engineerTelegramDTO)
                     .retrieve()
                     .bodyToMono(Boolean.class)
                     .block();

@@ -1,6 +1,11 @@
 package DBPostgres.controller;
 
-import DBPostgres.dto.*;
+import DBPostgres.dto.client.ClientDTO;
+import DBPostgres.dto.client.ClientDbDTO;
+import DBPostgres.dto.engineer.EngineerDTO;
+import DBPostgres.dto.engineer.EngineerTelegramDTO;
+import DBPostgres.dto.engineer.EngineerUpdatePasswordDTO;
+import DBPostgres.dto.pricelist.PricelistDTO;
 import DBPostgres.exception.*;
 import DBPostgres.models.Client;
 import DBPostgres.service.ClientService;
@@ -150,6 +155,29 @@ public class DBApiController {
         }
         log.error(engineerDTO.toString());
         Boolean checkAuth = engService.authenticationEngineer(engineerDTO);
+        log.info(" " + checkAuth);
+        return new ResponseEntity<>(checkAuth, HttpStatus.OK);
+    }
+
+    @PostMapping("/authenticationEngineerTelegram")
+    public ResponseEntity<?> authenticationEngineerTelegram(@RequestBody @Valid EngineerTelegramDTO engineerTelegramDTO, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMsg = new StringBuilder();
+
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+
+            for (FieldError error : fieldErrors) {
+                errorMsg
+                        .append(error.getField())           // на каком поле была ошибка
+                        .append(" — ")                      // —
+                        .append(error.getDefaultMessage())  // выведем какая была ошибка
+                        .append(";");
+            }
+            throw new GetJSONException(errorMsg.toString());
+        }
+        log.error(engineerTelegramDTO.toString());
+        Boolean checkAuth = engService.authenticationEngineerTelegram(engineerTelegramDTO);
         log.info(" " + checkAuth);
         return new ResponseEntity<>(checkAuth, HttpStatus.OK);
     }

@@ -1,7 +1,8 @@
 package DBPostgres.service;
 
-import DBPostgres.dto.EngineerDTO;
-import DBPostgres.dto.EngineerUpdatePasswordDTO;
+import DBPostgres.dto.engineer.EngineerDTO;
+import DBPostgres.dto.engineer.EngineerTelegramDTO;
+import DBPostgres.dto.engineer.EngineerUpdatePasswordDTO;
 import DBPostgres.exception.EngineerNotAuthentication;
 import DBPostgres.models.Engineer;
 import DBPostgres.repositories.EngRepository;
@@ -57,7 +58,6 @@ public class EngService {
         }
         Optional<EngineerDTO> dBEngineerDTO = Optional.of(dBOptionalEngineer.get().mappingEngineerDTO());
 
-        log.info(dBEngineerDTO.get().getPassword() + " " + engineerDTO.getPassword() + " \n");
         if (bCryptPasswordEncoder.matches(
                 engineerDTO.getPassword(),
                 dBEngineerDTO.get().getPassword()
@@ -67,6 +67,28 @@ public class EngService {
             return false;
         }
     }
+
+    // TODO return JWT and Save TgId
+    public Boolean authenticationEngineerTelegram(EngineerTelegramDTO engineerTelegramDTO) {
+        Optional<Engineer> dBOptionalEngineer = engRepository.findByLogin(engineerTelegramDTO.getLogin());
+        if (dBOptionalEngineer.isEmpty()) {
+            log.info("Engineer in BD is empty!");
+            return false;
+            //TODO throw new EngineerNotAuthentication();
+        }
+        Optional<EngineerDTO> dBEngineerDTO = Optional.of(dBOptionalEngineer.get().mappingEngineerDTO());
+
+        if (bCryptPasswordEncoder.matches(
+                engineerTelegramDTO.getPassword(),
+                dBEngineerDTO.get().getPassword()
+        )) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 
     @Transactional
     public void updatePassword(EngineerUpdatePasswordDTO engineerUpdatePasswordDTO) {

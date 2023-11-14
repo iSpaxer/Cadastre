@@ -2,10 +2,8 @@ package DBPostgres.service.impl;
 
 
 //import DBPostgres.models.Client
-import DBPostgres.dto.ClientDbDTO;
-import DBPostgres.dto.EngineerLoginDTO;
+import DBPostgres.dto.client.ClientDbDTO;
 import DBPostgres.models.Client;
-import DBPostgres.models.Engineer;
 import DBPostgres.repositories.ClientRepository;
 import DBPostgres.service.ClientService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 
 @Slf4j

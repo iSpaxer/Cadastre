@@ -1,4 +1,4 @@
-package DBPostgres.dto;
+package DBPostgres.dto.engineer;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Max;

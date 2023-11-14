@@ -1,6 +1,6 @@
 package DBPostgres.service.impl;
 
-import DBPostgres.dto.PricelistDTO;
+import DBPostgres.dto.pricelist.PricelistDTO;
 import DBPostgres.models.Pricelist;
 import DBPostgres.repositories.PricelistRepository;
 import DBPostgres.service.PricelistService;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 

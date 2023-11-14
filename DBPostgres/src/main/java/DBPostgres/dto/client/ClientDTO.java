@@ -1,4 +1,4 @@
-package DBPostgres.dto;
+package DBPostgres.dto.client;
 
 
 import jakarta.validation.constraints.NotEmpty;

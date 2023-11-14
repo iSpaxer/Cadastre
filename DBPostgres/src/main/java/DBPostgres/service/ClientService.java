@@ -1,6 +1,6 @@
 package DBPostgres.service;
 
-import DBPostgres.dto.ClientDbDTO;
+import DBPostgres.dto.client.ClientDbDTO;
 import DBPostgres.models.Client;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

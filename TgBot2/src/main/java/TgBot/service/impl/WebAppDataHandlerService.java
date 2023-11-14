@@ -1,14 +1,11 @@
 package TgBot.service.impl;
 
-import TgBot.dto.EngineerDTO;
-import TgBot.dto.EngineerWithUsernameDTO;
+import TgBot.dto.EngineerTelegramDTO;
 import TgBot.telegramAPI.TelegramBot;
 import TgBot.util.CommonSendTextMessage;
 import TgBot.web.service.impl.ApiRequestService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.GsonJsonParser;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -36,10 +33,11 @@ public class WebAppDataHandlerService implements TgBot.service.WebAppDataHandler
     @Override
     public void handle(Update update) {
         WebAppData webAppData = update.getMessage().getWebAppData();
+        long chatId = update.getMessage().getChatId();
         // TODO распарсить JSON в объект EngineerDTO
-        EngineerWithUsernameDTO engineerWithUsernameDTO = gson.fromJson(webAppData.getData(), EngineerWithUsernameDTO.class);
-        Boolean authenticate = apiRequestService.authenticationEngineer(new EngineerDTO(engineerWithUsernameDTO.getUsername(),
-                engineerWithUsernameDTO.getPassword()));
+        EngineerTelegramDTO engineerTelegramDTO = gson.fromJson(webAppData.getData(), EngineerTelegramDTO.class);
+        engineerTelegramDTO.setTgId(chatId);
+        Boolean authenticate = apiRequestService.authenticationEngineer(engineerTelegramDTO);
         String message;
         if (authenticate) {
             message = "Вы успешно вошли в аккаунт!";

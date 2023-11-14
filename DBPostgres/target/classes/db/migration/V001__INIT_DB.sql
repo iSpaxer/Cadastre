@@ -1,6 +1,6 @@
---drop table if exists Client;
---drop table if exists Engineer;
---drop table if exists Pricelist;
+drop table if exists Client;
+drop table if exists Engineer;
+drop table if exists Pricelist;
  
 
 create table Engineer (
@@ -8,7 +8,7 @@ create table Engineer (
     name varchar(12) NOT NULL,
     login varchar(50) NOT NULL unique,
     password varchar NOT NULL,
-    tg_id int unique
+    tg_id bigint
 );
 
 comment on table Engineer is 'Предназначена для хранения данных пользователей (инженеров).';
