@@ -72,6 +72,11 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.findById(clientDbDTOExternal.getId());
     }
 
+    @Override
+    public Optional<Client> findById(Integer id) {
+        return clientRepository.findById(id);
+    }
+
 //    @Override
 //    public Boolean findById(EngineerLoginDTO engineerLoginDTO, ClientDbDTO clientDbDTOExternal) {
 //        Optional<Client> clientOptional = clientRepository.findById(clientDbDTOExternal.getId());
@@ -96,11 +101,12 @@ public class ClientServiceImpl implements ClientService {
 //    }
 
     @Override
-    public void save(Client newClient) {
+    public Client save(Client newClient) {
         newClient.setCreatedData(new Date());
 
         System.out.printf(newClient.toString());
-        clientRepository.save(newClient);
+        Client savedClient = clientRepository.save(newClient);
+        return savedClient;
     }
 
 }

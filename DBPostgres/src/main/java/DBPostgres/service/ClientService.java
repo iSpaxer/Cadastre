@@ -11,9 +11,8 @@ public interface ClientService {
     Page<ClientDbDTO> getAllClients(Pageable pageable);
     Client getLastClient();
     Optional<Client> findById(ClientDbDTO clientDbDTOExternal);
-
-    void save(Client newClient);
+    Optional<Client> findById(Integer id);
+    Client save(Client newClient);
 
     Page<ClientDbDTO> getClientsWithBetweenDate(String fromDate, String toDate,Pageable pageable);
-
 }

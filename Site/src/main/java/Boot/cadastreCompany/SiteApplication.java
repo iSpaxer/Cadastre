@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
@@ -21,6 +22,8 @@ public class SiteApplication {
 				.filter(WebClientFilter.logRequest())
 				.filter(WebClientFilter.logResponse());
 	}
+
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(SiteApplication.class, args);

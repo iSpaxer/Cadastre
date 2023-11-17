@@ -37,3 +37,6 @@ jwt:
   secret: test
   lifetime: 10m
 
+value:
+  address:
+    tg: http://localhost:8081/tgbot/api/

@@ -56,7 +56,6 @@ public class RestApiClientController {
 
     @PostMapping("/saveClient")
     public ResponseEntity<?> saveClient(@RequestBody @Valid ClientDTO clientDTO) {
-
         clientProducer.clientSaveProduce(RabbitQueue.GET_CLIENT, clientDTO);
 
         return new ResponseEntity<>("Successfully!", HttpStatus.OK);

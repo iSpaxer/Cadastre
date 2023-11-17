@@ -34,7 +34,7 @@ public class EngineerDbDTO {
     @NotEmpty(message = "password can't be equal null")
     @Size(min = 8, message = "pls enter more than 8 characters")
     private String password;
-    private long tgId;
+    private Long tgId;
 
     ///TODO ?
     @JsonBackReference

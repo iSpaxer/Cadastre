@@ -2,12 +2,14 @@ package Boot.cadastreCompany.service.rabbit.impl;
 
 import Boot.cadastreCompany.service.rabbit.NotificationProducer;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class NotificationProducerImpl implements NotificationProducer {
     private final RabbitTemplate rabbitTemplate;
 
+    @Autowired
     public NotificationProducerImpl(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }

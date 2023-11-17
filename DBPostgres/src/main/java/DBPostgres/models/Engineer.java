@@ -38,7 +38,7 @@ public class Engineer {
     private String password;
 
     @Column(name = "tgId")
-    private long tgId;
+    private Long tgId;
 
     @OneToMany(mappedBy = "engineer")
     private List<Client> clientList;

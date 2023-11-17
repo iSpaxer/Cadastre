@@ -47,4 +47,8 @@ public class WebAppDataHandlerService implements TgBot.service.WebAppDataHandler
         SendMessage sendMessage = new SendMessage(update.getMessage().getChatId().toString(),message);
         commonSendTextMessage.sendTextMessage(sendMessage);
     }
+
+    private Boolean isActive(Update update) {
+        return apiRequestService.telegramIsActive(update);
+    }
 }

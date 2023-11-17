@@ -32,17 +32,17 @@ public class RestApiPricelistController {
         return new ResponseEntity<>(messageDB, HttpStatus.OK);
     }
 
-    @PostMapping("/updatePricelistDeadline")
-    public ResponseEntity<?> updatePricelistDeadline(@RequestBody @Valid PricelistDTO pricelistDTO) {
-        String messageDB = apiRequestService.updateDeadline(pricelistDTO);
-        return new ResponseEntity<>(messageDB, HttpStatus.OK);
-    }
-
-    @PostMapping("/updatePricelistCost")
-    public ResponseEntity<?> updatePricelistCost(@RequestBody @Valid PricelistDTO pricelistDTO) {
-        String messageDB = apiRequestService.updateCost(pricelistDTO);
-        return new ResponseEntity<>(messageDB, HttpStatus.OK);
-    }
+//    @PostMapping("/updatePricelistDeadline")
+//    public ResponseEntity<?> updatePricelistDeadline(@RequestBody @Valid PricelistDTO pricelistDTO) {
+//        String messageDB = apiRequestService.updateDeadline(pricelistDTO);
+//        return new ResponseEntity<>(messageDB, HttpStatus.OK);
+//    }
+//
+//    @PostMapping("/updatePricelistCost")
+//    public ResponseEntity<?> updatePricelistCost(@RequestBody @Valid PricelistDTO pricelistDTO) {
+//        String messageDB = apiRequestService.updateCost(pricelistDTO);
+//        return new ResponseEntity<>(messageDB, HttpStatus.OK);
+//    }
 
     @PostMapping("/updatePricelist")
     public ResponseEntity<?> updatePricelist(@RequestBody List<PricelistDTO> pricelistDTOList) {

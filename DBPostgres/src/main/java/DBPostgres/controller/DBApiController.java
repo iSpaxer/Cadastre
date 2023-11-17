@@ -2,12 +2,15 @@ package DBPostgres.controller;
 
 import DBPostgres.dto.client.ClientDTO;
 import DBPostgres.dto.client.ClientDbDTO;
+import DBPostgres.dto.client.ClientForOutputTelegramDTO;
+import DBPostgres.dto.client.ClientTakeTelegramDTO;
 import DBPostgres.dto.engineer.EngineerDTO;
 import DBPostgres.dto.engineer.EngineerTelegramDTO;
 import DBPostgres.dto.engineer.EngineerUpdatePasswordDTO;
 import DBPostgres.dto.pricelist.PricelistDTO;
 import DBPostgres.exception.*;
 import DBPostgres.models.Client;
+import DBPostgres.models.Engineer;
 import DBPostgres.service.ClientService;
 import DBPostgres.service.CommonService;
 import DBPostgres.service.PricelistService;
@@ -16,6 +19,8 @@ import DBPostgres.util.ClientErrorResponse;
 import DBPostgres.util.validate.EngineerValidator;
 import DBPostgres.util.wrapper.EngineerAndClient;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -160,7 +165,8 @@ public class DBApiController {
     }
 
     @PostMapping("/authenticationEngineerTelegram")
-    public ResponseEntity<?> authenticationEngineerTelegram(@RequestBody @Valid EngineerTelegramDTO engineerTelegramDTO, BindingResult bindingResult) {
+    public ResponseEntity<?> authenticationEngineerTelegram(@RequestBody @Valid EngineerTelegramDTO engineerTelegramDTO,
+                                                            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             StringBuilder errorMsg = new StringBuilder();
@@ -182,6 +188,21 @@ public class DBApiController {
         return new ResponseEntity<>(checkAuth, HttpStatus.OK);
     }
 
+
+    @PostMapping("/telegramIsActive")
+    public ResponseEntity<?> telegramIsActive(@RequestBody Long tgId) {
+
+        Boolean isActive = engService.telegramIsActive(tgId);
+        log.info(" " + isActive);
+        return new ResponseEntity<>(isActive, HttpStatus.OK);
+    }
+
+    @GetMapping("getAllEngineersWithTgId")
+    public ResponseEntity<?> getAllEngineersWithTgId() {
+        Optional<Long[]> allEngineersWithTgId = engService.getAllEngineersWithTgId();
+        return new ResponseEntity<>(allEngineersWithTgId.get(), HttpStatus.OK);
+    }
+
     @PostMapping("/findByEngineer")
     public ResponseEntity<?> findByEngineer(@RequestBody String engineerLoginDTO, BindingResult bindingResult) {
 //        if (bindingResult.hasErrors()) {
@@ -193,6 +214,14 @@ public class DBApiController {
         }
         return new ResponseEntity<>(engineerDTO.get(), HttpStatus.OK);
     }
+
+    @PostMapping("/takeClientUsingTgbot")
+    public ResponseEntity<?> takeClientUsingTgbot(@RequestBody ClientTakeTelegramDTO clientTakeTelegramDTO) {
+        ClientForOutputTelegramDTO clientForOutputTelegramDTO = commonService.takeClientUsingTgbot(clientTakeTelegramDTO);
+        return new ResponseEntity<>(clientForOutputTelegramDTO, HttpStatus.OK);
+    }
+
+
 
     @PostMapping("/updateEngineerPassword")
     public ResponseEntity<?> updateEngineerPassword(@RequestBody @Valid EngineerUpdatePasswordDTO engineerUpdatePasswordDTO, BindingResult bindingResult) {

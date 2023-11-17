@@ -26,13 +26,12 @@ public class TelegramBot extends TelegramLongPollingBot {
         this.botConfig = botConfig;
         this.distributionService = distributionService;
         List<BotCommand> listOfCommands = new ArrayList<>();
-        listOfCommands.add(new BotCommand("/start", "get welcome message"));
-        listOfCommands.add(new BotCommand("/mydata", "get your date store"));
-        listOfCommands.add(new BotCommand("/deletedata", "delete your data"));
-        listOfCommands.add(new BotCommand("/help", "description all commands"));
-        listOfCommands.add(new BotCommand("/settings", "bot settings"));
-        listOfCommands.add(new BotCommand("/register", "register me"));
-        listOfCommands.add(new BotCommand("/visit", "visit on site"));
+        listOfCommands.add(new BotCommand("/start", "welcome message"));
+        listOfCommands.add(new BotCommand("/login", "login in account"));
+        listOfCommands.add(new BotCommand("/about", "about me"));
+        listOfCommands.add(new BotCommand("/logout", "logout from account"));
+        listOfCommands.add(new BotCommand("/set_price", "settings price"));
+        listOfCommands.add(new BotCommand("/set_password", "change password"));
 
         distributionService.init(this);
 

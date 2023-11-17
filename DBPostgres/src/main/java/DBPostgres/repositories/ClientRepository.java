@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Integer> {
@@ -21,5 +22,7 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
     @Query(value = "SELECT * FROM client WHERE CAST(created_data AS DATE) BETWEEN :fromDate AND :toDate ",
             nativeQuery = true)
     Page<Client> findAllClientsWithBetweenDate(@Param("fromDate") LocalDate fromDate, @Param("toDate") LocalDate toDate, Pageable pageable);
+
+
 //    Optional<Client> findBy ///TODO findById
 }

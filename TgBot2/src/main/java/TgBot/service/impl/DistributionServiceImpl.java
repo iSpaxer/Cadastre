@@ -1,5 +1,6 @@
 package TgBot.service.impl;
 
+import TgBot.service.CallBackQueryHandlerService;
 import TgBot.service.DistributionService;
 import TgBot.service.MessageHandlerService;
 import TgBot.service.WebAppDataHandlerService;
@@ -17,13 +18,16 @@ public class DistributionServiceImpl implements DistributionService {
     private final CommonSendTextMessage commonSendTextMessage;
     private final MessageHandlerService messageHandlerService;
     private final WebAppDataHandlerService webAppDataHandlerService;
+    private final CallBackQueryHandlerService callBackQueryHandlerService;
+
 
 
     @Autowired
-    public DistributionServiceImpl(MessageHandlerService messageHandlerService, WebAppDataHandlerService webAppDataHandlerService, CommonSendTextMessage commonSendTextMessage, CommonSendTextMessage commonSendTextMessage1) {
+    public DistributionServiceImpl(MessageHandlerService messageHandlerService, WebAppDataHandlerService webAppDataHandlerService, CommonSendTextMessage commonSendTextMessage, CommonSendTextMessage commonSendTextMessage1, CallBackQueryHandlerService callBackQueryHandlerService) {
         this.messageHandlerService = messageHandlerService;
         this.webAppDataHandlerService = webAppDataHandlerService;
         this.commonSendTextMessage = commonSendTextMessage;
+        this.callBackQueryHandlerService = callBackQueryHandlerService;
     }
 
     @Override
@@ -32,6 +36,7 @@ public class DistributionServiceImpl implements DistributionService {
         messageHandlerService.init(telegramBot);
         webAppDataHandlerService.init(telegramBot);
         commonSendTextMessage.init(telegramBot);
+        callBackQueryHandlerService.init(telegramBot);
     }
 
     @Override
@@ -39,8 +44,11 @@ public class DistributionServiceImpl implements DistributionService {
         if (update.hasMessage() && update.getMessage().hasText()) {
             messageHandlerService.handle(update);
         }
-        if (Optional.ofNullable(update.getMessage().getWebAppData()).isPresent()) {
+        if (update.hasMessage() && Optional.ofNullable(update.getMessage().getWebAppData()).isPresent()) {
             webAppDataHandlerService.handle(update);
+        }
+        if (update.hasCallbackQuery()) {
+            callBackQueryHandlerService.handle(update);
         }
     }
 }
