@@ -1,12 +1,15 @@
 package TgBot.web.controller;
 
 import TgBot.dto.ClientWithoutPhoneForTelegramDTO;
+import TgBot.dto.EditSendUsersDTO;
 import TgBot.util.CommonSendTextMessage;
 import TgBot.util.EmojiParserCustom;
+import TgBot.util.cache.CacheCustom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
@@ -20,6 +23,7 @@ public class MainRestController {
     //TODO CommonSendTextMessage MB does not have telegrambot (init was not created)
     private final CommonSendTextMessage commonSendTextMessage;
     private final EmojiParserCustom emojiParserCustom;
+    private final CacheCustom cacheCustom;
     @PostMapping("notificOfNewClient")
     public ResponseEntity<?> notificOfNewClient(@RequestBody ClientWithoutPhoneForTelegramDTO clientWithoutPhoneForTelegramDTO) {
 
@@ -29,13 +33,18 @@ public class MainRestController {
                            + "\n:id: " + clientWithoutPhoneForTelegramDTO.getId()
                            + "\n:bust_in_silhouette: " + clientWithoutPhoneForTelegramDTO.getName()
                            + "\nСкорее обработай его! " + ":rocket:"));
-
-
+        List<Integer> allChatId = new ArrayList<>();
+        List<Long>   allEngTgId = new ArrayList<>();
         for (Long id : clientWithoutPhoneForTelegramDTO.getAllEngineersWithTgId()) {
             sendMessage.setChatId(id.toString());
             setInlineKeyboardButtonForGetAllAuthTgId(sendMessage, clientWithoutPhoneForTelegramDTO.getId());
-            commonSendTextMessage.sendTextMessage(sendMessage);
+            Message message = commonSendTextMessage.sendTextMessage(sendMessage);
+            allEngTgId.add(id);
+            allChatId.add(message.getMessageId());
         }
+        //todo refactoring
+        String key = String.valueOf(clientWithoutPhoneForTelegramDTO.getId());
+        cacheCustom.cashe.put(key, new EditSendUsersDTO(allChatId, allEngTgId));
 
         return ResponseEntity.ok("Successfully!");
     }
@@ -51,12 +60,12 @@ public class MainRestController {
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
         List<InlineKeyboardButton> rowInline = new ArrayList<>();
 
-        InlineKeyboardButton ybutton = new InlineKeyboardButton(
+        InlineKeyboardButton inlButton = new InlineKeyboardButton(
                 emojiParserCustom.messageWithEmoji("Take!" + ":fire:"));
 
-        ybutton.setCallbackData("taken_client_with_tgId: " + clientId); // TODO Long all engineers JSON
+        inlButton.setCallbackData("taken_client_with_tgId: " + clientId); // TODO Long all engineers JSON
 
-        rowInline.add(ybutton);
+        rowInline.add(inlButton);
         rowsInline.add(rowInline);
         inlineKeyboardMarkup.setKeyboard(rowsInline);
 

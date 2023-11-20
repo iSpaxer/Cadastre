@@ -3,9 +3,9 @@ package TgBot.web.service.impl;
 import TgBot.dto.ClientForOutputTelegramDTO;
 import TgBot.dto.ClientTakeTelegramDTO;
 import TgBot.dto.EngineerTelegramDTO;
-import jakarta.servlet.http.HttpServletRequest;
+import TgBot.dto.PricelistDTO;
+import TgBot.util.CommonSendTextMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -13,19 +13,30 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
 public class ApiRequestService {
     private final WebClient.Builder webClientBuilder;
+    private final CommonSendTextMessage commonSendTextMessage;
+
 
     @Autowired
-    public ApiRequestService(WebClient.Builder webClientBuilder) {
+    public ApiRequestService(WebClient.Builder webClientBuilder, CommonSendTextMessage commonSendTextMessage) {
         this.webClientBuilder = webClientBuilder;
+        this.commonSendTextMessage = commonSendTextMessage;
     }
 
-    public Boolean authenticationEngineer(EngineerTelegramDTO engineerTelegramDTO) {
+
+    private void sendErrorMessageDB(Exception e, Long chatId) {
+        commonSendTextMessage.sendTextMessage(
+                chatId,
+                        "⛔\uFE0F Извините. База данных заболела \uD83E\uDD12 \n" +
+                      e.getMessage()
+        );
+    }
+
+    public Boolean authenticationEngineer(EngineerTelegramDTO engineerTelegramDTO, Update update) {
         try {
             return webClientBuilder.build()
                     .post()
@@ -35,11 +46,13 @@ public class ApiRequestService {
                     .bodyToMono(Boolean.class)
                     .block();
         } catch (WebClientResponseException webClientResponseException) {
+            sendErrorMessageDB(webClientResponseException, update.getMessage().getChatId());
             throw new RuntimeException();
         } catch (Exception e) {
             throw new RuntimeException();
         }
     }
+
 
     public Boolean telegramIsActive(Update update) {
         Long chatId = update.getMessage().getChatId();
@@ -52,13 +65,15 @@ public class ApiRequestService {
                     .bodyToMono(Boolean.class)
                     .block();
         } catch (WebClientResponseException webClientResponseException) {
+            sendErrorMessageDB(webClientResponseException, update.getMessage().getChatId());
             throw new RuntimeException();
         } catch (Exception e) {
+            sendErrorMessageDB(e, update.getMessage().getChatId());
             throw new RuntimeException();
         }
     }
 
-    public ClientForOutputTelegramDTO takeClientUsingTgbot(Integer clientId, Long tgId) {
+    public ClientForOutputTelegramDTO takeClientUsingTgbot(Integer clientId, Long tgId) throws Exception{
 
         ClientTakeTelegramDTO clientTakeTelegramDTO = new ClientTakeTelegramDTO();
         clientTakeTelegramDTO.setClientId(clientId);
@@ -72,10 +87,53 @@ public class ApiRequestService {
                     .bodyToMono(ClientForOutputTelegramDTO.class)
                     .block();
         } catch (WebClientResponseException webClientResponseException) {
+            sendErrorMessageDB(webClientResponseException, tgId);
             throw new RuntimeException();
         } catch (Exception e) {
-            throw new RuntimeException();
+            throw e;
         }
+
+    }
+
+    public List<PricelistDTO> getPricelist(Update update) {
+        try {
+            return webClientBuilder.build()
+                    .get()
+                    .uri("/getPricelist")
+                    .retrieve()
+                    .bodyToFlux(PricelistDTO.class)
+                    .collectList()
+                    .block();
+        } catch (WebClientResponseException webClientResponseException) {
+            System.err.println(webClientResponseException.getMessage());;
+            sendErrorMessageDB(webClientResponseException, update.getMessage().getChatId());
+            throw new RuntimeException(webClientResponseException.getMessage());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public String updatePricelist(Update update, List<PricelistDTO> pricelistDTOList) {
+        String messageFromeDB;
+        try {
+            ///TODO неправильная обработка возвращаемого значения
+            messageFromeDB = webClientBuilder.build()
+                    .post()
+                    .uri("/updatePricelist")
+                    .bodyValue(pricelistDTOList)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+        } catch (WebClientResponseException webClientResponseException) {
+            System.err.println(webClientResponseException.getMessage());;
+            sendErrorMessageDB(webClientResponseException, update.getMessage().getChatId());
+            throw new RuntimeException(webClientResponseException.getMessage());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return "Error Database \uD83D\uDE3F \nMessage: " +e.getMessage();
+        }
+        return messageFromeDB;
     }
 
     public Long[] getAllEngineersWithTgId() {
@@ -89,6 +147,7 @@ public class ApiRequestService {
         } catch (WebClientResponseException webClientResponseException) {
             throw new RuntimeException();
         } catch (Exception e) {
+            System.err.println("\uD83D\uDE3F Error Database: " + e.getMessage());
             throw new RuntimeException();
         }
     }

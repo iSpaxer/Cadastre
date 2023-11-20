@@ -1,9 +1,14 @@
 package TgBot.testJava;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TestJava {
     public static void main(String[] args) {
-        Long i = 10L;
-        String asd = "0123456789";
-        System.out.println(asd.substring(0,4));
+        Map<String, Integer> stringStringMap = new HashMap<>();
+        stringStringMap.put("1", 1);
+//        System.out.println(stringStringMap.);
+
+        System.out.println("entrySet " + stringStringMap.entrySet());
     }
 }

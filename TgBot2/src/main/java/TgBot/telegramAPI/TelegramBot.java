@@ -30,6 +30,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         listOfCommands.add(new BotCommand("/login", "login in account"));
         listOfCommands.add(new BotCommand("/about", "about me"));
         listOfCommands.add(new BotCommand("/logout", "logout from account"));
+        listOfCommands.add(new BotCommand("/get_price", "get price list from site"));
         listOfCommands.add(new BotCommand("/set_price", "settings price"));
         listOfCommands.add(new BotCommand("/set_password", "change password"));
 

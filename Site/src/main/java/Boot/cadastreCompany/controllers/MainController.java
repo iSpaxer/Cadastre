@@ -1,15 +1,7 @@
 package Boot.cadastreCompany.controllers;
 
 import Boot.cadastreCompany.dto.ClientDTO;
-import Boot.cadastreCompany.dto.EngineerDTO;
-import Boot.cadastreCompany.exception.AuthenticationError;
-import Boot.cadastreCompany.security.EngDetails;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

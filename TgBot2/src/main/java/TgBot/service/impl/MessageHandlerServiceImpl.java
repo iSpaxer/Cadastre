@@ -1,5 +1,6 @@
 package TgBot.service.impl;
 
+import TgBot.dto.PricelistDTO;
 import TgBot.service.MessageHandlerService;
 import TgBot.telegramAPI.TelegramBot;
 import TgBot.util.CommonSendTextMessage;
@@ -117,6 +118,7 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
 
     private void loginCommand(Update update) {
 
+
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         List<KeyboardRow> keyboardRows = new ArrayList<>();
         KeyboardRow row = new KeyboardRow();
@@ -125,12 +127,6 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
                 .text(emojiParserCustom.messageWithEmoji("Войти " + ":heart:"))
                 .webApp(new WebAppInfo("https://ispaxer.github.io/SPACE-REGION.github.io/"))
                 .build();
-//        keyboardButton.setText(
-//                messageWithEmoji("Войти " + ":heart:")
-//        );
-//        keyboardButton.setWebApp(
-//                new WebAppInfo("https://ispaxer.github.io/SPACE-REGION.github.io/")
-//        );
 
         row.add(keyboardButton);
         keyboardRows.add(row);
@@ -179,14 +175,55 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
 
     private void getClients(Update update) {
 
+
     }
 
 
     private void getPriceCommand(Update update) {
+        List<PricelistDTO> pricelist = apiRequestService.getPricelist(update);
+        String message =
+                "Прайс лист на сайте \uD83D\uDCA4\n"
+                + "‼\uFE0F Дни -> цены\n"
+                +"\uD83D\uDD38Межевание: "     + pricelist.get(0).getMezhevaniye() +      " : " + pricelist.get(1).getMezhevaniye() + "\n"
+                + "\uD83D\uDD38Тех. план:      "    + pricelist.get(0).getTech_plan() +        " : " + pricelist.get(1).getTech_plan() + "\n"
+                + "\uD83D\uDD38Акт обслед.: "  + pricelist.get(0).getAkt_inspection() +   " : " + pricelist.get(1).getAkt_inspection() + "\n"
+                + "\uD83D\uDD38Вынос гр-ц:  " + pricelist.get(0).getTakeaway_borders() + " : " + pricelist.get(1).getTakeaway_borders() + "\n"
+                + "\uD83D\uDD38Схемы расп: "   + pricelist.get(0).getScheme_location() +  " : " + pricelist.get(1).getScheme_location() + "\n";
+
+
+        commonSendTextMessage.sendTextMessage(
+                setInlineKeyboardForSetPrice(new SendMessage(
+                        update.getMessage().getChatId().toString(),
+                        message
+                ))
+        );
+
     }
 
-    private void setPriceCommand(Update update) {
 
+    private void setPriceCommand(Update update) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setText("Set price! ✍\uFE0F");
+        setInlineKeyboardForSetPrice(sendMessage);
+    }
+
+    private SendMessage setInlineKeyboardForSetPrice(SendMessage sendMessage) {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+
+        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+        List<InlineKeyboardButton> rowInline = new ArrayList<>();
+        InlineKeyboardButton inlButton = new InlineKeyboardButton(
+                ("Set price! ✍\uFE0F"));
+//        inlButton.set
+        inlButton.setWebApp(new WebAppInfo(
+                "https://ispaxer.github.io/SPACE-REGION.github.io/"));
+
+        rowInline.add(inlButton);
+        rowsInline.add(rowInline);
+        inlineKeyboardMarkup.setKeyboard(rowsInline);
+
+        sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+        return sendMessage;
     }
 
     private void setPasswordCommand(Update update) {

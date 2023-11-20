@@ -26,26 +26,25 @@ public class CommonSendTextMessage implements InitTelegramBot {
         this.telegramBot = telegramBot;
     }
 
-    public void sendTextMessage(SendMessage sendMessage) {
+    public Message sendTextMessage(SendMessage sendMessage) {
         try {
-            Message message = telegramBot.execute(sendMessage);
-            System.err.println(message.getMessageId());
+            return telegramBot.execute(sendMessage);
         } catch (TelegramApiException e) {
             log.error("Error occurred " + e.getMessage());
+            return null;
         }
     }
 
-    public void sendTextMessage(Update update, String textToSend) {
+    public Message sendTextMessage(Update update, String textToSend) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(update.getMessage().getChatId().toString());
         sendMessage.setText(textToSend);
         sendMessage.setReplyMarkup(null);
-//        addHeartAndDis(sendMessage);
         try {
-            Message message = telegramBot.execute(sendMessage);
-            System.err.println(message.getMessageId());
+            return telegramBot.execute(sendMessage);
         } catch (TelegramApiException e) {
             log.error("Error occurred " + e.getMessage());
+            return null;
         }
     }
 

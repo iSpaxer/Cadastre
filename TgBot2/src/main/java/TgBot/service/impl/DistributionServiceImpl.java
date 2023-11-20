@@ -44,6 +44,7 @@ public class DistributionServiceImpl implements DistributionService {
         if (update.hasMessage() && update.getMessage().hasText()) {
             messageHandlerService.handle(update);
         }
+
         if (update.hasMessage() && Optional.ofNullable(update.getMessage().getWebAppData()).isPresent()) {
             webAppDataHandlerService.handle(update);
         }
