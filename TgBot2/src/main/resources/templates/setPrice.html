@@ -317,20 +317,20 @@
                 date = {}
             ]
 
-        data[0].mezhevaniye = allInputs[0].value;
-        data[1].mezhevaniye = allInputs[1].value;
+        data[1].mezhevaniye = allInputs[0].value;
+        data[0].mezhevaniye = allInputs[1].value;
 
-        data[0].tech_plan = allInputs[2].value;
-        data[1].tech_plan = allInputs[3].value;
+        data[1].tech_plan = allInputs[2].value;
+        data[0].tech_plan = allInputs[3].value;
 
-        data[0].akt_inspection = allInputs[4].value;
-        data[1].akt_inspection = allInputs[5].value;
+        data[1].akt_inspection = allInputs[4].value;
+        data[0].akt_inspection = allInputs[5].value;
 
-        data[0].scheme_location = allInputs[8].value;
-        data[1].scheme_location = allInputs[9].value;
+        data[1].scheme_location = allInputs[8].value;
+        data[0].scheme_location = allInputs[9].value;
 
-        data[0].takeaway_borders = allInputs[6].value;
-        data[1].takeaway_borders = allInputs[7].value;
+        data[1].takeaway_borders = allInputs[6].value;
+        data[0].takeaway_borders = allInputs[7].value;
 
         tg.sendData(JSON.stringify(data));
     })

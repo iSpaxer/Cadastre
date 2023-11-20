@@ -96,11 +96,6 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
                     notAllowed(update);
                 setPriceCommand(update);
             }
-            case "/set_password" -> {
-                if (!userIsActive)
-                    notAllowed(update);
-                setPasswordCommand(update);
-            }
             default -> {
                 commonSendTextMessage.sendTextMessage(update, EmojiParser.parseToUnicode("Я тебя не понял " + ":crying_cat_face:"));
             }
@@ -226,15 +221,6 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
         return sendMessage;
     }
 
-    private void setPasswordCommand(Update update) {
-//        String responseMessage = apiRequestService.updatePasswordByEngineer( );
-//        commonSendTextMessage.sendTextMessage(
-//                new SendMessage(
-//                        update.getMessage().getChatId().toString(),
-//                        responseMessage
-//                )
-//        );
-    }
 
     private void visitSite(Long chatId) {
         SendMessage sendMessage = new SendMessage(chatId.toString(),
