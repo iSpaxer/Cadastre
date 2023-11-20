@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- TODO referense on css and icons -->
     <link rel="stylesheet" href="../../login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,8 +109,6 @@
             transition: transform 0.15s box-shadow 0.15s;
         }
 
-
-
         input {
             width: 90%;
             outline: none;
@@ -126,17 +125,9 @@
             border-color: #db5d5d;
         }
 
-
-
         .save-button {
             margin-top: 30px;
             width: 300px;
-        }
-
-        .main-form, .main-form2 {
-            /* background: mediumturquoise; */
-
-
         }
 
         .main-form2 {
@@ -152,13 +143,6 @@
             margin-top: 100px;
             margin-bottom: 300px;
         }
-
-
-
-        .exit-button:hover {
-
-        }
-
 
         .circle {
             /* display: ; */
@@ -196,8 +180,6 @@
 <div id="main">
     <h1 class="firstH1">Найстройка цен на сайте</h1>
 </div>
-
-
 
 <div class="main-form" id="">
     <div class="circle" id="tick">
@@ -246,7 +228,7 @@
 
     <div>
         <div id="main">
-            <h1 class="naming">Вынос границ</h1>
+            <h1 class="naming">Схемы расположения</h1>
         </div>
         <div class="selection">
             <input class="union" type="text" name="" id="" placeholder="PRICE">
@@ -259,7 +241,7 @@
 
     <div>
         <div id="main">
-            <h1 class="naming">Схемы расположения</h1>
+            <h1 class="naming">Вынос границ</h1>
         </div>
         <div class="selection">
             <input class="union" type="text" name="" id="" placeholder="PRICE">
@@ -269,22 +251,10 @@
             <button class="apply-button">Применить</button>
         </div>
     </div>
-
     <div class="center-button">
         <button class="exit-button" id="exit">Сохранить и выйти</button>
     </div>
-
-
 </div>
-
-
-<!--
-<div class="center-button">
-    <div class="p" id="error"></div>
-    <button id="login-button">Войти</button>
-</div> -->
-
-
 
 
 
@@ -342,20 +312,26 @@
     let tg = window.Telegram.WebApp;
     let saveExit = document.getElementById("exit");
     saveExit.addEventListener("click", () => {
-        let data = {
-            pricelist: [
-                price = [],
-                date = []
+        let data = [
+                price = {},
+                date = {}
             ]
-        }
-        let naming = ['mezhevaniye', 'pricelist', 'akt_inspection', 'takeaway_borders', 'scheme_location'];
-        for (let i = 0; i < allInputs.length; i = i + 2) {
-            // data.pricelist.set(naming[count], allInputs[i+1].value);
-            // data.datelist.set(naming[count], allInputs[i].value);
-            data.pricelist[0].push(allInputs[i+1].value);
-            data.pricelist[1].push(allInputs[i].value);
-        }
-        console.log(data);
+
+        data[0].mezhevaniye = allInputs[0].value;
+        data[1].mezhevaniye = allInputs[1].value;
+
+        data[0].tech_plan = allInputs[2].value;
+        data[1].tech_plan = allInputs[3].value;
+
+        data[0].akt_inspection = allInputs[4].value;
+        data[1].akt_inspection = allInputs[5].value;
+
+        data[0].scheme_location = allInputs[8].value;
+        data[1].scheme_location = allInputs[9].value;
+
+        data[0].takeaway_borders = allInputs[6].value;
+        data[1].takeaway_borders = allInputs[7].value;
+
         tg.sendData(JSON.stringify(data));
     })
 
