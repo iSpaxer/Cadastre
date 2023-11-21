@@ -15,4 +15,8 @@ public interface ClientService {
     Client save(Client newClient);
 
     Page<ClientDbDTO> getClientsWithBetweenDate(String fromDate, String toDate,Pageable pageable);
+
+    Page<ClientDbDTO> getActiveClients(Pageable pageable);
+
+    Page<ClientDbDTO> getEndedClients(Pageable pageable);
 }

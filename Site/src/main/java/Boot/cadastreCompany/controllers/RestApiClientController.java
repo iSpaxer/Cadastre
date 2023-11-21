@@ -40,8 +40,19 @@ public class RestApiClientController {
     ///TODO not exception
     @GetMapping("/getClients")
     public ResponseEntity<?> getClients( @RequestParam(required = false) String size, @RequestParam(required = false) String page) {
-
         Page<ClientDbDTO> clientDbDToPage = apiRequestService.getAllClients(page, size);
+        return new ResponseEntity<>(clientDbDToPage, HttpStatus.OK);
+    }
+
+    @GetMapping("/getActiveClients")
+    public ResponseEntity<?> getActiveClients( @RequestParam(required = false) String size, @RequestParam(required = false) String page) {
+        Page<ClientDbDTO> clientDbDToPage = apiRequestService.getActiveClients(page, size);
+        return new ResponseEntity<>(clientDbDToPage, HttpStatus.OK);
+    }
+
+    @GetMapping("/getEndedClients")
+    public ResponseEntity<?> getEndedClients( @RequestParam(required = false) String size, @RequestParam(required = false) String page) {
+        Page<ClientDbDTO> clientDbDToPage = apiRequestService.getEndedClients(page, size);
         return new ResponseEntity<>(clientDbDToPage, HttpStatus.OK);
     }
 

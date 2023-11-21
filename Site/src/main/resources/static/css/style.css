@@ -22353,4 +22353,37 @@ dl li {
   }
 }
 
+
 /*# sourceMappingURL=maps/style.css.map */
+/* My css */
+.pagination, .pagination-common, .pagination-new {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination__list {
+  display: flex;
+  list-style-type: none;  
+}
+
+.pagination__list-new {
+  display: flex;
+  list-style-type: none;  
+}
+
+.pagination__item, .pagination__item-new {
+  padding: 8px;
+  margin: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.pagination__item--active {
+  font-weight: 800;
+  color: gold;
+}
+
+.pagination__item-new--active {
+  font-weight: 800;
+  color: gold;
+}

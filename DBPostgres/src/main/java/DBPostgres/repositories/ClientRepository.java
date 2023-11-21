@@ -23,6 +23,14 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
             nativeQuery = true)
     Page<Client> findAllClientsWithBetweenDate(@Param("fromDate") LocalDate fromDate, @Param("toDate") LocalDate toDate, Pageable pageable);
 
+    @Query(value = "SELECT * FROM client WHERE eng_id IS NOT NULL",
+            nativeQuery = true)
+    Page<Client> findEndedClients(Pageable pageable);
+
+    @Query(value = "SELECT * FROM client WHERE eng_id IS NULL",
+            nativeQuery = true)
+    Page<Client> findActiveClients(Pageable pageable);
+
 
 //    Optional<Client> findBy ///TODO findById
 }

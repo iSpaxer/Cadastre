@@ -25,7 +25,7 @@ drop table if exists Pricelist;
 
 SELECT tg_id FROM engineer WHERE tg_id IS NOT NULL
 
-SELECT * FROM client WHERE CAST(created_data AS DATE) BETWEEN '2023/10/25' and '2023/10/27';
+SELECT * FROM client WHERE eng_id IS NOT NULL;
 
 SELECT * FROM client LEFT JOIN FETCH client.engineer WHERE CAST(created_data AS DATE) BETWEEN '2023/10/25' AND '2023/10/27']]></console>
     </connection>

@@ -33,8 +33,23 @@ public class ClientServiceImpl implements ClientService {
         this.modelMapper = modelMapper;
     }
     @Override
+    @Transactional
     public Page<ClientDbDTO> getAllClients(Pageable pageable) {
         Page<Client> clientPage = clientRepository.findAll(pageable);
+        return customMapClientPageInDTO(clientPage);
+    }
+
+    @Override
+    @Transactional
+    public Page<ClientDbDTO> getActiveClients(Pageable pageable) {
+        Page<Client> clientPage = clientRepository.findActiveClients(pageable);
+        return customMapClientPageInDTO(clientPage);
+    }
+
+    @Override
+    @Transactional
+    public Page<ClientDbDTO> getEndedClients(Pageable pageable) {
+        Page<Client> clientPage = clientRepository.findEndedClients(pageable);
         return customMapClientPageInDTO(clientPage);
     }
 
@@ -49,8 +64,8 @@ public class ClientServiceImpl implements ClientService {
         return clientDbDTOPage;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public Page<ClientDbDTO> getClientsWithBetweenDate(String fromDateStr, String toDateStr, Pageable pageable) throws DateTimeException {
         LocalDate fromDate = LocalDate.parse(fromDateStr);
         LocalDate toDate = LocalDate.parse(toDateStr);
@@ -60,6 +75,7 @@ public class ClientServiceImpl implements ClientService {
         Page<Client> clientPage = clientRepository.findAllClientsWithBetweenDate(fromDate, toDate, pageable);
         return customMapClientPageInDTO(clientPage);
     }
+
 
     @Override
     public Client getLastClient() {

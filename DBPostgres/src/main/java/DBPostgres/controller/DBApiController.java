@@ -10,7 +10,6 @@ import DBPostgres.dto.engineer.EngineerUpdatePasswordDTO;
 import DBPostgres.dto.pricelist.PricelistDTO;
 import DBPostgres.exception.*;
 import DBPostgres.models.Client;
-import DBPostgres.models.Engineer;
 import DBPostgres.service.ClientService;
 import DBPostgres.service.CommonService;
 import DBPostgres.service.PricelistService;
@@ -19,8 +18,6 @@ import DBPostgres.util.ClientErrorResponse;
 import DBPostgres.util.validate.EngineerValidator;
 import DBPostgres.util.wrapper.EngineerAndClient;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +72,18 @@ public class DBApiController {
     @GetMapping("/getClients")
     public ResponseEntity<?> getClients(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable) {
         Page<ClientDbDTO> clientDbDToPage = clientService.getAllClients(pageable);
+        return new ResponseEntity<>(clientDbDToPage, HttpStatus.OK);
+    }
+
+    @GetMapping("/getActiveClients")
+    public ResponseEntity<?> getActiveClients(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable) {
+        Page<ClientDbDTO> clientDbDToPage = clientService.getActiveClients(pageable);
+        return new ResponseEntity<>(clientDbDToPage, HttpStatus.OK);
+    }
+
+    @GetMapping("/getEndedClients")
+    public ResponseEntity<?> getEndedClient(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable) {
+        Page<ClientDbDTO> clientDbDToPage = clientService.getEndedClients(pageable);
         return new ResponseEntity<>(clientDbDToPage, HttpStatus.OK);
     }
 

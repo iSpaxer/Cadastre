@@ -51,6 +51,33 @@ public class ApiRequestService {
                 .block();
     }
 
+
+    public Page<ClientDbDTO> getActiveClients(String page, String size) {
+        return webClientBuilder.build()
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/getActiveClients")
+                        .queryParamIfPresent("page", Optional.ofNullable(page))
+                        .queryParamIfPresent("size", Optional.ofNullable(size))
+                        .build())
+                .retrieve()
+                .bodyToMono(RestPage.class)
+                .block();
+    }
+
+    public Page<ClientDbDTO> getEndedClients(String page, String size) {
+        return webClientBuilder.build()
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/getEndedClients")
+                        .queryParamIfPresent("page", Optional.ofNullable(page))
+                        .queryParamIfPresent("size", Optional.ofNullable(size))
+                        .build())
+                .retrieve()
+                .bodyToMono(RestPage.class)
+                .block();
+    }
+
     private void checkingEmptyString(String... values) {
         for (String e : values) {
             if (e == null) {
@@ -281,6 +308,5 @@ public class ApiRequestService {
         }
         return messageFromeDB;
     }
-
 
 }
