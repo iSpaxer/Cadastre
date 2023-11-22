@@ -110,7 +110,7 @@ class CommonAppeal { // класс всех взятых обращний
 
     createAppeal() { //функция создания html разметки
         let tr = tableCommonAppeal.insertRow(); //создаем tr
-        engineerTakesTheClient
+        engineerTakesTheClient // TODO ?
         this.clientList.forEach(element => {
           let td = tr.insertCell();
           td.appendChild(document.createTextNode(element));
@@ -244,7 +244,7 @@ async function main() {
       ulEl.classList.add('pagination__list-new');
   
       // 1! 2! 3! 4! 5! 6! 7!
-      if (pagesCount <=7) {
+      if (pagesCount <= 7) {
         for (let i = 0; i < pagesCount; i++) {
           const liEl = displayPaginationBtnNew(i + 1, i+1);
           ulEl.appendChild(liEl);

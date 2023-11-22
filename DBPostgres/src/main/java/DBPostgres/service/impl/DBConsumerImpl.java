@@ -56,7 +56,7 @@ public class DBConsumerImpl implements DBConsumer {
                 return;
             }
         } else {
-            log.error("Not exist enginner with telegram id");
+            log.error("Not exist engineer sad with telegram id");
         }
     }
 }
