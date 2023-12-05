@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- TODO referense on css and icons -->
+    <link rel="stylesheet" href="../../login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="./icon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./icon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./icon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./icon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./icon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./icon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./icon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="./icon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./icon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icon/favicon-16x16.png">
+    <link rel="manifest" href="./icon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="./icon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>Вход</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat';
+            font-weight: 200;
+            color: var(--tg-theme-text-color);
+            background-color: var(--tg-theme-bg-color);
+        }
+
+        #main {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 50px;
+            margin-bottom: 10px;
+        }
+
+        .firstH1 {
+            margin-top: 0px;
+            color: yellowgreen;
+            font-size: 36px;
+
+        }
+
+        .naming {
+            font-weight: 900;
+        }
+
+        img {
+            width: 70px;
+            margin: 30px auto;
+        }
+
+        p {
+            width: 350px;
+            margin: 0 auto;
+        }
+
+        .p {
+            width: 350px;
+            font-size: 20px;
+            color: var(--tg-theme-button-color);;
+            margin: 0 auto;
+        }
+
+        button {
+            border: 0;
+            border-radius: 5px;
+            margin-top: 40px;
+            height: 60px;
+            width: 200px;
+            font-size: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 500ms ease;
+            color: #000;
+            background: yellowgreen;
+        }
+
+        .center-button {
+            /* display: inline-block; */
+            text-align: center;
+        }
+
+        button:focus {
+            color: var(--tg-theme-bg-color);
+            background: var(--tg-theme-text-color);
+            transition: transform 0.15s box-shadow 0.15s;
+        }
+
+        input {
+            width: 90%;
+            outline: none;
+            margin: 10px 5%;
+            padding: 15px 10px;
+            font-size: 18px;
+            color: var(--tg-theme-text-color);
+            background: none;
+            border: 2px solid silver;
+            border-radius: 5px;
+        }
+
+        input:focus {
+            border-color: #db5d5d;
+        }
+
+        .save-button {
+            margin-top: 30px;
+            width: 300px;
+        }
+
+        .main-form2 {
+            margin-top: 60px;
+        }
+
+        .exit-button {
+            height: 70px;
+            width: 300px;
+            /* color: #3b3838; */
+            background-color: #db5d5d;
+            font-weight: 900;
+            margin-top: 100px;
+            margin-bottom: 300px;
+        }
+
+        .circle {
+            /* display: ; */
+            width: 70px;
+            height: 70px;
+            border-radius: 100%;
+            background: #e6e7e7;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            left: 70%;
+
+            animation-duration: 1s;
+            animation-name: slidein;
+            animation-iteration-count: 2;
+            animation-direction: alternate;
+        }
+
+        @keyframes slidein {
+            from {
+                top: -10%;
+            }
+
+            to {
+                top: 20%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div id="main">
+    <h1 class="firstH1">Найстройка цен на сайте</h1>
+</div>
+
+<div class="main-form" id="">
+    <div class="circle" id="tick">
+        <svg width="40px" height="40px" viewBox="0 0 12 12" fill="#00c853">
+            <path d="M10.742 1.907c-.353-.38-.923-.38-1.273 0L4.148 8.66 2.53 7.042c-.353-.38-.923-.38-1.273 0-.35.38-.35 1.002 0 1.381l2.8 3.012c.177.19.412.285.637.285.225 0 .432-.094.637-.285l6.036-6.483c.35-.379.35-1.002 0-1.381z"></path>
+        </svg>
+    </div>
+    <div>
+        <div id="main">
+            <h1 class="naming">Межевание</h1>
+        </div>
+        <div class="selection">
+            <input class="union" type="text" name="" id="" placeholder="PRICE">
+            <input class="union" type="text" name="" id="" placeholder="DATE">
+        </div>
+        <div class="center-button">
+            <button class="apply-button">Применить</button>
+        </div>
+    </div>
+
+    <div>
+        <div id="main">
+            <h1 class="naming">Тех.план</h1>
+        </div>
+        <div class="selection">
+            <input class="union" type="text" name="" id="" placeholder="PRICE">
+            <input class="union" type="text" name="" id="" placeholder="DATE">
+        </div>
+        <div class="center-button">
+            <button class="apply-button">Применить</button>
+        </div>
+    </div>
+
+    <div>
+        <div id="main">
+            <h1 class="naming">Акт обследования</h1>
+        </div>
+        <div class="selection">
+            <input class="union" type="text" name="" id="" placeholder="PRICE">
+            <input class="union" type="text" name="" id="" placeholder="DATE">
+        </div>
+        <div class="center-button">
+            <button class="apply-button">Применить</button>
+        </div>
+    </div>
+
+    <div>
+        <div id="main">
+            <h1 class="naming">Схемы расположения</h1>
+        </div>
+        <div class="selection">
+            <input class="union" type="text" name="" id="" placeholder="PRICE">
+            <input class="union" type="text" name="" id="" placeholder="DATE">
+        </div>
+        <div class="center-button">
+            <button class="apply-button">Применить</button>
+        </div>
+    </div>
+
+    <div>
+        <div id="main">
+            <h1 class="naming">Вынос границ</h1>
+        </div>
+        <div class="selection">
+            <input class="union" type="text" name="" id="" placeholder="PRICE">
+            <input class="union" type="text" name="" id="" placeholder="DATE">
+        </div>
+        <div class="center-button">
+            <button class="apply-button">Применить</button>
+        </div>
+    </div>
+    <div class="center-button">
+        <button class="exit-button" id="exit">Сохранить и выйти</button>
+    </div>
+</div>
+
+
+
+<!-- Скрипты -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+    // TODO get pricelist from Site
+    // async function getPricelist() {
+    //     const response = await fetch('http://localhost:8080/api/getPricelist', {
+    //     method: 'GET',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     })
+    //     return await response.json()
+    // }
+
+    let allInputs = document.getElementsByClassName("union");
+    // getPricelist().then((pricelistAll) => {
+    //     let pricelist = pricelistAll[0];
+    //     let dateList  = pricelistAll[1];
+
+    //     allInputs[0].value = pricelist.mezhevaniye;
+    //     allInputs[1].value = dateList.mezhevaniye;
+
+    //     allInputs[2].value = pricelist.tech_plan;
+    //     allInputs[3].value = dateList.tech_plan;
+
+    //     allInputs[4].value = pricelist.akt_inspection;
+    //     allInputs[5].value = dateList.akt_inspection;
+
+    //     allInputs[6].value = pricelist.takeaway_borders;
+    //     allInputs[7].value = dateList.takeaway_borders;
+
+    //     allInputs[8].value = pricelist.scheme_location;
+    //     allInputs[9].value = dateList.scheme_location;
+    // });
+
+
+    let applybut = document.getElementsByClassName("apply-button");
+    for (let elem of applybut) {
+        elem.addEventListener("click", () => {
+            let tick = document.getElementById("tick");
+            tick.setAttribute(
+                "style",
+                "display: flex",
+                "animation-iteration-count: 2"
+            );
+            setTimeout(function(){
+                tick.style.display = 'none';
+            }, 1900);
+        })
+    }
+
+    let tg = window.Telegram.WebApp;
+    let saveExit = document.getElementById("exit");
+    saveExit.addEventListener("click", () => {
+        let data = [
+                price = {},
+                date = {}
+            ]
+
+        data[1].mezhevaniye = allInputs[0].value;
+        data[0].mezhevaniye = allInputs[1].value;
+
+        data[1].tech_plan = allInputs[2].value;
+        data[0].tech_plan = allInputs[3].value;
+
+        data[1].akt_inspection = allInputs[4].value;
+        data[0].akt_inspection = allInputs[5].value;
+
+        data[1].scheme_location = allInputs[8].value;
+        data[0].scheme_location = allInputs[9].value;
+
+        data[1].takeaway_borders = allInputs[6].value;
+        data[0].takeaway_borders = allInputs[7].value;
+
+        tg.sendData(JSON.stringify(data));
+    })
+
+
+</script>
+</body>
+</html>
+

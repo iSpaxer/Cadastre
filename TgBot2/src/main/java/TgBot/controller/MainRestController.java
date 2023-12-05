@@ -1,4 +1,4 @@
-package TgBot.web.controller;
+package TgBot.controller;
 
 import TgBot.dto.ClientWithoutPhoneForTelegramDTO;
 import TgBot.dto.EditSendUsersDTO;

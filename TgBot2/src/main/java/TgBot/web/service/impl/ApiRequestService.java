@@ -1,11 +1,10 @@
 package TgBot.web.service.impl;
 
-import TgBot.dto.ClientForOutputTelegramDTO;
-import TgBot.dto.ClientTakeTelegramDTO;
-import TgBot.dto.EngineerTelegramDTO;
-import TgBot.dto.PricelistDTO;
+import TgBot.dto.*;
 import TgBot.util.CommonSendTextMessage;
+import TgBot.util.RestPage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -13,6 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -150,6 +150,19 @@ public class ApiRequestService {
             System.err.println("\uD83D\uDE3F Error Database: " + e.getMessage());
             throw new RuntimeException();
         }
+    }
+
+    public Page<ClientDbDTO> getAllClients(String page, String size) {
+        return webClientBuilder.build()
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/getClients")
+                        .queryParamIfPresent("page", Optional.ofNullable(page))
+                        .queryParamIfPresent("size", Optional.ofNullable(size))
+                        .build())
+                .retrieve()
+                .bodyToMono(RestPage.class)
+                .block();
     }
 }
 

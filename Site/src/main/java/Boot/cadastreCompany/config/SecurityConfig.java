@@ -41,11 +41,11 @@ public class SecurityConfig  {
         HttpSessionCsrfTokenRepository httpSessionCsrfTokenRepository = new HttpSessionCsrfTokenRepository();
         var chain = http
                 .csrf().disable() ///TODO csrf and cors
-//                .cors().disable()
+                .cors().disable()
 
-                .cors()
+//                .cors()
+//                .and()
 //
-                .and()
 //                .csrf().csrfTokenRequestHandler(new XorCsrfTokenRequestAttributeHandler())
 //                .csrfTokenRepository(new HttpSessionCsrfTokenRepository())
 //                .sessionAuthenticationStrategy(new CsrfAuthenticationStrategy(httpSessionCsrfTokenRepository))

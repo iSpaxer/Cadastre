@@ -1,4 +1,4 @@
-package Boot.cadastreCompany.dto;
+package TgBot.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

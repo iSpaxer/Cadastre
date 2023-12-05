@@ -1,6 +1,7 @@
 package TgBot.service.impl;
 
 import TgBot.dto.PricelistDTO;
+import TgBot.jwt.TelegramJwtFactory;
 import TgBot.service.MessageHandlerService;
 import TgBot.telegramAPI.TelegramBot;
 import TgBot.util.CommonSendTextMessage;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
@@ -31,12 +33,14 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
     private final CommonSendTextMessage commonSendTextMessage;
     private final TgBot.web.service.impl.ApiRequestService apiRequestService;
     private final EmojiParserCustom emojiParserCustom;
+    private final TelegramJwtFactory telegramJwtFactory;
 
     @Autowired
-    public MessageHandlerServiceImpl(CommonSendTextMessage commonSendTextMessage, ApiRequestService apiRequestService, EmojiParserCustom emojiParserCustom) {
+    public MessageHandlerServiceImpl(CommonSendTextMessage commonSendTextMessage, ApiRequestService apiRequestService, EmojiParserCustom emojiParserCustom, TelegramJwtFactory telegramJwtFactory) {
         this.commonSendTextMessage = commonSendTextMessage;
         this.apiRequestService = apiRequestService;
         this.emojiParserCustom = emojiParserCustom;
+        this.telegramJwtFactory = telegramJwtFactory;
     }
 
     @Override
@@ -81,7 +85,7 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
                     notAllowed(update);
                 logoutCommand(update);
             }
-            case "get_clients" -> {
+            case "/get_clients" -> {
                 if (!userIsActive)
                     notAllowed(update);
                 getClients(update);
@@ -96,11 +100,20 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
                     notAllowed(update);
                 setPriceCommand(update);
             }
+            case "/jwt" -> {
+
+                getJwt(update);
+            }
             default -> {
                 commonSendTextMessage.sendTextMessage(update, EmojiParser.parseToUnicode("Я тебя не понял " + ":crying_cat_face:"));
             }
         }
 
+    }
+
+    private void getJwt(Update update) {
+        String tjwt = this.telegramJwtFactory.apply(update);
+        commonSendTextMessage.sendTextMessage(update, tjwt);
     }
 
 
@@ -113,14 +126,13 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
 
     private void loginCommand(Update update) {
 
-
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         List<KeyboardRow> keyboardRows = new ArrayList<>();
         KeyboardRow row = new KeyboardRow();
-
         KeyboardButton keyboardButton = KeyboardButton.builder()
                 .text(emojiParserCustom.messageWithEmoji("Войти " + ":heart:"))
-                .webApp(new WebAppInfo("https://ispaxer.github.io/SPACE-REGION.github.io/"))
+                .webApp(new WebAppInfo("https://ispaxer.github.io/SPACE-REGION.github.io"))
+
                 .build();
 
         row.add(keyboardButton);
@@ -169,8 +181,29 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
     }
 
     private void getClients(Update update) {
+        var sendMessage = new SendMessage();
+        sendMessage.setText("\uD83D\uDC8E Просмотр всех обращений от заказчиков.");
+        sendMessage.setChatId(update.getMessage().getChatId().toString());
+        setInlineKeyBoardForGetClients(sendMessage, update);
+        commonSendTextMessage.sendTextMessage(sendMessage);
+    }
 
+    private SendMessage setInlineKeyBoardForGetClients(SendMessage sendMessage, Update update) {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
+        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+        List<InlineKeyboardButton> rowInline = new ArrayList<>();
+        InlineKeyboardButton inlButton = InlineKeyboardButton.builder()
+                .text("View! \uD83D\uDE80")
+                .webApp(new WebAppInfo("https://ispaxer.github.io/SPACE-REGION.github.io?tjwt=" + this.telegramJwtFactory.apply(update)))
+                .build();
+        System.out.println("https://ispaxer.github.io/SPACE-REGION.github.io?tjwt=" + this.telegramJwtFactory.apply(update));
+        rowInline.add(inlButton);
+        rowsInline.add(rowInline);
+        inlineKeyboardMarkup.setKeyboard(rowsInline);
+
+        sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+        return sendMessage;
     }
 
 
@@ -190,7 +223,7 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
                 setInlineKeyboardForSetPrice(new SendMessage(
                         update.getMessage().getChatId().toString(),
                         message
-                ))
+                ), update)
         );
 
     }
@@ -199,20 +232,19 @@ public class MessageHandlerServiceImpl implements MessageHandlerService {
     private void setPriceCommand(Update update) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setText("Set price! ✍\uFE0F");
-        setInlineKeyboardForSetPrice(sendMessage);
+        setInlineKeyboardForSetPrice(sendMessage, update);
     }
 
-    private SendMessage setInlineKeyboardForSetPrice(SendMessage sendMessage) {
+    private SendMessage setInlineKeyboardForSetPrice(SendMessage sendMessage, Update update) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
         List<InlineKeyboardButton> rowInline = new ArrayList<>();
-        InlineKeyboardButton inlButton = new InlineKeyboardButton(
-                ("Set price! ✍\uFE0F"));
-//        inlButton.set
-        inlButton.setWebApp(new WebAppInfo(
-                "https://ispaxer.github.io/SPACE-REGION.github.io/"));
-
+        InlineKeyboardButton inlButton = InlineKeyboardButton.builder()
+                .text("Set price! ✍\uFE0F")
+                .webApp(new WebAppInfo("https://ispaxer.github.io/SPACE-REGION.github.io?tjwt=" + this.telegramJwtFactory.apply(update)))
+                .build();
+        System.out.println("https://ispaxer.github.io/SPACE-REGION.github.io?tjwt=" + this.telegramJwtFactory.apply(update));
         rowInline.add(inlButton);
         rowsInline.add(rowInline);
         inlineKeyboardMarkup.setKeyboard(rowsInline);

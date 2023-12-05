@@ -17,7 +17,4 @@ public class ClientDbDTO {
     private Date createdData;
     private String phone;
     private String engName;
-    ///TODO
-//    @JsonManagedReference
-//    private Engineer engineer;
 }

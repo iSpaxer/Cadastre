@@ -34,6 +34,10 @@ bot:
   name: geodezist13_bot
   token: 6121943088:AAGIP6nClRnV3GdIJwJwDFATGiiCyz6i-VQ
 
+jwt:
+  telegram_token:
+      key: '{"kty":"oct","k":"956PBFst1FguLr5irJD-aQ"}'
+
 value:
   address:
     db: http://localhost:8088/DB/
