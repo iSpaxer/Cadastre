@@ -33,7 +33,7 @@
     >**<p style="text-align: center;">Все команды бота**
     ><p style="text-align: center;"><img src="readme_images/commands.jpg" width="468" height="476" />
 
-    Для удобства пользования телеграм ботом в неё используется технология WebApp, для которой отдельно написан front.
+    Для удобства пользования телеграм ботом в нем используется технология WebApp, для которой отдельно написан front.
     > <p style="text-align: center;"> Пример как выглядит UI WebApp
     > <p style="text-align: center;"><img src="readme_images/separate_front.jpg" width="468" height="750" />
 
