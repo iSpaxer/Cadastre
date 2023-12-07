@@ -1,5 +1,5 @@
 # <a href="https://my-kadastr.ru"><img src="readme_images/Main_icon.png" width="140" height="80" />   My-kadastr.ru </a>
-Данный проект является продуктом, сайтом кадастровых инженеров в Республике Мордовии.
+Данный проект является продуктом, сайтом кадастровых инженеров по Республике Мордовия.
 
 <img src="readme_images/main_page3.png" />
 
