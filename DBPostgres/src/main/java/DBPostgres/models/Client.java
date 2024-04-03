@@ -23,7 +23,7 @@ public class Client {
 
     @Column(name = "name")
     @NotEmpty(message = "Поле пустое")
-    @Size(min = 2, max = 15, message = "Введите ваше имя")
+    @Size(min = 2, max = 40, message = "Введите ваше имя")
     private String name;
 
     @Column(name = "created_data")
@@ -35,7 +35,7 @@ public class Client {
     @Size(min = 11, max = 11, message = "не корректный номер")
     private String phone;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "eng_id", referencedColumnName = "id")
     private Engineer engineer;
 

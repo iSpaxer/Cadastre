@@ -1,17 +1,22 @@
 package DBPostgres.service;
 
-import DBPostgres.dto.ClientDbDTO;
-import DBPostgres.dto.EngineerLoginDTO;
+import DBPostgres.dto.client.ClientDbDTO;
 import DBPostgres.models.Client;
-import DBPostgres.models.Engineer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 public interface ClientService {
-    List<ClientDbDTO> getAllClient();
+    Page<ClientDbDTO> getAllClients(Pageable pageable);
     Client getLastClient();
     Optional<Client> findById(ClientDbDTO clientDbDTOExternal);
-    void save(Client newClient);
+    Optional<Client> findById(Integer id);
+    Client save(Client newClient);
+
+    Page<ClientDbDTO> getClientsWithBetweenDate(String fromDate, String toDate,Pageable pageable);
+
+    Page<ClientDbDTO> getActiveClients(Pageable pageable);
+
+    Page<ClientDbDTO> getEndedClients(Pageable pageable);
 }

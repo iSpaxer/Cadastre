@@ -18,4 +18,8 @@ public class EngineerDTO {
     @Size(min = 8, message = "pls enter more than 8 characters")
     private String password;
 
+    public String toString() {
+        return "Engineer have login: " + this.getLogin() + " and password: " + this.getPassword();
+    }
+
 }

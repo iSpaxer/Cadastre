@@ -1,0 +1,40 @@
+# Developer regime
+spring:
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  #  datasource:
+  #    driverClassName: org.postgresql.Driver
+  #    url: jdbc:postgresql://localhost:5432/CadastreCompany
+  #    username: alex
+  #    password: alex
+
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+    hibernate:
+      ddl-auto: update
+
+  rabbitmq:
+    host: 'localhost'
+    port: 5672
+    username: alex
+    password: alex
+
+server:
+  port: 8080
+
+value:
+  address:
+    db: http://localhost:8088/DB/
+
+jwt:
+  secret: test
+  lifetime: 10m
+

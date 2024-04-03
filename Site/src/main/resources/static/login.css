@@ -1,0 +1,198 @@
+*,
+*::before,
+*::after {
+	border: 0;
+	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	overflow-x:  hidden;
+    font-family: 'Inter', sans-serif;
+    color: #FFFFFF;
+}
+
+input, textarea, button {
+	padding: 0;
+}
+
+label {
+	cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+:focus, 
+:active {
+    outline: none;
+}
+
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.none {
+	display: none !important;
+}
+
+
+.section {
+    height: 100%;
+    background-image: url("./img/bg-admin.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    align-items: center;
+}
+
+
+.main-form {
+    margin-left: 20px;
+    width: 570px;
+    height: 429px;
+    border-radius: 32px;
+    background: radial-gradient(281.42% 191.35% at 13.51% 27.39%, rgba(63, 103, 142, 0.65) 0%, rgba(119, 8, 23, 0.65) 100%);
+    
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		width: 279px;
+        height: 220px;
+    }
+}
+
+.form-title-wrapper {
+    margin-bottom: 30px;
+    padding-top: 82px;
+    text-align: center;
+    
+    /* Mobile XS */
+    @media (max-width: 766px) {
+        padding-top: 30px;
+		margin-bottom: 20px;
+    }
+}
+
+.main-form-title {
+    font-size: 40px;
+    font-weight: 700;
+    color: #FFF;
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		font-size: 22px;
+    }
+}
+
+.form-group-name {
+
+    margin-bottom: 24px;
+    padding-left: 62px;
+    display: flex;
+    flex-direction: column;
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		margin-bottom: 12px;
+        padding-left: 31px;
+    }
+}
+
+.form-group-phone {
+    padding-left: 62px;
+    margin-bottom: 35px;
+    display: flex;
+    flex-direction: column;
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		margin-bottom: 12px;
+        padding-left: 31px;
+    }
+}
+
+.label {
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.70);
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		margin-bottom: 5px;
+        font-size: 8px;
+    }
+
+}
+
+.input {
+    width: 430px;
+    font-weight: 900;
+    font-size: 20px;
+    color: #FFFFFF;
+
+    background: none;
+    border-bottom: 2px solid #00C2FF;;
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+		width: 214px;
+        font-size: 11px;
+    }
+
+}
+
+.button-wrapper {
+    width: 491px;
+    display: flex;
+    justify-content: flex-end;
+
+    /* Mobile XS */
+    @media (max-width: 766px) {
+        width: 245px;
+    }
+}
+
+.button-bell {
+    width: 81px;
+    height: 36px;
+    border: 1px solid #00C2FF;
+    background: rgba(217, 217, 217, 0.00);
+    cursor: pointer;
+
+    font-weight: 700;
+    font-size: 17px;
+    color: #00C2FF;
+
+}

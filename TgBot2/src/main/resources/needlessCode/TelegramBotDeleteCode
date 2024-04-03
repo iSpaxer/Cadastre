@@ -1,0 +1,142 @@
+
+//        else if (update.hasCallbackQuery()) {
+//            String callBackData = update.getCallbackQuery().getData();
+//
+//            Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
+//            Long chatId = update.getCallbackQuery().getMessage().getChatId();
+//
+//            EditMessageText editMessageText = new EditMessageText();
+//            switch (callBackData) {
+//                case "YES_BUTTON" -> {
+//
+//                    AnswerCallbackQuery answerCallbackQuery = new AnswerCallbackQuery();
+//
+//                    answerCallbackQuery.setCallbackQueryId(update.getCallbackQuery().getId());
+//                    answerCallbackQuery.setUrl("https://ya.ru/");
+//
+//                    try {
+//                        execute(answerCallbackQuery);
+//                        return;
+//                    } catch (TelegramApiException e) {
+//                        e.printStackTrace();
+//                        return;
+//                    }
+//                }
+//                case "NO_BUTTON" -> {
+//                    String text = "You pressed NO button";
+//                    editMessageText.setChatId(chatId.toString());
+//                    editMessageText.setText(text);
+//                    editMessageText.setMessageId(messageId);
+//
+//                    InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+//                    List<List<InlineKeyboardButton>> rowsInline = getLists();
+//                    inlineKeyboardMarkup.setKeyboard(rowsInline);
+//
+//                    editMessageText.setReplyMarkup(inlineKeyboardMarkup);
+//                }
+//            }
+//            try {
+//                execute(editMessageText);
+//            } catch (TelegramApiException e) {
+//                log.error("Error edited message: " + e.getMessage());
+//            }
+//        }
+    }
+
+//
+//
+//    private void startCommandReceived(Long chatId, String firstName) {
+//        String answer = "Hi, " + firstName + "! ";
+//        sendMessage(chatId, answer);
+//    }
+//
+//    private void visitSite(Long chatId) {
+//        SendMessage sendMessage = new SendMessage(chatId.toString(),
+//                EmojiParser.parseToUnicode("Do you really want to visit? " + ":thinking:"));
+//        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+//
+//        List<List<InlineKeyboardButton>> rowsInline = getLists();
+//
+//        inlineKeyboardMarkup.setKeyboard(rowsInline);
+//
+//        sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+//        sendMessage(sendMessage);
+//
+//
+//    }
+//
+//    private void registerCommandReceived(Long chatId) {
+//        SendMessage sendMessage = new SendMessage(chatId.toString(),
+//                EmojiParser.parseToUnicode("Do you really want to register? " + ":thinking:"));
+//        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+//
+//        List<List<InlineKeyboardButton>> rowsInline = getLists();
+//
+//        inlineKeyboardMarkup.setKeyboard(rowsInline);
+//
+//        sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+//        sendMessage(sendMessage);
+//    }
+//
+//    @NotNull
+//    private static List<List<InlineKeyboardButton>> getLists() {
+//        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+//        List<InlineKeyboardButton> rowInline = new ArrayList<>();
+//
+//        InlineKeyboardButton ybutton = new InlineKeyboardButton();
+//        ybutton.setText("Yes");
+////        ybutton.setCallbackData("YES_BUTTON");
+//
+//        WebAppInfo webAppInfo = new WebAppInfo("https://my-kadastr.ru/login");
+//        ybutton.setWebApp(webAppInfo);
+//
+//        rowInline.add(ybutton);
+//
+//        rowsInline.add(rowInline);
+//
+//        return rowsInline;
+//    }
+//
+//    private void sendMessage(Long chatId, String textToSend) {
+//        SendMessage sendMessage = new SendMessage();
+//        sendMessage.setChatId(chatId.toString());
+//        sendMessage.setText(textToSend);
+//
+//        addHeartAndDis(sendMessage);
+//        try {
+//            execute(sendMessage);
+//        } catch (TelegramApiException e) {
+//            log.error("Error occurred " + e.getMessage());
+//        }
+//    }
+//
+//    private void sendMessage(SendMessage sendMessage) {
+//        try {
+//            execute(sendMessage);
+//        } catch (TelegramApiException e) {
+//            log.error("Error occurred " + e.getMessage());
+//        }
+//    }
+//
+//    private void addHeartAndDis(SendMessage sendMessage) {
+//        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+//        List<KeyboardRow> keyboardRows = new ArrayList<>();
+//
+//        KeyboardRow row = new KeyboardRow();
+//        row.add(EmojiParser.parseToUnicode(":heart:"));
+//
+//        KeyboardButton keyboardButton = new KeyboardButton();
+//        keyboardButton.setText(EmojiParser.parseToUnicode("Open me " + ":heart:"));
+//        keyboardButton.setWebApp(new WebAppInfo("https://ya.ru"));
+//
+//        row.add(keyboardButton);
+//        keyboardRows.add(row);
+//
+//
+////        row = new KeyboardRow();
+////        row.add(EmojiParser.parseToUnicode(":-1:"));
+////        keyboardRows.add(row);
+//
+//        keyboardMarkup.setKeyboard(keyboardRows);
+//        sendMessage.setReplyMarkup(keyboardMarkup);
+//    }

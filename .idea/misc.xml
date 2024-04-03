@@ -1,38 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/Cadastre/pom.xml" />
-        <option value="$PROJECT_DIR$/telegramBot/pom.xml" />
-        <option value="$PROJECT_DIR$/tgBot/pom.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/DBPostgres/pom.xml" />
+        <option value="$PROJECT_DIR$/RabbitMQ/pom.xml" />
         <option value="$PROJECT_DIR$/Site/pom.xml" />
-        <option value="$PROJECT_DIR$/tgBot/node2/pom.xml" />
+        <option value="$PROJECT_DIR$/tgBot/pom.xml" />
         <option value="$PROJECT_DIR$/tgBot/dispatcher/pom.xml" />
         <option value="$PROJECT_DIR$/tgBot/node/pom.xml" />
-        <option value="$PROJECT_DIR$/commonJpa/pom.xml" />
-        <option value="$PROJECT_DIR$/Site22/pom.xml" />
-        <option value="$PROJECT_DIR$/RabbitMQ/pom.xml" />
-        <option value="$PROJECT_DIR$/DBPostgres/pom.xml" />
-        <option value="$PROJECT_DIR$/utils/pom.xml" />
-        <option value="$PROJECT_DIR$/../DBPostgresql/pom.xml" />
+        <option value="$PROJECT_DIR$/TgBot/pom.xml" />
+        <option value="$PROJECT_DIR$/TgBot2/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
-        <option value="$PROJECT_DIR$/DBPostgres/testAPI/pom.xml" />
-        <option value="$PROJECT_DIR$/Site/DBPostgresql/pom.xml" />
-        <option value="$PROJECT_DIR$/commonJpa/pom.xml" />
-        <option value="$PROJECT_DIR$/tgBot/Site22/pom.xml" />
-        <option value="$PROJECT_DIR$/tgBot/tgBott/pom.xml" />
-        <option value="$PROJECT_DIR$/utils/pom.xml" />
-        <option value="$PROJECT_DIR$/../DBPostgresql/pom.xml" />
+        <option value="$PROJECT_DIR$/TgBot/pom.xml" />
       </set>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="openjdk-20" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="openjdk-20" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
   <component name="ProjectType">
     <option name="id" value="jpab" />
   </component>

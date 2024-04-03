@@ -3,7 +3,6 @@ package Boot.cadastreCompany.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -12,13 +11,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
-import org.springframework.security.web.authentication.RememberMeServices;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfAuthenticationStrategy;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
-import org.springframework.security.web.csrf.XorCsrfTokenRequestAttributeHandler;
-import org.springframework.stereotype.Service;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 
 @EnableWebSecurity
@@ -44,8 +44,8 @@ public class SecurityConfig  {
                 .cors().disable()
 
 //                .cors()
-
 //                .and()
+//
 //                .csrf().csrfTokenRequestHandler(new XorCsrfTokenRequestAttributeHandler())
 //                .csrfTokenRepository(new HttpSessionCsrfTokenRepository())
 //                .sessionAuthenticationStrategy(new CsrfAuthenticationStrategy(httpSessionCsrfTokenRepository))
@@ -53,27 +53,39 @@ public class SecurityConfig  {
 
                 .authorizeHttpRequests()
                 .requestMatchers("/", "/login", "/error").permitAll()
-                .requestMatchers("/img/**", "/css/**", "/js/**", "/sass/**", "/libs/**").permitAll()
+                .requestMatchers("/img/**", "/css/**", "/js/**", "/sass/**", "/libs/**",
+                        "/images/**", "/vendors/**", "/gif/**", "/icon/**").permitAll()
+
                 .requestMatchers("/api/login").permitAll()
-                .requestMatchers("/api/**").authenticated()
-                .requestMatchers("/adminPanel").authenticated()
-                .anyRequest().authenticated()
+                .requestMatchers("/api/saveClient").permitAll()
+                .requestMatchers("/api/getPricelist").permitAll()
+
+//                .requestMatchers("/api/**").authenticated() //TODO authenticated
+//                .requestMatchers("/adminPanel").authenticated()
+//                .anyRequest().authenticated()//TODO
+                .anyRequest().permitAll()
 
                 .and()
                 .addFilterBefore(new UserPassAuthFilter(), BasicAuthenticationFilter.class)
 
 
                 .formLogin().loginPage("/login")
-                .loginProcessingUrl("/api/login")
+                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/adminPanel")
                 .failureUrl("/login?error")
 
                 .and()
-                .rememberMe()//TODO key must be included from another file
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+
+                .and()
+                .rememberMe().key("alexandr")//TODO key must be included from another file
 
                 .and()
                 .authenticationProvider(authProvider)
                 .exceptionHandling(customizer -> customizer
+
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .build();
 
@@ -85,7 +97,18 @@ public class SecurityConfig  {
     }
 
     @Bean
-    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    @Bean
+     AuthenticationManager authManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.authenticationProvider(authProvider);
         return authenticationManagerBuilder.build();

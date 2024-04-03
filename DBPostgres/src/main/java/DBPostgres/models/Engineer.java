@@ -1,10 +1,9 @@
 package DBPostgres.models;
 
-import DBPostgres.dto.EngineerDTO;
+import DBPostgres.dto.engineer.EngineerDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,7 +38,7 @@ public class Engineer {
     private String password;
 
     @Column(name = "tgId")
-    private int tgId;
+    private Long tgId;
 
     @OneToMany(mappedBy = "engineer")
     private List<Client> clientList;

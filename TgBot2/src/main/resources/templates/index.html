@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../login.css"> <!-- TODO -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="./icon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./icon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./icon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./icon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./icon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./icon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./icon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="./icon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./icon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icon/favicon-16x16.png">
+    <link rel="manifest" href="./icon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="./icon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>Вход</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat';
+            font-weight: 200;
+            color: var(--tg-theme-text-color);
+            background-color: var(--tg-theme-bg-color);
+        }
+
+        #main {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 50px;
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 70px;
+            margin: 30px auto;
+        }
+
+        p {
+            width: 350px;
+            margin: 0 auto;
+        }
+
+        .p {
+            width: 350px;
+            font-size: 20px;
+            color: var(--tg-theme-button-color);;
+            margin: 0 auto;
+        }
+
+        button {
+            border: 0;
+            border-radius: 5px;
+            margin-top: 40px;
+            height: 60px;
+            width: 200px;
+            font-size: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 500ms ease;
+            color: #000;
+            background: yellowgreen;
+            
+        }
+        
+        .center-button {
+            text-align: center;
+        }
+
+        button:hover {
+            background: var(--tg-theme-text-color);;
+        }
+
+        input {
+            width: 90%;
+            outline: none;
+            margin: 10px 5%;
+            padding: 15px 10px;
+            font-size: 18px;
+            color: var(--tg-theme-text-color);
+            background: none;
+            border: 2px solid silver;
+            border-radius: 5px;
+        }
+
+        input:focus {
+            border-color: #db5d5d;
+        }
+        
+
+    </style>
+</head>
+
+
+<body>
+    <div id="main">
+        <h1>Вход в аккаунт</h1>
+    </div>
+
+    <form class="main-form" id="login-form">
+        <input type="text" name="username" id="user_name" placeholder="username">
+        <input type="password" name="password" id="password" placeholder="password">
+    </form>
+    <div class="center-button">
+        <div class="p" id="error"></div> 
+        <button id="login-button">Войти</button>
+    </div>
+
+    
+
+    
+
+    <!-- Скрипты -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="./js/login.js"></script>
+    <script>
+        checkName = (username) => {
+            if (username.length < 5) {
+                document.getElementById("error").innerText = "Ошибка в поле username";
+                return false;
+            } 
+            return true;
+        }
+
+        checkPassword = (password) => {
+            if (password.length < 8) {
+                document.getElementById("error").innerText = "Ошибка. Пароль слишком короткий";
+                return false;
+            }
+            return true;
+        }
+
+        let tg = window.Telegram.WebApp; 
+        let loginButton = document.getElementById("login-button");
+        let exitButton = document.getElementById("exit-button");
+        // tg.expand();
+
+        loginButton.addEventListener("click", () => {
+            document.getElementById("error").innerText = "";
+            let username = document.getElementById("user_name").value;
+            let password = document.getElementById("password").value;
+            if (checkName(username) && checkPassword(password)) {
+                let data = {
+                    login: username,
+                    password: password
+                }
+                tg.sendData(JSON.stringify(data));
+            }
+        })
+
+
+
+    </script>
+</body>
+</html>

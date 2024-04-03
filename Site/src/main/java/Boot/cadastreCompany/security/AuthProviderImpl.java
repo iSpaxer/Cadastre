@@ -29,12 +29,12 @@ public class AuthProviderImpl implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        log.info("authenticationProvider working... ");
+        log.info("authenticationProvider working.... " + authentication.getCredentials() + "! ");
         if (authentication.getName().isEmpty() || authentication.getPrincipal() == null) {
             throw new BadCredentialsException("Empty login or password... ");
         }
         EngineerDTO engineerDTO = new EngineerDTO(authentication.getName(), authentication.getCredentials().toString());
-
+        log.error(engineerDTO.toString());
         if (!apiRequestService.authenticationEngineer(engineerDTO)) {
             throw new BadCredentialsException("Incorrect login or password... ");
         }
